@@ -1,6 +1,5 @@
 package Presentacion;
 
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -12,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Modelo.Componentes;
 import Modelo.Usuario;
 import Negocio.ControlVendedores;
 
@@ -51,28 +51,29 @@ public class VistaConsultaRealizada extends JFrame {
 		JPanel panel = new JPanel(null);
 		setContentPane(panel);
 		JLabel titulo, nombre, curp, direccion, telefono, user, id;
+		Componentes componente =new Componentes();
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
-		finaliza = creaBoton("Finalizar Consulta", 360, 380, 160, 30);
-		nueva = creaBoton("Nueva Consulta", 80, 380, 150, 30);
+		finaliza = componente.creaBoton("Finalizar Consulta", 360, 380, 160, 30);
+		nueva = componente.creaBoton("Nueva Consulta", 80, 380, 150, 30);
 		finaliza.setToolTipText("Termina la Consulta y Regresa a la Ventana de Administrar Vendedores");
 		nueva.setToolTipText("Realiza una Nueva Consulta");
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		titulo = creaEtiqueta("Vendedor", 220, 40, 340, 35, 30);
-		nombre = creaEtiqueta("Nombre Completo:", 40, 120, 150, 25, 16);
-		curp = creaEtiqueta("Curp:", 40, 160, 150, 25, 16);
-		direccion = creaEtiqueta("Direccion:", 40, 200, 150, 25, 16);
-		telefono = creaEtiqueta("Telefono:", 40, 240, 150, 25, 16);
-		user = creaEtiqueta("Usuario:", 40, 280, 150, 25, 16);
-		id = creaEtiqueta("ID:", 40, 320, 150, 25, 16);
-		getnombre = creaEtiqueta("", 200, 120, 360, 25, 16);
-		getcurp = creaEtiqueta("", 200, 160, 360, 25, 16);
-		getdireccion = creaEtiqueta("", 200, 200, 360, 25, 16);
-		gettelefono = creaEtiqueta("", 200, 240, 360, 25, 16);
-		getuser = creaEtiqueta("", 200, 280, 360, 25, 16);
-		getid = creaEtiqueta("", 200, 320, 360, 25, 16);
+		titulo = componente.creaEtiqueta("Vendedor", 220, 40, 340, 35, 30);
+		nombre = componente.creaEtiqueta("Nombre Completo:", 40, 120, 150, 25, 16);
+		curp = componente.creaEtiqueta("Curp:", 40, 160, 150, 25, 16);
+		direccion = componente.creaEtiqueta("Direccion:", 40, 200, 150, 25, 16);
+		telefono = componente.creaEtiqueta("Telefono:", 40, 240, 150, 25, 16);
+		user = componente.creaEtiqueta("Usuario:", 40, 280, 150, 25, 16);
+		id = componente.creaEtiqueta("ID:", 40, 320, 150, 25, 16);
+		getnombre = componente.creaEtiqueta("", 200, 120, 360, 25, 16);
+		getcurp = componente.creaEtiqueta("", 200, 160, 360, 25, 16);
+		getdireccion = componente.creaEtiqueta("", 200, 200, 360, 25, 16);
+		gettelefono = componente.creaEtiqueta("", 200, 240, 360, 25, 16);
+		getuser = componente.creaEtiqueta("", 200, 280, 360, 25, 16);
+		getid = componente.creaEtiqueta("", 200, 320, 360, 25, 16);
 		getnombre.setToolTipText("Nombre Completo del Vendedor");
 		getcurp.setToolTipText("Curp del Vendedor");
 		getdireccion.setToolTipText("Direccion del Vendedor");
@@ -99,30 +100,6 @@ public class VistaConsultaRealizada extends JFrame {
 		panel.add(finaliza);
 		panel.add(nueva);
 
-	}
-
-	// Método Para Crear las Propiedades del boton
-	private JButton creaBoton(String nombre, int posx, int posy, int ancho, int alto) {
-		// Se Crea e Inicializa un boton de la Clase JButton
-		JButton boton = new JButton(nombre);
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto del Boton Como la
-		// Letra del Texto
-		boton.setBounds(posx, posy, ancho, alto);
-		boton.setFont(new Font("Serif", Font.ITALIC, 14));
-		return boton;
-	}
-
-	// Método Para Crear las Propiedades de las Etiquetas
-	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
-		// Se Crea e Inicializa una Etiqueta de la Clase JLabel
-		JLabel etiqueta = new JLabel(nombre);
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de la Etiqueta asi
-		// Como la Letra del Texto
-		etiqueta.setBounds(posx, posy, ancho, alto);
-		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaño));
-		return etiqueta;
 	}
 
 	// Método para Crear las Acciones de Los Componentes

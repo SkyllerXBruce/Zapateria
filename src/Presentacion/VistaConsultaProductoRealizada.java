@@ -1,7 +1,6 @@
 package Presentacion;
 
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -13,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Modelo.Componentes;
 import Modelo.Producto;
 import Negocio.ControlAlmacen;
 
@@ -66,32 +66,34 @@ public class VistaConsultaProductoRealizada extends JFrame {
 	private void iniciarComponentes() {
 		// creamos el panel y lo agregamos a la ventana
 		JPanel panel = new JPanel(null);
-		setContentPane(panel);
 		JLabel titulo, codigo, modelo, tipo, color, costo, talla, cantidad;
+		Componentes componente = new Componentes();
 
+		setContentPane(panel);
+		
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
-		finaliza = creaBoton("Finalizar Consulta", 260, 420, 160, 30);
-		nueva = creaBoton("Nueva Consulta", 20, 420, 150, 30);
+		finaliza = componente.creaBoton("Finalizar Consulta", 260, 420, 160, 30);
+		nueva = componente.creaBoton("Nueva Consulta", 20, 420, 150, 30);
 		finaliza.setToolTipText("Termina la Consulta y Regresa a la Ventana de Administrar Vendedores");
 		nueva.setToolTipText("Realiza una Nueva Consulta");
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		titulo = creaEtiqueta("Producto", 140, 40, 340, 35, 30);
-		codigo = creaEtiqueta("Código:", 40, 120, 150, 25, 16);
-		modelo = creaEtiqueta("Modelo:", 40, 160, 150, 25, 16);
-		tipo = creaEtiqueta("Tipo:", 40, 200, 150, 25, 16);
-		color = creaEtiqueta("Color:", 40, 240, 150, 25, 16);
-		costo = creaEtiqueta("Costo Unitario:", 40, 280, 150, 25, 16);
-		talla = creaEtiqueta("Talla:", 40, 320, 150, 25, 16);
-		cantidad = creaEtiqueta("Cantidad:", 40, 360, 150, 25, 16);
-		getcodigo = creaEtiqueta("Codigo", 200, 120, 360, 25, 16);
-		getmodelo = creaEtiqueta("Modelo", 200, 160, 360, 25, 16);
-		gettipo = creaEtiqueta("Tipo", 200, 200, 360, 25, 16);
-		getcolor = creaEtiqueta("Color", 200, 240, 360, 25, 16);
-		getcosto = creaEtiqueta("Costo", 200, 280, 360, 25, 16);
-		gettalla = creaEtiqueta("Talla", 200, 320, 360, 25, 16);
-		getcantidad = creaEtiqueta("Cantidad", 200, 360, 150, 25, 16);
+		titulo = componente.creaEtiqueta("Producto", 140, 40, 340, 35, 30);
+		codigo = componente.creaEtiqueta("Código:", 40, 120, 150, 25, 16);
+		modelo = componente.creaEtiqueta("Modelo:", 40, 160, 150, 25, 16);
+		tipo = componente.creaEtiqueta("Tipo:", 40, 200, 150, 25, 16);
+		color = componente.creaEtiqueta("Color:", 40, 240, 150, 25, 16);
+		costo = componente.creaEtiqueta("Costo Unitario:", 40, 280, 150, 25, 16);
+		talla = componente.creaEtiqueta("Talla:", 40, 320, 150, 25, 16);
+		cantidad = componente.creaEtiqueta("Cantidad:", 40, 360, 150, 25, 16);
+		getcodigo = componente.creaEtiqueta("Codigo", 200, 120, 360, 25, 16);
+		getmodelo = componente.creaEtiqueta("Modelo", 200, 160, 360, 25, 16);
+		gettipo = componente.creaEtiqueta("Tipo", 200, 200, 360, 25, 16);
+		getcolor = componente.creaEtiqueta("Color", 200, 240, 360, 25, 16);
+		getcosto = componente.creaEtiqueta("Costo", 200, 280, 360, 25, 16);
+		gettalla = componente.creaEtiqueta("Talla", 200, 320, 360, 25, 16);
+		getcantidad = componente.creaEtiqueta("Cantidad", 200, 360, 150, 25, 16);
 		getcodigo.setToolTipText("Codigo del Producto");
 		gettipo.setToolTipText("Tipo del Producto");
 		getcolor.setToolTipText("Color del Producto");
@@ -120,22 +122,6 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		panel.add(finaliza);
 		panel.add(nueva);
 
-	}
-
-	// Método Para Crear las Propiedades del boton
-	private JButton creaBoton(String nombre, int posx, int posy, int ancho, int alto) {
-		JButton boton = new JButton(nombre);
-		boton.setBounds(posx, posy, ancho, alto);
-		boton.setFont(new Font("Serif", Font.ITALIC, 14));
-		return boton;
-	}
-
-	// Método Para Crear las Propiedades de las Etiquetas
-	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
-		JLabel etiqueta = new JLabel(nombre);
-		etiqueta.setBounds(posx, posy, ancho, alto);
-		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaño));
-		return etiqueta;
 	}
 
 	// Método para Crear las Acciones de Los Componentes
