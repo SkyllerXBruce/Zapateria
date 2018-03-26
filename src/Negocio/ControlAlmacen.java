@@ -11,6 +11,7 @@ import Presentacion.VistaMostrarProductos;
 
 public class ControlAlmacen {
 
+	// Variables Globales
 	private VistaAlmacen vistaalmacen;
 	private VistaAdministrador vistaadmin;
 	private VistaAgregarProducto vistaaddproducto;
@@ -20,6 +21,7 @@ public class ControlAlmacen {
 	private VistaMostrarProductos vistamostrarproductos;
 	private ServicioAlmacen servicioalmacen;
 
+	// Agrega las Instancias de las Vistas al Control del Almacen
 	public void setVistaAlmacen(VistaAlmacen vistaalmacen) {
 		this.vistaalmacen = vistaalmacen;
 	}
@@ -52,6 +54,7 @@ public class ControlAlmacen {
 		this.vistamostrarproductos = vistamostrarproductos;
 	}
 
+	// Metodos para Mostrar las Vistas Correspondientes
 	public void muestraVistaAlmacen() {
 		this.vistaalmacen.setVisible(true);
 	}
@@ -81,6 +84,89 @@ public class ControlAlmacen {
 		this.vistamostrarproductos.setVisible(true);
 	}
 
+	// Metodos para Verficar la existencia de Productos si Existe manda true otro
+	// caso false
+	public boolean existeProducto(String modelo, String tipo, String color, double talla) {
+		if (servicioalmacen.buscaProducto(modelo, tipo, color, talla) != null)
+			return true;
+		return false;
+	}
+
+	public boolean existeProducto(int codigo) {
+		if (servicioalmacen.buscaProducto(codigo) != null)
+			return true;
+		return false;
+	}
+
+	// Metodos para la Busqueda de un Producto, si lo Encuentra Regresa el Producto
+	// en Otro Caso null
+	public Producto buscaProducto(String modelo, String tipo) {
+		return servicioalmacen.buscaProducto(modelo, tipo);
+	}
+
+	public Producto buscaProducto(String modelo, String tipo, String color, double talla) {
+		return servicioalmacen.buscaProducto(modelo, tipo, color, talla);
+	}
+
+	public Producto buscaProducto(int codigo) {
+		return servicioalmacen.buscaProducto(codigo);
+	}
+
+	// Metodo para Agregar el Producto a la Base de Datos
+	public boolean agregarProducto(Producto producto) {
+		return servicioalmacen.agregarProducto(producto);
+	}
+
+	// Metodo para Quitar el Producto de la Base de Datos
+	public boolean eliminarProducto(Producto producto) {
+		return servicioalmacen.eliminarProducto(producto);
+	}
+
+	// Metodo para Obtener los Datos de Todos los Productos y los Cargar a la Tabla
+	public void cargarDatosProductos() {
+		String[] nuevo = new String[vistamostrarproductos.getTablaModelo().getColumnCount()];
+		for (Producto producto : servicioalmacen.dameProductos()) {
+			nuevo[0] = String.valueOf(producto.dameCodigo());
+			nuevo[1] = producto.dameModelo();
+			nuevo[2] = producto.dameTipo();
+			nuevo[3] = producto.dameColor();
+			nuevo[4] = String.format("%.2f", producto.dameCosto());
+			nuevo[5] = String.valueOf(producto.dameTalla());
+			nuevo[6] = String.valueOf(producto.dameCantidad());
+			vistamostrarproductos.getTablaModelo().addRow(nuevo);
+		}
+	}
+
+	// Metodo que crea un codigo no repetido para el Producto
+	public int generaCodigo() {
+		int codigo = 1, j = 0, cantidad = servicioalmacen.cantidadProductos();
+		for (int i = j; i < cantidad; i++) {
+			for (Producto p : servicioalmacen.dameProductos())
+				if (p.dameCodigo() == codigo)
+					codigo++;
+			j++;
+		}
+		return codigo;
+	}
+
+	// Metodo que Verifica el Texto Ingresado es un Numero Real, en Caso de ser
+	// un Numero manda True en Otro Caso false
+	public boolean esNumeroReal(String num) {
+		int puntos = 0, tam = num.length();
+		if (num.isEmpty())
+			return false;
+		for (Character c : num.toCharArray())
+			if (!Character.isDigit(c))
+				if (c.equals('.') && tam > 1) {
+					if (puntos > 0)
+						return false;
+					puntos++;
+				} else
+					return false;
+		return true;
+	}
+
+	// Metodo que Manda a Limpiar los Datos de la Vista del Caso Ingresado
 	public void limpiarDatos(String limpiar) {
 		switch (limpiar) {
 		case "Agregar":
@@ -100,77 +186,4 @@ public class ControlAlmacen {
 			throw new IllegalArgumentException("Error, No se Puede Limpiar");
 		}
 	}
-
-	public boolean existeProducto(String modelo, String tipo, String color, double talla) {
-		if (servicioalmacen.buscaProducto(modelo, tipo, color, talla) != null)
-			return true;
-		return false;
-	}
-
-	public boolean existeProducto(int codigo) {
-		if (servicioalmacen.buscaProducto(codigo) != null)
-			return true;
-		return false;
-	}
-
-	public Producto buscaProducto(String modelo, String tipo) {
-		return servicioalmacen.buscaProducto(modelo, tipo);
-	}
-	
-	public Producto buscaProducto(String modelo, String tipo,String color,double talla) {
-		return servicioalmacen.buscaProducto(modelo, tipo, color, talla);
-	}
-
-	public Producto buscaProducto(int codigo) {
-		return servicioalmacen.buscaProducto(codigo);
-	}
-
-	public boolean agregarProducto(Producto producto) {
-		return servicioalmacen.agregarProducto(producto);
-	}
-
-	public boolean eliminarProducto(Producto producto) {
-		return servicioalmacen.eliminarProducto(producto);
-	}
-
-	public int generaCodigo() {
-		int codigo = 1, j = 0, cantidad = servicioalmacen.cantidadProductos();
-		for (int i = j; i < cantidad; i++) {
-			for (Producto p : servicioalmacen.dameProductos()) 
-				if(p.dameCodigo()==codigo)
-					codigo++;
-			j++;
-		}
-		return codigo;
-	}
-
-	public void cargarDatosProductos() {
-		String[] nuevo = new String[vistamostrarproductos.getTablaModelo().getColumnCount()];
-		for (Producto producto : servicioalmacen.dameProductos()) {
-			nuevo[0] = String.valueOf(producto.dameCodigo());
-			nuevo[1] = producto.dameModelo();
-			nuevo[2] = producto.dameTipo();
-			nuevo[3] = producto.dameColor();
-			nuevo[4] = String.format("%.2f", producto.dameCosto());
-			nuevo[5] = String.valueOf(producto.dameTalla());
-			nuevo[6] = String.valueOf(producto.dameCantidad());
-			vistamostrarproductos.getTablaModelo().addRow(nuevo);
-		}
-	}
-
-	public boolean esNumero(String num) {
-		int puntos = 0, tam = num.length();
-		if (num.isEmpty())
-			return false;
-		for (Character c : num.toCharArray())
-			if (!Character.isDigit(c))
-				if (c.equals('.') && tam > 1) {
-					if (puntos > 0)
-						return false;
-					puntos++;
-				} else
-					return false;
-		return true;
-	}
-
 }

@@ -5,33 +5,11 @@ import Persistencia.DAOLogin;
 
 public class ServicioVendedores {
 
-	@SuppressWarnings("unused")
-	private ControlVendedores control;
+	// Instancia de la Base de Datos
 	private DAOLogin dao = new DAOLogin();
 
-	public void setControl(ControlVendedores control) {
-		this.control = control;
-	}
-
-	public Usuario[] dameVendedores() {
-		Usuario vendedores[] = dao.dameVendedores();
-		if (vendedores != null)
-			return vendedores;
-		return null;
-	}
-
-	public boolean agregaVendedor(Usuario vendedor) {
-		return dao.agregaVendedor(vendedor);
-	}
-
-	public int cuantosVendedores() {
-		int cantidadvendedores = dao.cuantosVendedores();
-		System.out.println("cantidad: "+cantidadvendedores);
-		if (cantidadvendedores != 0)
-			return cantidadvendedores;
-		return 0;
-	}
-
+	// Metodos para Verficar la existencia del Vendedor si Existe manda true otro
+	// caso false
 	public boolean existeVendedor(String dato) {
 		if (dao.buscarUsuario(dato) != null)
 			return true;
@@ -40,6 +18,8 @@ public class ServicioVendedores {
 		return false;
 	}
 
+	// Metodos para la Busqueda de un Vendedor, si lo Encuentra Regresa el Producto
+	// en Otro Caso null
 	public Usuario buscaVendedorPorNombre(String nombre) {
 		return dao.buscarUsuario(nombre);
 	}
@@ -48,8 +28,30 @@ public class ServicioVendedores {
 		return dao.buscarVendedor(id);
 	}
 
+	// Metodo para Agregar el Vendedor a la Base de Datos
+	public boolean agregaVendedor(Usuario vendedor) {
+		return dao.agregaVendedor(vendedor);
+	}
+
+	// Metodo para Quitar el Vendedor de la Base de Datos
 	public boolean eliminarVendedor(Usuario vendedor) {
 		return dao.quitaVendedor(vendedor);
 	}
 
+	// Metodo para Obtener Todos los Tickets Existentes en la Base de Datos
+	public Usuario[] dameVendedores() {
+		Usuario vendedores[] = dao.dameVendedores();
+		if (vendedores != null)
+			return vendedores;
+		return null;
+	}
+
+	// Metodo para Obtener la Cantidad de Vendedores que Existen en la Base de Datos
+	public int cuantosVendedores() {
+		int cantidadvendedores = dao.cuantosVendedores();
+		System.out.println("cantidad: " + cantidadvendedores);
+		if (cantidadvendedores != 0)
+			return cantidadvendedores;
+		return 0;
+	}
 }

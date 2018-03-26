@@ -207,7 +207,7 @@ public class VistaVentaCalzado extends JFrame {
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String prod=codigo.getText();
-				if (control.esNumero(prod)) {
+				if (control.esNumeroReal(prod)) {
 					if (modelo.getRowCount() != 0)
 						control.limpiarDatos("Venta");
 					control.buscaProducto(Integer.valueOf(prod));
@@ -233,7 +233,7 @@ public class VistaVentaCalzado extends JFrame {
 		// Validamos si ya hay producto seleccionado, para calcular su costo y total
 		calcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (control.esNumero(codigo.getText())) 
+				if (control.esNumeroReal(codigo.getText())) 
 					control.calculaTotal();
 				else
 				 JOptionPane.showMessageDialog(null, "No es posible calcular el total");

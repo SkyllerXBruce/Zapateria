@@ -1,7 +1,8 @@
 package Modelo;
 
 public class Usuario {
-	// Declaramos atributos de usuario.
+
+	// Variables Globales
 	private String id, user, pass, tipo, nombre, curp, correo, telefono;
 
 	// Constructor que hace referencia al constructor debajo
@@ -9,6 +10,7 @@ public class Usuario {
 		this("", "", "", "", "", "", "", "");
 	}
 
+	// Constructor para asignar valores al Usuario
 	public Usuario(String id, String user, String pass, String tipo, String nombre, String curp, String correo,
 			String telefono) {
 		this.id = id;
@@ -21,42 +23,8 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 
-	// Implementamos estos métodos para consultarlos en el DAOLogin.
-
-	public String getId() {
-		return id;
-	}
-
-	public String getUsuario() {
-		return user;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public String getCurp() {
-		return curp;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	// Implementamos estos métodos para crear el objeto de tipo usuario a validar
-
+	// Declaramos estos métodos, para que modifiquemos los valores cuando se
+	// necesario
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -87,6 +55,39 @@ public class Usuario {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	// Estos otros metodos nos serviran para mostrar los atributos
+	public String getId() {
+		return id;
+	}
+
+	public String getUsuario() {
+		return user;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getCurp() {
+		return curp;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public String getTelefono() {
+		return telefono;
 	}
 
 	@Override

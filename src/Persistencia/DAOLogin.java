@@ -11,7 +11,7 @@ import Modelo.Usuario;
 
 public class DAOLogin {
 
-	//
+	// Metodo para Agregar un Usuario a la Base de Datos
 	public boolean agregaVendedor(Usuario user) {
 		try {
 			// Crea el statement
@@ -26,7 +26,7 @@ public class DAOLogin {
 		}
 	}
 
-	//
+	// Metodo para Quitar un Usuario de la Base de Datos
 	public boolean quitaVendedor(Usuario usuario) {
 		int resultado = 0;
 		try {
@@ -61,6 +61,8 @@ public class DAOLogin {
 		return false;
 	}
 
+	// Metodos para la Busqueda de un Usuario o Vendedor, si lo Encuentra Regresa el
+	// Usuario en Otro Caso null
 	public Usuario buscarUsuario(String usuario, String tipo) {
 		Usuario user = null;
 		String sql = "SELECT * FROM Loginpersonal WHERE Tipo='" + tipo + "'AND Usuario ='" + usuario + "'   ";
@@ -113,6 +115,7 @@ public class DAOLogin {
 		return user;
 	}
 
+	// Metodo para Obtener todos los Usuarios
 	public Usuario[] dameVendedores() {
 		ArrayList<Usuario> vendedorTemp = new ArrayList<Usuario>();
 		Usuario usuarios[] = null;
@@ -135,8 +138,8 @@ public class DAOLogin {
 		}
 		return usuarios;
 	}
-	
-	//
+
+	// Metodo que Obtiene el Total de Usuarios en la Base de Datos
 	public int cuantosVendedores() {
 		try {
 			// Crea el statement

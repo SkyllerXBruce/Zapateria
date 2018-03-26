@@ -179,7 +179,7 @@ public class VistaCambioCalzado extends JFrame {
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String folio = tffolioventa.getText();
-				if (control.esNumero(folio)) {
+				if (control.esNumeroReal(folio)) {
 					if (modeloventa.getRowCount() != 0)
 						control.limpiarDatos("Cambio");
 					control.buscaTicket(Integer.valueOf(folio));
@@ -194,7 +194,7 @@ public class VistaCambioCalzado extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String folio = tffolioventa.getText();
 				int f = 0;
-				if (control.esNumero(folio)) {
+				if (control.esNumeroReal(folio)) {
 					f = Integer.valueOf(folio);
 					if (control.cambioProducto(f)) {
 						control.limpiarDatos("Cambio");

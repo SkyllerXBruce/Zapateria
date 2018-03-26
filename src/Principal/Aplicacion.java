@@ -8,7 +8,6 @@ import Negocio.ServicioAlmacen;
 import Negocio.ServicioLogin;
 import Negocio.ServicioTicket;
 import Negocio.ServicioVendedores;
-import Negocio.ServicioVenta;
 import Presentacion.VistaAdministarVendedores;
 import Presentacion.VistaAdministrador;
 import Presentacion.VistaAgregarProducto;
@@ -80,7 +79,6 @@ public class Aplicacion {
 		ServicioLogin serviciologin = new ServicioLogin();
 		ServicioTicket servicioticket = new ServicioTicket();
 		ServicioVendedores serviciovendedores = new ServicioVendedores();
-		ServicioVenta servicioventa = new ServicioVenta();
 
 		// Mandamos el Control Correspondiente a las vistas
 		vistaadmin.setControl(controlvendedores);
@@ -107,12 +105,6 @@ public class Aplicacion {
 		vistavendedor.setControl(controlventa);
 		vistavendedorcalzado.setControl(controlventa);
 
-		// Mandamos el Control Correspondiente a los Servicios
-		serviciologin.setControl(controllogin);
-		servicioticket.setControl(controlventa);
-		serviciovendedores.setControl(controlvendedores);
-		servicioventa.setControl(controlventa);
-
 		// Mandamos al Control Login las Vistas y el Servicion Correspondiente
 		controllogin.setServicioLogin(serviciologin);
 		controllogin.setVistaAdministrador(vistaadmin);
@@ -123,7 +115,6 @@ public class Aplicacion {
 		controlventa.setServicioAlmacen(servicioalmacen);
 		controlventa.setServicioLogin(serviciologin);
 		controlventa.setServicioTicket(servicioticket);
-		controlventa.setServicioVenta(servicioventa);
 		controlventa.setVistaCambioCalzado(vistacambio);
 		controlventa.setVistaComiciones(vistacomiciones);
 		controlventa.setVistaLogin(vistalogin);

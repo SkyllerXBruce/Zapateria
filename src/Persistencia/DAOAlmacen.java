@@ -9,11 +9,7 @@ import java.sql.ResultSet;
 
 public class DAOAlmacen {
 
-	public DAOAlmacen() {
-
-	}
-
-	//
+	// Metodo para Agregar el Producto a la Base de Datos
 	public boolean agregaProducto(Producto producto) {
 		try {
 			// Crea el statement
@@ -28,7 +24,7 @@ public class DAOAlmacen {
 		}
 	}
 
-	//
+	// Metodo para Quitar un Producto de la Base de Datos
 	public boolean quitaProducto(Producto producto) {
 		int resultado = 0;
 		try {
@@ -46,6 +42,8 @@ public class DAOAlmacen {
 			return true;
 	}
 
+	// Metodos para la Busqueda de un Producto, si lo Encuentra Regresa el Producto
+	// en Otro Caso null
 	public Producto buscaProducto(String modelo, String tipo, String color, double talla) {
 		Producto producto = null;
 		try {
@@ -103,7 +101,7 @@ public class DAOAlmacen {
 		return producto;
 	}
 
-	//
+	// Metodo para Obtener todos los Productos
 	public Producto[] dameProductos() {
 		ArrayList<Producto> productosTemp = new ArrayList<Producto>();
 		try {
@@ -127,7 +125,7 @@ public class DAOAlmacen {
 		}
 	}
 
-	//
+	// Metodo que Obtiene el Total de Productos en la Base de Datos
 	public int cuantosProductos() {
 		try {
 			// Crea el statement

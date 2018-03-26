@@ -10,39 +10,31 @@ import Persistencia.DAOTicket;
 
 public class ServicioTicket {
 
-	@SuppressWarnings("unused")
-	private ControlVenta control;
+	// Instancia de la Base de Datos
 	private DAOTicket daoticket = new DAOTicket();
 
-	// Instanciamos el control de nuestro servicio.
-	public void setControl(ControlVenta control) {
-		this.control = control;
-	}
-
+	// Metodo para Agregar el Ticket a la Base de Datos
 	public boolean agregaTicket(Ticket ticket) {
 		return daoticket.agregaTicket(ticket);
 	}
 
+	// Metodo para Obtener un Ticket dependiendo del Folio, si lo Encuentra Regresa
+	// el Ticket en Otro Caso null
 	public Ticket dameTicket(int folio) {
 		return daoticket.buscaTicket(folio);
 	}
 
-	public boolean modificaTicket(int folio, String fecha, String idvendedor, int codigo, double total, double iva) {
-		return daoticket.modificaTicket(folio, fecha, idvendedor, codigo, total, iva);
+	// Metodo para Generar el Folio del Ticket
+	public int generaFolio() {
+		return daoticket.cantidadTickets() + 1;
 	}
 
-	public Ticket[] obtenTodosTickets() {
-		return daoticket.dameTickets();
-	}
-
+	// Metodo para Obtener la Cantidad de Tickets Existentes 
 	public int dameCantidadTickets() {
 		return daoticket.cantidadTickets();
 	}
 
-	public int dameFolio() {
-		return daoticket.cantidadTickets() + 1;
-	}
-
+	// Metodo que Obtiene la Comicion Actual del Vendedor
 	public double obtenerComicionVendedor(Usuario user) {
 		double comicion = 0;
 		for (Ticket t : daoticket.dameTickets())
@@ -50,7 +42,8 @@ public class ServicioTicket {
 				comicion += t.getTotal() * 0.05;
 		return comicion;
 	}
-	
+
+	// Metodo que Obtiene la Cantidad de Ventas Realizadas por Vendedor
 	public int obtenerCantidadVentasVendedor(Usuario user) {
 		int vendidos = 0;
 		for (Ticket t : daoticket.dameTickets())
@@ -58,7 +51,8 @@ public class ServicioTicket {
 				vendidos += t.getVendidos();
 		return vendidos;
 	}
-	
+
+	// Metodo que Obtiene la Cantidad de Ganancias Realizadas por Vendedor
 	public double obtenerGananciasVendedor(Usuario user) {
 		double ganancias = 0;
 		for (Ticket t : daoticket.dameTickets())
@@ -66,7 +60,17 @@ public class ServicioTicket {
 				ganancias += t.getTotal();
 		return ganancias;
 	}
-	
+
+	// Metodo para Modificar las Cararcteristicas del ticket
+	public boolean modificaTicket(int folio, String fecha, String idvendedor, int codigo, double total, double iva) {
+		return daoticket.modificaTicket(folio, fecha, idvendedor, codigo, total, iva);
+	}
+
+	// Metodo para Obtener Todos los Tickets Existentes en la Base de Datos
+	public Ticket[] obtenTodosTickets() {
+		return daoticket.dameTickets();
+	}
+
 	// Este método nos permite obtener la fecha, para pasarla al ticket impreso.
 	public String getFechaActual() {
 		Date ahora = new Date();

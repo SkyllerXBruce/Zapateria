@@ -278,7 +278,7 @@ public class VistaTicket extends JFrame {
 					control.imprimeTicket();
 					cambio = control.realizaCambio();
 					if (!cambio) {
-						control.almacenarDatosTicket(obtenerDatosTicket());
+						control.guardarDatosTicket(obtenerDatosTicket());
 						JOptionPane.showMessageDialog(null, "Venta Realizada con Exito");
 					}else
 						JOptionPane.showMessageDialog(null, "Cambio Realizado con Exito");

@@ -1,20 +1,17 @@
 package Persistencia;
 
-public class DatabaseException extends RuntimeException{
+@SuppressWarnings("serial")
+public class DatabaseException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
-	
 	Exception m_realException;
 
-	DatabaseException(String msg, Exception ex)
-	{
+	DatabaseException(String msg, Exception ex) {
 		super(msg);
 		m_realException = ex;
 	}
-	
-	public Exception getRealException()
-	{
+
+	public Exception getRealException() {
 		return m_realException;
 	}
-	
+
 }

@@ -13,6 +13,7 @@ import Presentacion.VistaMostrarVendedores;
 
 public class ControlVendedores {
 
+	// Variables Globales
 	private VistaAdministrador vistaadmin;
 	private VistaAdministarVendedores vistaadminvendedores;
 	private VistaAgregarVendedor vistaagregarvendedor;
@@ -25,6 +26,7 @@ public class ControlVendedores {
 	private ServicioVendedores serviciovendedores;
 	private ServicioTicket servicioticket;
 
+	// Agrega las Instancias de las Vistas al Control Vendedores
 	public void setServicioVendedores(ServicioVendedores serviciovendedores) {
 		this.serviciovendedores = serviciovendedores;
 	}
@@ -69,6 +71,7 @@ public class ControlVendedores {
 		this.vistabalancegeneral = vistabalancegeneral;
 	}
 
+	// Metodos para Mostrar las Vistas Correspondientes
 	public void muestraVistaAdministarVendedores() {
 		vistaadminvendedores.setVisible(true);
 	}
@@ -102,34 +105,18 @@ public class ControlVendedores {
 		vistaconsultarealizada.setVisible(true);
 	}
 
-	public void obtenerDatosVendedor(String[] datosvendedor) {
-		vistaadduser.obtenerDatosVendedor(datosvendedor);
-	}
-	
 	public void muestraVistaBalanceGeneral() {
 		vistabalancegeneral.setVisible(true);
 	}
 
-	public String generaId() {
-		int contador = 0;
-		String id = "ID-ZA-V-" + contador;
-		for (Usuario vendedor : serviciovendedores.dameVendedores()) {
-			if (vendedor.getId().equals(id) || vendedor.getId().equals("ID-ZA-Master")) {
-				contador++;
-				id = "ID-ZA-V-" + contador;
-			}
-		}
-		return id;
-	}
-
-	public boolean agregaVendedor(Usuario vendedor) {
-		return serviciovendedores.agregaVendedor(vendedor);
-	}
-
+	// Metodos para Verficar la existencia de Vendedores si Existe Manda true otro
+	// caso false
 	public boolean existeVendedor(String dato) {
 		return serviciovendedores.existeVendedor(dato);
 	}
 
+	// Metodos para la Busqueda de un Vendedor, si lo Encuentra Regresa el Producto
+	// en Otro Caso null
 	public Usuario buscaVendedorPorNombre(String nombre) {
 		return serviciovendedores.buscaVendedorPorNombre(nombre);
 	}
@@ -138,10 +125,17 @@ public class ControlVendedores {
 		return serviciovendedores.buscaVendedorPorId(id);
 	}
 
+	// Metodo para Agregar un Vendedor a la Base de Datos
+	public boolean agregaVendedor(Usuario vendedor) {
+		return serviciovendedores.agregaVendedor(vendedor);
+	}
+
+	// Metodo para Quitar un Vendedor de la Base de Datos
 	public boolean eliminarVendedor(Usuario vendedor) {
 		return serviciovendedores.eliminarVendedor(vendedor);
 	}
 
+	// Metodo para Obtener los Datos de Todos los Vendedores y los Carga a la Tabla
 	public void cargarDatosVendedores() {
 		String[] nuevo = new String[vistamostrarvvendedores.getTablaModelo().getColumnCount()];
 		for (Usuario vendedor : serviciovendedores.dameVendedores()) {
@@ -157,6 +151,12 @@ public class ControlVendedores {
 		}
 	}
 
+	// Metodo para Obtener los Datos del Vendedor
+	public void obtenerDatosVendedor(String[] datosvendedor) {
+		vistaadduser.obtenerDatosVendedor(datosvendedor);
+	}
+
+	// Metodo Para Obtener los Datos del Balance General
 	public void obtenDatosBalanceGeneral() {
 		double ganancias = 0, comicion = 0;
 		int vendidos = 0;
@@ -168,6 +168,20 @@ public class ControlVendedores {
 		vistabalancegeneral.obtenDatosBalanceGeneral(vendidos, comicion, ganancias);
 	}
 
+	// Metodo que crea un ID no repetido para el Vendedor
+	public String generaId() {
+		int contador = 0;
+		String id = "ID-ZA-V-" + contador;
+		for (Usuario vendedor : serviciovendedores.dameVendedores()) {
+			if (vendedor.getId().equals(id) || vendedor.getId().equals("ID-ZA-Master")) {
+				contador++;
+				id = "ID-ZA-V-" + contador;
+			}
+		}
+		return id;
+	}
+
+	// Metodo que Manda a Limpiar los Datos de la Vista del Caso Ingresado
 	public void limpiarDatos(String limpiar) {
 		switch (limpiar) {
 		case "AgregarVendedor":

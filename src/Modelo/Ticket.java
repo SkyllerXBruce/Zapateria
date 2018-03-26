@@ -1,7 +1,8 @@
 package Modelo;
 
 public class Ticket {
-	// declaramos atributos de ticket
+
+	// Variables Globles
 	private int folio = 0, codigoproducto = 0, vendidos = 0;
 	private String idvendedor, fecha;
 	private double iva = 0, total = 0;
@@ -18,52 +19,22 @@ public class Ticket {
 		this.vendidos = vendidos;
 	}
 
-	public int getVendidos() {
-		return vendidos;
-	}
-
-	public void setVendidos(int vendidos) {
-		this.vendidos = vendidos;
-	}
-
-	public int getFolio() {
-		return folio;
-	}
-
-	public int getCodigoproducto() {
-		return codigoproducto;
-	}
-
-	public String getIdvendedor() {
-		return idvendedor;
-	}
-
-	public String getFecha() {
-		return fecha;
-	}
-
-	public double getIva() {
-		return iva;
-	}
-
-	public double getTotal() {
-		return total;
-	}
-
+	// Declaramos estos métodos, para que modifiquemos los valores cuando se
+	// necesario
 	public void setFolio(int folio) {
 		this.folio = folio;
 	}
 
-	public void setCodigoproducto(int codigoproducto) {
-		this.codigoproducto = codigoproducto;
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 
 	public void setIdvendedor(String idvendedor) {
 		this.idvendedor = idvendedor;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
+	public void setCodigoproducto(int codigoproducto) {
+		this.codigoproducto = codigoproducto;
 	}
 
 	public void setIva(double iva) {
@@ -74,4 +45,36 @@ public class Ticket {
 		this.total = total;
 	}
 
+	public void setVendidos(int vendidos) {
+		this.vendidos = vendidos;
+	}
+
+	// Estos otros metodos nos serviran para mostrar los atributos
+	public int getFolio() {
+		return folio;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public String getIdvendedor() {
+		return idvendedor;
+	}
+
+	public int getCodigoproducto() {
+		return codigoproducto;
+	}
+
+	public double getIva() {
+		return iva;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public int getVendidos() {
+		return vendidos;
+	}
 }

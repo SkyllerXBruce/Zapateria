@@ -1,7 +1,8 @@
 package Modelo;
 
 public class Producto {
-	// Declaramos atributos de nuestro producto.
+
+	// Variables Globales
 	private String modelo, tipo, color;
 	private double costo = 0, talla = 0;
 	private int cantidad = 0, codigo = 0;
@@ -17,9 +18,8 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 
-	// Declaramos estos métodos, para que en la consulta en el DAO podamos crear el
-	// objeto sacándolo del resultset
-
+	// Declaramos estos métodos, para que modifiquemos los valores cuando se
+	// necesario
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -48,7 +48,7 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 
-	// Estos otros metodos nos serviran para mostrar los atributos en el Jtable
+	// Estos otros metodos nos serviran para mostrar los atributos
 	public int dameCodigo() {
 		return codigo;
 	}

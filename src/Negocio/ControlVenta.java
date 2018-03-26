@@ -20,6 +20,7 @@ import Presentacion.VistaVendedor;
 import Presentacion.VistaVentaCalzado;
 
 public class ControlVenta implements Printable {
+
 	// Instanciamos nuestros atributos
 	private VistaCambioCalzado vistacambio;
 	private VistaVentaCalzado vistaventacalzado;
@@ -28,28 +29,12 @@ public class ControlVenta implements Printable {
 	private VistaVendedor vistavendedor;
 	private VistaAdministarVendedores vistaadminvendedores;
 	private VistaComiciones vistacomiciones;
-	private ServicioVenta servicioventa;
 	private ServicioTicket servicioticket;
 	private ServicioAlmacen servicioalmacen;
 	private ServicioLogin serviciologin;
 	private Usuario user;
 
-	// Agregamos la Vista Cambio de Calzado
-	public void setVistaCambioCalzado(VistaCambioCalzado vistacambio) {
-		this.vistacambio = vistacambio;
-	}
-
-	// Agregamos la Vista Venta de Calzado
-	public void setVistaVentaCalzado(VistaVentaCalzado vistaventacalzado) {
-		this.vistaventacalzado = vistaventacalzado;
-	}
-
-	// Agregamos el Servicio de Venta
-	public void setServicioVenta(ServicioVenta servicioventa) {
-		this.servicioventa = servicioventa;
-	}
-
-	//
+	// Agrega las Instancias de las Vistas al Control de Venta
 	public void setServicioTicket(ServicioTicket servicioticket) {
 		this.servicioticket = servicioticket;
 	}
@@ -62,12 +47,10 @@ public class ControlVenta implements Printable {
 		this.serviciologin = serviciologin;
 	}
 
-	//
 	public void setVistaLogin(VistaLogin vistalogin) {
 		this.vistalogin = vistalogin;
 	}
 
-	//
 	public void setVistaVendedor(VistaVendedor vistavendedor) {
 		this.vistavendedor = vistavendedor;
 	}
@@ -75,12 +58,24 @@ public class ControlVenta implements Printable {
 	public void setVistaAdministarVendedores(VistaAdministarVendedores vistaadminvendedores) {
 		this.vistaadminvendedores = vistaadminvendedores;
 	}
-	
+
 	public void setVistaComiciones(VistaComiciones vistacomiciones) {
 		this.vistacomiciones = vistacomiciones;
 	}
 
-	// Mostramos Ventana de Venta de Calzado
+	public void setVistaTicket(VistaTicket vistaticket) {
+		this.vistaticket = vistaticket;
+	}
+
+	public void setVistaCambioCalzado(VistaCambioCalzado vistacambio) {
+		this.vistacambio = vistacambio;
+	}
+
+	public void setVistaVentaCalzado(VistaVentaCalzado vistaventacalzado) {
+		this.vistaventacalzado = vistaventacalzado;
+	}
+
+	// Metodos para Mostrar las Vistas Correspondientes
 	public void muestraVistaAdministarVendedores() {
 		vistaadminvendedores.setVisible(true);
 	}
@@ -89,35 +84,42 @@ public class ControlVenta implements Printable {
 		vistaventacalzado.setVisible(true);
 	}
 
-	// Mostramos Ventana de Cambio de Calzado
 	public void muestraCambioCalzado() {
 		vistacambio.setVisible(true);
 	}
 
-	//
 	public void muestraVistaLogin() {
 		vistalogin.setVisible(true);
 	}
 
-	//
 	public void muestraVistaVendedor() {
 		vistavendedor.setVisible(true);
 	}
-	
+
 	public void muestraVistaComiciones() {
 		vistacomiciones.setVisible(true);
 	}
 
-	// Agregamos Vista ticket
-	public void setVistaTicket(VistaTicket vistaticket) {
-		this.vistaticket = vistaticket;
+	// Se Guarda el Vendedor que Ingreso en el Login
+	public void setVendedor(Usuario user) {
+		this.user = user;
+	}
+
+	// Obtiene los Datos del Vendedor
+	public Usuario getVendedor() {
+		return user;
+	}
+
+	// Busca el Vendedor por el nombre Ingresado
+	public Usuario buscaVendedor(String nombre, String tipo) {
+		return serviciologin.dameVendedor(nombre, tipo);
 	}
 
 	// Este método nos permite agregar los datos que nos regresa el DAO a la tabla
 	// de consulta.
 	public void buscaProducto(int id) {
 		Object[] fila = new Object[vistaventacalzado.getTablaModelo().getColumnCount()];
-		Producto producto = servicioventa.buscaProducto(id);
+		Producto producto = servicioalmacen.buscaProducto(id);
 		if (producto != null) {
 			fila[0] = producto.dameModelo();
 			fila[1] = producto.dameTipo();
@@ -188,56 +190,9 @@ public class ControlVenta implements Printable {
 		}
 	}
 
-	public void limpiarDatos(String tipo) {
-		if (vistaventacalzado.getTablaModelo().getRowCount() != 0 && tipo.equals("Venta")) {
-			vistaventacalzado.setIdProducto("");
-			vistaventacalzado.setMontounitario("       -");
-			vistaventacalzado.setIva("       -");
-			vistaventacalzado.setMontototal("       -");
-			vistaventacalzado.getTablaModelo().removeRow(0);
-		} else if (vistacambio.getTablaModeloVenta().getRowCount() != 0
-				|| vistacambio.getTablaModeloCambio().getRowCount() != 0 && tipo.equals("Cambio")) {
-			vistacambio.getTablaModeloVenta().removeRow(0);
-			vistacambio.setFolioventa("");
-			for (int i = vistacambio.getTablaModeloCambio().getRowCount() - 1; i >= 0; i--)
-				vistacambio.getTablaModeloCambio().removeRow(i);
-		} else if (tipo.equals("Comicion")) {
-			vistacomiciones.limpiarDatosComiciones();
-		}
-	}
-
-	// Creamos el ticket de venta
-	public void creaTicketVenta() {
-		vistaticket.setFolio(String.valueOf(servicioticket.dameFolio()));
-		vistaticket.setFecha(servicioticket.getFechaActual());
-		vistaticket.setModelo((String) vistaventacalzado.getTablaModelo().getValueAt(0, 0));
-		vistaticket.setTipo((String) vistaventacalzado.getTablaModelo().getValueAt(0, 1));
-		vistaticket.setColor((String) vistaventacalzado.getTablaModelo().getValueAt(0, 2));
-		vistaticket.setTalla(String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 3)));
-		vistaticket.setCantidad((String) vistaventacalzado.getTablaModelo().getValueAt(0, 6));
-		vistaticket.setIva(vistaventacalzado.getIva());
-		vistaticket.setPrecioUnitario(String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 4)));
-		vistaticket.setTotal(vistaventacalzado.getTotal());
-		vistaticket.setVisible(true);
-	}
-
-	// Creamos el ticket de Cambio
-	public void creaTicketCambio(int folio, Producto producto, double iva, double total, double diferencia,
-			double tventa) {
-		vistaticket.setFolio(String.valueOf(folio));
-		vistaticket.setFecha(servicioticket.getFechaActual());
-		vistaticket.setModelo(producto.dameModelo());
-		vistaticket.setTipo(producto.dameTipo());
-		vistaticket.setColor(producto.dameColor());
-		vistaticket.setTalla(String.valueOf(producto.dameTalla()));
-		vistaticket.setCantidad(String.valueOf(1));
-		vistaticket.setIva(String.format("%.2f", iva));
-		vistaticket.setPrecioUnitario(String.format("%.2f", producto.dameCosto()));
-		vistaticket.setTotal(String.format("%.2f", diferencia));
-		vistaticket.setTotalAnterior(String.format("%.2f", tventa));
-		vistaticket.setVisible(true);
-	}
-
+	// Metodo para Realizar el Cambio del Producto Seleccionado, Requiere el folio
+	// de la Venta, si Realizo el Cambio Correctamente Regresa true en Otro Caso
+	// false
 	public boolean cambioProducto(int folio) {
 		int fila = -1;
 		String modelocambio, tipocambio, colorcambio;
@@ -299,7 +254,47 @@ public class ControlVenta implements Printable {
 		return false;
 	}
 
-	public void almacenarDatosTicket(String[] datosTicket) {
+	// Creamos el ticket de venta
+	public void creaTicketVenta() {
+		vistaticket.setFolio(String.valueOf(servicioticket.generaFolio()));
+		vistaticket.setFecha(servicioticket.getFechaActual());
+		vistaticket.setModelo((String) vistaventacalzado.getTablaModelo().getValueAt(0, 0));
+		vistaticket.setTipo((String) vistaventacalzado.getTablaModelo().getValueAt(0, 1));
+		vistaticket.setColor((String) vistaventacalzado.getTablaModelo().getValueAt(0, 2));
+		vistaticket.setTalla(String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 3)));
+		vistaticket.setCantidad((String) vistaventacalzado.getTablaModelo().getValueAt(0, 6));
+		vistaticket.setIva(vistaventacalzado.getIva());
+		vistaticket.setPrecioUnitario(String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 4)));
+		vistaticket.setTotal(vistaventacalzado.getTotal());
+		vistaticket.setVisible(true);
+	}
+
+	// Creamos el ticket de Cambio
+	public void creaTicketCambio(int folio, Producto producto, double iva, double total, double diferencia,
+			double tventa) {
+		vistaticket.setFolio(String.valueOf(folio));
+		vistaticket.setFecha(servicioticket.getFechaActual());
+		vistaticket.setModelo(producto.dameModelo());
+		vistaticket.setTipo(producto.dameTipo());
+		vistaticket.setColor(producto.dameColor());
+		vistaticket.setTalla(String.valueOf(producto.dameTalla()));
+		vistaticket.setCantidad(String.valueOf(1));
+		vistaticket.setIva(String.format("%.2f", iva));
+		vistaticket.setPrecioUnitario(String.format("%.2f", producto.dameCosto()));
+		vistaticket.setTotal(String.format("%.2f", diferencia));
+		vistaticket.setTotalAnterior(String.format("%.2f", tventa));
+		vistaticket.setVisible(true);
+	}
+
+	// Metodo que Verifica si el Ticket a Imprimir es de Cambio o no, Si es Cambio
+	// regresa true en Otro Caso false
+	public boolean realizaCambio() {
+		return vistacambio.realizaCambio();
+	}
+
+	// Metodo para Guardar los Datos del Ticket de Venta en la Base de Datos del
+	// Ticket
+	public void guardarDatosTicket(String[] datosTicket) {
 		Producto producto = servicioalmacen.buscaProducto(datosTicket[2], datosTicket[3]);
 		Usuario user = getVendedor();
 		String fecha;
@@ -321,12 +316,49 @@ public class ControlVenta implements Printable {
 		} else
 			JOptionPane.showMessageDialog(null, "No hay Productos Disponibles");
 	}
-	
+
+	// Metodo Para Obtener los Datos de las Comiciones del Vendedor
 	public void obtenDatosComiciones() {
 		Usuario user = getVendedor();
-		double comicion= servicioticket.obtenerComicionVendedor(user);
+		double comicion = servicioticket.obtenerComicionVendedor(user);
 		int vendidos = servicioticket.obtenerCantidadVentasVendedor(user);
-		vistacomiciones.obtenDatosComicion(user.getNombre(),comicion,vendidos);
+		vistacomiciones.obtenDatosComicion(user.getNombre(), comicion, vendidos);
+	}
+
+	// Metodo que Verifica el Texto Ingresado es un Numero Real, en Caso de ser
+	// un Numero manda True en Otro Caso false
+	public boolean esNumeroReal(String num) {
+		int puntos = 0, tam = num.length();
+		if (num.isEmpty())
+			return false;
+		for (Character c : num.toCharArray())
+			if (!Character.isDigit(c))
+				if (c.equals('.') && tam > 1) {
+					if (puntos > 0)
+						return false;
+					puntos++;
+				} else
+					return false;
+		return true;
+	}
+
+	// Metodo que Manda a Limpiar los Datos de la Vista del Caso Ingresado
+	public void limpiarDatos(String tipo) {
+		if (vistaventacalzado.getTablaModelo().getRowCount() != 0 && tipo.equals("Venta")) {
+			vistaventacalzado.setIdProducto("");
+			vistaventacalzado.setMontounitario("       -");
+			vistaventacalzado.setIva("       -");
+			vistaventacalzado.setMontototal("       -");
+			vistaventacalzado.getTablaModelo().removeRow(0);
+		} else if (vistacambio.getTablaModeloVenta().getRowCount() != 0
+				|| vistacambio.getTablaModeloCambio().getRowCount() != 0 && tipo.equals("Cambio")) {
+			vistacambio.getTablaModeloVenta().removeRow(0);
+			vistacambio.setFolioventa("");
+			for (int i = vistacambio.getTablaModeloCambio().getRowCount() - 1; i >= 0; i--)
+				vistacambio.getTablaModeloCambio().removeRow(i);
+		} else if (tipo.equals("Comicion")) {
+			vistacomiciones.limpiarDatosComiciones();
+		}
 	}
 
 	// Este método imprime el ticket.
@@ -340,37 +372,6 @@ public class ControlVenta implements Printable {
 		} catch (PrinterException e) {
 			JOptionPane.showMessageDialog(null, "Error al imprimir");
 		}
-	}
-
-	public boolean realizaCambio() {
-		return vistacambio.realizaCambio();
-	}
-
-	public Usuario getVendedor() {
-		return user;
-	}
-
-	public Usuario buscaVendedor(String nombre, String tipo) {
-		return serviciologin.dameVendedor(nombre, tipo);
-	}
-
-	public void setVendedor(Usuario user) {
-		this.user = user;
-	}
-
-	public boolean esNumero(String num) {
-		int puntos = 0, tam = num.length();
-		if (num.isEmpty())
-			return false;
-		for (Character c : num.toCharArray())
-			if (!Character.isDigit(c))
-				if (c.equals('.') && tam > 1) {
-					if (puntos > 0)
-						return false;
-					puntos++;
-				} else
-					return false;
-		return true;
 	}
 
 	// Valida y le da formato de impresión al ticket.

@@ -157,13 +157,13 @@ public class VistaAgregarProducto extends JFrame {
 				if (!datomodelo.isEmpty())
 					if (!datotipo.isEmpty())
 						if (!datocolor.isEmpty()) {
-							if (control.esNumero(tcosto.getText()))
+							if (control.esNumeroReal(tcosto.getText()))
 								datocosto = Double.valueOf(tcosto.getText());
 							if (datocosto != 0) {
-								if (control.esNumero(ttalla.getText()))
+								if (control.esNumeroReal(ttalla.getText()))
 									datotalla = Double.valueOf(ttalla.getText());
 								if (datotalla != 0) {
-									if (control.esNumero(tcantidad.getText()))
+									if (control.esNumeroReal(tcantidad.getText()))
 										datocantidad = Integer.valueOf(tcantidad.getText());
 									if (datocantidad != 0) {
 										if (JOptionPane.showConfirmDialog(rootPane,

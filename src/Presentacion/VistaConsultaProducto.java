@@ -181,7 +181,7 @@ public class VistaConsultaProducto extends JFrame {
 					if (!productomodelo.isEmpty())
 						if (!productotipo.isEmpty())
 							if (!productocolor.isEmpty()) {
-								if (control.esNumero(ttalla.getText()))
+								if (control.esNumeroReal(ttalla.getText()))
 									productotalla = Double.valueOf(ttalla.getText());
 								if (productotalla > 0)
 									if (control.existeProducto(productomodelo, productotipo, productocolor,
@@ -203,7 +203,7 @@ public class VistaConsultaProducto extends JFrame {
 						JOptionPane.showMessageDialog(null, "Es Necesario Escribir el Modelo");
 				} else if (porcodigo) {
 					int productocodigo = 0;
-					if (control.esNumero(tcodigo.getText()))
+					if (control.esNumeroReal(tcodigo.getText()))
 						productocodigo = Integer.valueOf(tcodigo.getText());
 					if (productocodigo != 0) {
 						if (control.existeProducto(productocodigo)) {

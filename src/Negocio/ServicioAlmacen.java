@@ -5,8 +5,19 @@ import Modelo.Producto;
 
 public class ServicioAlmacen {
 
+	// Instancia de la Base de Datos
 	private DAOAlmacen dao = new DAOAlmacen();
 
+	// Metodos para Verficar la existencia de Productos si Existe manda true otro
+	// caso false
+	public boolean existeProducto(String modelo, String tipo) {
+		if (dao.buscaProducto(modelo, tipo) != null)
+			return true;
+		return false;
+	}
+
+	// Metodos para la Busqueda de un Producto, si lo Encuentra Regresa el Producto
+	// en Otro Caso null
 	public Producto buscaProducto(int codigo) {
 		return dao.buscaProducto(codigo);
 	}
@@ -19,34 +30,30 @@ public class ServicioAlmacen {
 		return dao.buscaProducto(modelo, tipo, color, talla);
 	}
 
-	public boolean existeProducto(String modelo, String tipo) {
-		if (dao.buscaProducto(modelo, tipo) != null)
-			return true;
-		return false;
+	// Metodo para Agregar el Producto a la Base de Datos
+	public boolean agregarProducto(Producto producto) {
+		return dao.agregaProducto(producto);
 	}
 
-	public Producto[] dameProductos() {
-		return dao.dameProductos();
-	}
-
-	// recibe el producto como boolean del resultado al enviar a dao
+	// Metodo para Quitar el Producto de la Base de Datos
 	public boolean eliminarProducto(Producto producto) {
 		return dao.quitaProducto(producto);
 	}
 
-	// recibe las caracteristicas del modelo y regresa producto
+	// Metodo para Consultar los Datos del Producto en la Base de Datos
 	public Producto consultaProducto(String modelo, String tipo) {
 		return dao.buscaProducto(modelo, tipo);
 	}
 
+	// Metodo para Obtener todos los Productos
+	public Producto[] dameProductos() {
+		return dao.dameProductos();
+	}
+
+	// Metodo que Obtiene el Total de Productos en la Base de Datos
 	public int cantidadProductos() {
 		if (dao.cuantosProductos() != 0)
 			return dao.cuantosProductos();
 		return 0;
 	}
-
-	public boolean agregarProducto(Producto producto) {
-		return dao.agregaProducto(producto);
-	}
-
 }
