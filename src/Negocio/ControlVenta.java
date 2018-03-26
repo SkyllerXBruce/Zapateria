@@ -308,7 +308,7 @@ public class ControlVenta implements Printable {
 		cantidad = producto.dameCantidad();
 		if (cantidad != 0) {
 			servicioalmacen.eliminarProducto(producto);
-			producto.setCantidad(cantidad - 1);
+			producto.setCantidad(cantidad - vendidos);
 			if (producto.dameCantidad() > 0)
 				servicioalmacen.agregarProducto(producto);
 			Ticket ticket = new Ticket(folio, fecha, user.getId(), producto.dameCodigo(), iva, total, vendidos);
