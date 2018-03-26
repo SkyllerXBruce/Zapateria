@@ -32,9 +32,7 @@ public class VistaEliminarProducto extends JFrame {
 	private boolean pormodelo, porcodigo;
 	private ControlAlmacen control;
 
-	/**
-	 * Launch the application.
-	 */
+	//
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
