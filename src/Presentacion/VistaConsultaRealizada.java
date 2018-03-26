@@ -18,6 +18,7 @@ import Negocio.ControlVendedores;
 @SuppressWarnings("serial")
 public class VistaConsultaRealizada extends JFrame {
 
+	// Variables Globales
 	private JButton finaliza, nueva;
 	private JLabel getnombre, getuser, getcurp, getdireccion, gettelefono, getid;
 	private ControlVendedores control;
