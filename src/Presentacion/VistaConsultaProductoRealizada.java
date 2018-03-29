@@ -131,10 +131,10 @@ public class VistaConsultaProductoRealizada extends JFrame {
 	}
 
 	// MÃ©todo Para Crear las Propiedades de las Etiquetas
-	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaÃ±o) {
+	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
 		JLabel etiqueta = new JLabel(nombre);
 		etiqueta.setBounds(posx, posy, ancho, alto);
-		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaÃ±o));
+		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaño));
 		return etiqueta;
 	}
 

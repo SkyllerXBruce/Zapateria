@@ -166,7 +166,7 @@ public class VistaLogin extends JFrame {
 		// entrada
 		textPassword.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
-				control.recibeContraseÃ±a(textPassword.getText());
+				control.recibeContraseña(textPassword.getText());
 			}
 		});
 

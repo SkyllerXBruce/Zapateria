@@ -136,26 +136,26 @@ public class VistaAgregarUsuario extends JFrame {
 	}
 
 	// Método Para Crear las Propiedades de las Etiquetas
-	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
+	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tama�o) {
 		// Se Crea e Inicializa una Etiqueta de la Clase JLabel
 		JLabel etiqueta = new JLabel(nombre);
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de la Etiqueta asi
 		// Como la Letra del Texto
 		etiqueta.setBounds(posx, posy, ancho, alto);
-		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaño));
+		etiqueta.setFont(new Font("Serif", Font.ITALIC, tama�o));
 		return etiqueta;
 	}
 
 	// Método Para Crear las Propiedades de los Cuadros de Texto
-	private JTextField creaCuadroTexto(int posx, int posy, int ancho, int alto, int tamaño) {
+	private JTextField creaCuadroTexto(int posx, int posy, int ancho, int alto, int tama�o) {
 		// Se Crea e Inicializa el Cuadro de Texto de la Clase JTextField
 		JTextField texto = new JTextField();
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto del Cuadro de Texto
 		// asi como la Letra del Texto y se Asegura que Este Vacio el Cuadro de Texto
 		texto.setBounds(posx, posy, ancho, alto);
-		texto.setFont(new Font("Serif", Font.ITALIC, tamaño));
+		texto.setFont(new Font("Serif", Font.ITALIC, tama�o));
 		texto.setText("");
 		return texto;
 	}

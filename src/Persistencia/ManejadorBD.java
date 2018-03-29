@@ -24,7 +24,6 @@ public class ManejadorBD {
 	 * Este manejador implementa el patron Singleton, por ello el constructor es
 	 * privado
 	 */
-	@SuppressWarnings("deprecation")
 	private ManejadorBD() throws DatabaseException {
 		try {
 			/*

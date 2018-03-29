@@ -88,7 +88,7 @@ public class ControlLogin {
 
 	// Validamos que hay algo escrito en el textfield de contraseña para la
 	// consulta.
-	public void recibeContraseña(String pass) {
+	public void recibeContrase�a(String pass) {
 		if (pass.length() > 1)
 			usuario.setPass(pass);
 	}
