@@ -1,14 +1,11 @@
 package Presentacion;
 
-import java.awt.Choice;
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import Negocio.ControlLogin;
@@ -16,24 +13,29 @@ import Negocio.ControlLogin;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.event.CaretListener;
+
+import Modelo.Componentes;
+
 import javax.swing.event.CaretEvent;
 
 @SuppressWarnings("serial")
 public class VistaLogin extends JFrame {
 
 	// Variables Globales
+	@SuppressWarnings("rawtypes")
+	private JComboBox choice;
 	private JTextField textUser, textPassword;
 	private JButton btnIngresar;
 	private ControlLogin control;
-	private Choice choice;
 
 	// Muestra Solo la Presentacion de la Vista
 	public static void main(String[] args) {
@@ -75,80 +77,56 @@ public class VistaLogin extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// Creamos e Instanciamos los Componentes de la Ventana
-		JPanel contentPane = new JPanel();
-		JLabel lblZapateria = new JLabel("Zapateria el Ahorro");
-		JLabel lblUsuario = new JLabel("Usuario:");
-		JLabel lblpass = new JLabel("Contraseña:");
-		JLabel lblCargo = new JLabel("Selecciona Cargo");
-		JLabel lblIcon = new JLabel("");
-		btnIngresar = new JButton("Ingresar");
-		textUser = new JTextField();
-		textPassword = new JPasswordField();
-		choice = new Choice();
+		// creamos el panel y lo agregamos a la ventana
+		JPanel panel = new JPanel();
+		Componentes componente = new Componentes();
+		String items[] = { "Selecciona...", "Vendedor", "Administrador" };
+		JLabel lblZapateria, lblUsuario, lblpass, lblCargo, lblIcon;
 
 		// Propiedades del Panel y se Agrega a la Ventana
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(panel);
+		panel.setLayout(null);
 
-		// Propiedades de la Etiqueta "Zapateria el Ahorro" y se Agrega al Panel
-		lblZapateria.setFont(new Font("Lucida Grande", Font.BOLD, 26));
-		lblZapateria.setBounds(140, 20, 280, 25);
-		contentPane.add(lblZapateria);
-
-		// Propiedades de la Imagen y se Agrega al Panel
-		lblIcon.setBounds(20, 30, 100, 100);
-		contentPane.add(lblIcon);
+		// Imagen del Login
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("userIcon.png"));
 		Image user = imgIcon.getImage();
 		Image userScaled = user.getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
+
+		// Creamos y Agregamos las Propiedades del Método creaBoton
+		btnIngresar = componente.creaBoton("Ingresar", 327, 243, 117, 29);
+
+		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
+		// Como de la Letra
+		lblZapateria = componente.creaEtiqueta("Zapateria el Ahorro", 140, 20, 280, 25, 26);
+		lblUsuario = componente.creaEtiqueta("Usuario:", 30, 150, 80, 20, 14);
+		lblpass = componente.creaEtiqueta("Contraseña:", 30, 200, 100, 20, 14);
+		lblCargo = componente.creaEtiqueta("Selecciona Cargo", 200, 70, 140, 20, 16);
+		lblIcon = componente.creaEtiqueta("", 20, 30, 100, 100, 14);
 		lblIcon.setIcon(imgIcon);
 
-		// Propiedades de la Etiqueta "Usuario" y se Agrega al Panel
-		lblUsuario.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblUsuario.setBounds(30, 150, 80, 20);
-		contentPane.add(lblUsuario);
+		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
+		// Como de la Letra
+		textUser = componente.creaCuadroTexto(130, 150, 214, 26, 14);
+		textPassword = componente.creaCuadroPassword(130, 200, 214, 26, 14);
 
-		// Propiedades de la Etiqueta "Contraseña" y se Agrega al Panel
-		lblpass.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblpass.setBounds(30, 200, 100, 20);
-		contentPane.add(lblpass);
-
-		// Propiedades de la Etiqueta "Selecciona Cargo" y se Agrega al Panel
-		lblCargo.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblCargo.setBounds(200, 70, 140, 20);
-		contentPane.add(lblCargo);
-
-		// Propiedades del textfield "Usuario" y se Agrega al Panel
-		textUser.setBounds(130, 150, 214, 26);
-		textUser.setColumns(10);
-		contentPane.add(textUser);
-
-		// Propiedades del textfield "Contraseña" y se Agrega al Panel
-		textPassword.setBounds(130, 200, 214, 26);
-		textPassword.setColumns(10);
-		contentPane.add(textPassword);
-
-		// Propiedades del Boton Ingresar y se Agrega al Panel
-		btnIngresar.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		btnIngresar.setBounds(327, 243, 117, 29);
-		contentPane.add(btnIngresar);
-
-		// Propiedades del Componente Choice "Selecciona Cargo" y se Agrega al Panel
-		choice.setForeground(Color.BLACK);
-		choice.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		choice.setBounds(200, 100, 140, 25);
-		contentPane.add(choice);
-
-		// Se Agregan los Items al Componente choice
-		choice.addItem("Selecciona...");
-		choice.addItem("Vendedor");
-		choice.addItem("Administrador");
+		// Propiedades del Componente JComboBox
+		choice = componente.creaComboBox(items, 200, 100, 140, 25, 14);
 
 		// Acciones de los Componentes
 		accionesComponentes();
+
+		// Agregamos los Componentes al Panel
+		panel.add(lblZapateria);
+		panel.add(lblIcon);
+		panel.add(lblUsuario);
+		panel.add(lblpass);
+		panel.add(lblCargo);
+		panel.add(textUser);
+		panel.add(textPassword);
+		panel.add(btnIngresar);
+		panel.add(choice);
 	}
 
 	// Realiza las Acciones de los Componentes
@@ -177,23 +155,26 @@ public class VistaLogin extends JFrame {
 				if (choice.getSelectedItem().equals("Vendedor")) {
 					control.recibeTipo("Vendedor");
 					if (control.validaIngreso()) {
-						textUser.setText("");
-						textPassword.setText("");
-						choice.select(0);
+						limpiaDatosLogin();
 						dispose();
 					}
 				} else if (choice.getSelectedItem().equals("Administrador")) {
 					control.recibeTipo("Administrador");
-					if(control.validaIngreso()) {
-						textUser.setText("");
-						textPassword.setText("");
-						choice.select(0);
+					if (control.validaIngreso()) {
+						limpiaDatosLogin();
 						dispose();
 					}
 				} else if (choice.getSelectedItem().equals("Selecciona..."))
 					JOptionPane.showMessageDialog(null, "Selecciona tipo de ingreso, por favor");
 			}
 		});
+	}
+
+	// Limpia los Datos Ingresados para Acceder
+	public void limpiaDatosLogin() {
+		textUser.setText("");
+		textPassword.setText("");
+		choice.setSelectedIndex(0);
 	}
 
 	// Obtenemos la Instancia del Control Login

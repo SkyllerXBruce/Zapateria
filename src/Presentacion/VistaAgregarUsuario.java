@@ -1,7 +1,6 @@
 package Presentacion;
 
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -106,15 +105,9 @@ public class VistaAgregarUsuario extends JFrame {
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
 		// Como de la Letra
 		tusuario = componente.creaCuadroTexto(190, 140, 270, 25, 14);
+		tcontrasena = componente.creaCuadroPassword(190, 180, 270, 25, 14);
 		tusuario.setToolTipText("Ingrese un Usuario");
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los PasswordField
-		// Como de la Letra
-		tcontrasena = new JPasswordField();
-		tcontrasena.setBounds(190, 180, 270, 25);
-		tcontrasena.setFont(new Font("Serif", Font.ITALIC, 14));
 		tcontrasena.setToolTipText("Ingrese una Contraseña");
-		tcontrasena.setText("");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();

@@ -2,7 +2,6 @@ package Presentacion;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -112,10 +111,10 @@ public class VistaEliminarVendedor extends JFrame {
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
 		// Como de la Letra
-		tnombre = creaCuadroTexto(210, 160, 250, 25, 14);
-		tapaterno = creaCuadroTexto(210, 200, 250, 25, 14);
-		tamaterno = creaCuadroTexto(210, 240, 250, 25, 14);
-		tid = creaCuadroTexto(210, 340, 250, 25, 14);
+		tnombre = componente.creaCuadroTexto(210, 160, 250, 25, 14);
+		tapaterno = componente.creaCuadroTexto(210, 200, 250, 25, 14);
+		tamaterno = componente.creaCuadroTexto(210, 240, 250, 25, 14);
+		tid = componente.creaCuadroTexto(210, 340, 250, 25, 14);
 		tnombre.setToolTipText("Ingrese Nombre del Vendedor");
 		tapaterno.setToolTipText("Ingrese Apellido Paterno del Vendedor");
 		tapaterno.setToolTipText("Ingrese Apellido Materno del Vendedor");
@@ -123,6 +122,7 @@ public class VistaEliminarVendedor extends JFrame {
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
+		
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(nombre);
@@ -138,43 +138,6 @@ public class VistaEliminarVendedor extends JFrame {
 		panel.add(eliminar);
 		panel.add(regresar);
 
-	}
-
-	// Método Para Crear las Propiedades del boton
-	private JButton creaBoton(String nombre, int posx, int posy, int ancho, int alto) {
-		// Se Crea e Inicializa un boton de la Clase JButton
-		JButton boton = new JButton(nombre);
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto del Boton Como la
-		// Letra del Texto
-		boton.setBounds(posx, posy, ancho, alto);
-		boton.setFont(new Font("Serif", Font.ITALIC, 14));
-		return boton;
-	}
-
-	// Método Para Crear las Propiedades de las Etiquetas
-	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
-		// Se Crea e Inicializa una Etiqueta de la Clase JLabel
-		JLabel etiqueta = new JLabel(nombre);
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de la Etiqueta asi
-		// Como la Letra del Texto
-		etiqueta.setBounds(posx, posy, ancho, alto);
-		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaño));
-		return etiqueta;
-	}
-
-	// Método Para Crear las Propiedades de los Cuadros de Texto
-	private JTextField creaCuadroTexto(int posx, int posy, int ancho, int alto, int tamaño) {
-		// Se Crea e Inicializa el Cuadro de Texto de la Clase JTextField
-		JTextField texto = new JTextField();
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto del Cuadro de Texto
-		// asi como la Letra del Texto y se Asegura que Este Vacio el Cuadro de Texto
-		texto.setBounds(posx, posy, ancho, alto);
-		texto.setFont(new Font("Serif", Font.ITALIC, tamaño));
-		texto.setText("");
-		return texto;
 	}
 
 	// Método para Crear las Acciones de Los Componentes
