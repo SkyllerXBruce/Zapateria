@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -21,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import Negocio.ControlAlmacen;
+import Modelo.Componentes;
 import Modelo.Producto;
 
 @SuppressWarnings("serial")
@@ -76,6 +76,7 @@ public class VistaEliminarProducto extends JFrame {
 		JPanel panel = new JPanel(null);
 		setContentPane(panel);
 		JLabel titulo, modelotipo, numcodigo;
+		Componentes componente = new Componentes();
 
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
@@ -83,22 +84,22 @@ public class VistaEliminarProducto extends JFrame {
 		imgIcon = new ImageIcon(userScaled);
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
-		eliminar = creaBoton("Eliminar", 280, 440, 150, 30);
-		regresa = creaBoton("", 40, 430, 50, 50);
+		eliminar = componente.creaBoton("Eliminar", 280, 440, 150, 30);
+		regresa = componente.creaBoton("", 40, 430, 50, 50);
 		regresa.setIcon(imgIcon);
 		eliminar.setToolTipText("Elimina el Producto del Almacen");
 		regresa.setToolTipText("Cancela la Operacion y Regresa a la Ventana de Administrar Almacen");
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		titulo = creaEtiqueta("Eliminar Producto", 120, 40, 340, 35, 30);
-		modelotipo = creaEtiqueta("Por Modelo y Tipo de Producto", 40, 120, 260, 25, 16);
-		modelo = creaEtiqueta("Modelo:", 60, 160, 140, 25, 16);
-		tipo = creaEtiqueta("Tipo:", 60, 200, 140, 25, 16);
-		color = creaEtiqueta("Color:", 60, 240, 140, 25, 16);
-		talla = creaEtiqueta("Talla:", 60, 280, 140, 25, 16);
-		numcodigo = creaEtiqueta("Por Número de Código", 40, 340, 180, 25, 16);
-		codigo = creaEtiqueta("Código:", 60, 380, 140, 25, 16);
+		titulo = componente.creaEtiqueta("Eliminar Producto", 120, 40, 340, 35, 30);
+		modelotipo = componente.creaEtiqueta("Por Modelo y Tipo de Producto", 40, 120, 260, 25, 16);
+		modelo = componente.creaEtiqueta("Modelo:", 60, 160, 140, 25, 16);
+		tipo = componente.creaEtiqueta("Tipo:", 60, 200, 140, 25, 16);
+		color = componente.creaEtiqueta("Color:", 60, 240, 140, 25, 16);
+		talla = componente.creaEtiqueta("Talla:", 60, 280, 140, 25, 16);
+		numcodigo = componente.creaEtiqueta("Por Número de Código", 40, 340, 180, 25, 16);
+		codigo = componente.creaEtiqueta("Código:", 60, 380, 140, 25, 16);
 		modelotipo.setToolTipText("Ingrese el Modelo y el Tipo del Producto");
 		modelo.setToolTipText("Ingrese el Modelo del Producto");
 		tipo.setToolTipText("Ingrese el Tipo del Producto");
@@ -107,11 +108,11 @@ public class VistaEliminarProducto extends JFrame {
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
 		// Como de la Letra
-		tmodelo = creaCuadroTexto(210, 160, 250, 25, 14);
-		ttipo = creaCuadroTexto(210, 200, 250, 25, 14);
-		tcolor = creaCuadroTexto(210, 240, 250, 25, 14);
-		ttalla = creaCuadroTexto(210, 280, 250, 25, 14);
-		tcodigo = creaCuadroTexto(210, 380, 250, 25, 14);
+		tmodelo = componente.creaCuadroTexto(210, 160, 250, 25, 14);
+		ttipo = componente.creaCuadroTexto(210, 200, 250, 25, 14);
+		tcolor = componente.creaCuadroTexto(210, 240, 250, 25, 14);
+		ttalla = componente.creaCuadroTexto(210, 280, 250, 25, 14);
+		tcodigo = componente.creaCuadroTexto(210, 380, 250, 25, 14);
 		tmodelo.setToolTipText("Ingrese el Modelo del Producto");
 		ttipo.setToolTipText("Ingrese el Tipo del Producto");
 		tcodigo.setToolTipText("Ingrese el Codigo del Producto");
@@ -135,31 +136,6 @@ public class VistaEliminarProducto extends JFrame {
 		panel.add(eliminar);
 		panel.add(regresa);
 
-	}
-
-	// Método Para Crear las Propiedades del boton
-	private JButton creaBoton(String nombre, int posx, int posy, int ancho, int alto) {
-		JButton boton = new JButton(nombre);
-		boton.setBounds(posx, posy, ancho, alto);
-		boton.setFont(new Font("Serif", Font.ITALIC, 14));
-		return boton;
-	}
-
-	// Método Para Crear las Propiedades de las Etiquetas
-	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
-		JLabel etiqueta = new JLabel(nombre);
-		etiqueta.setBounds(posx, posy, ancho, alto);
-		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaño));
-		return etiqueta;
-	}
-
-	// Método Para Crear las Propiedades de los Cuadros de Texto
-	private JTextField creaCuadroTexto(int posx, int posy, int ancho, int alto, int tamaño) {
-		JTextField texto = new JTextField();
-		texto.setBounds(posx, posy, ancho, alto);
-		texto.setFont(new Font("Serif", Font.ITALIC, tamaño));
-		texto.setText("");
-		return texto;
 	}
 
 	// Método para Crear las Acciones de Los Componentes

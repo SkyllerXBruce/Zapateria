@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Modelo.Componentes;
 import Modelo.Usuario;
 import Negocio.ControlVendedores;
 
@@ -78,6 +79,7 @@ public class VistaEliminarVendedor extends JFrame {
 		JPanel panel = new JPanel(null);
 		setContentPane(panel);
 		JLabel titulo, name, numid;
+		Componentes componente = new Componentes();
 		
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
@@ -85,21 +87,21 @@ public class VistaEliminarVendedor extends JFrame {
 		imgIcon = new ImageIcon(userScaled);
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
-		eliminar = creaBoton("Eliminar", 260, 400, 150, 30);
-		regresar = creaBoton("", 40, 390, 50, 50);
+		eliminar = componente.creaBoton("Eliminar", 260, 400, 150, 30);
+		regresar = componente.creaBoton("", 40, 390, 50, 50);
 		regresar.setIcon(imgIcon);
 		eliminar.setToolTipText("Elimina al Vendedor del Sistema");
 		regresar.setToolTipText("Cancela la Operacion y Regresa a la Ventana de Administrar Vendedores");
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		titulo = creaEtiqueta("Eliminar Vendedor", 120, 40, 340, 35, 30);
-		name = creaEtiqueta("Por Nombre", 40, 120, 140, 25, 16);
-		nombre = creaEtiqueta("Nombre:", 60, 160, 140, 25, 16);
-		apaterno = creaEtiqueta("Apellido Paterno:", 60, 200, 140, 25, 16);
-		amaterno = creaEtiqueta("Apellido Materno:", 60, 240, 140, 25, 16);
-		numid = creaEtiqueta("Por Número de ID", 40, 300, 140, 25, 16);
-		id = creaEtiqueta("ID:", 60, 340, 140, 25, 16);
+		titulo = componente.creaEtiqueta("Eliminar Vendedor", 120, 40, 340, 35, 30);
+		name = componente.creaEtiqueta("Por Nombre", 40, 120, 140, 25, 16);
+		nombre = componente.creaEtiqueta("Nombre:", 60, 160, 140, 25, 16);
+		apaterno = componente.creaEtiqueta("Apellido Paterno:", 60, 200, 140, 25, 16);
+		amaterno = componente.creaEtiqueta("Apellido Materno:", 60, 240, 140, 25, 16);
+		numid = componente.creaEtiqueta("Por Número de ID", 40, 300, 140, 25, 16);
+		id = componente.creaEtiqueta("ID:", 60, 340, 140, 25, 16);
 
 		nombre.setToolTipText("Ingrese Nombre del Vendedor");
 		apaterno.setToolTipText("Ingrese Apellido Paterno del Vendedor");
