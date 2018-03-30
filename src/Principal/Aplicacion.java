@@ -38,11 +38,6 @@ public class Aplicacion {
 		app.inicia(); // La inicia
 	}
 
-	// Constructor de la Clase Aplicacion
-	public Aplicacion() {
-		// No hay nada que inicializar
-	}
-
 	// Inicia la Aplicacion
 	public void inicia() {
 		// Declaramos e instanciamos las clases de las Vistas
