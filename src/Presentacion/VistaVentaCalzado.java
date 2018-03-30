@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Modelo.Componentes;
 import Negocio.ControlVenta;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -29,24 +30,7 @@ public class VistaVentaCalzado extends JFrame {
 	private JLabel total, iva, montounitario;
 	private JButton buscar, continuar, regresar, calcular;
 	private ControlVenta control;
-	private JTable table;
-	private DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
-			new String[] { "Modelo", "Tipo", "Color", "Talla", "Costo", "Disponibles", "Pares a Vender" }) {
-		@SuppressWarnings("rawtypes")
-		Class[] columnTypes = new Class[] { String.class, String.class, String.class, Double.class, Double.class,
-				Integer.class, Object.class };
-
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		public Class getColumnClass(int columnIndex) {
-			return columnTypes[columnIndex];
-		}
-
-		boolean[] columnEditables = new boolean[] { false, false, false, false, false, false, true };
-
-		public boolean isCellEditable(int row, int column) {
-			return columnEditables[column];
-		}
-	};
+	private DefaultTableModel modelo;
 
 	/**
 	 * Launch the application.
@@ -92,96 +76,52 @@ public class VistaVentaCalzado extends JFrame {
 
 	private void iniciarComponentes() {
 		JPanel contentPane = new JPanel();
-		JLabel lblcodigo = new JLabel("Codigo del Producto");
-		JLabel lblmonto = new JLabel("Monto por unidad  $");
-		JLabel lblIva = new JLabel("IVA (16%)   $");
-		JLabel lblTotal = new JLabel("Total  $");
-		codigo = new JTextField();
-		montounitario = new JLabel("       -");
-		total = new JLabel("       -");
-		iva = new JLabel("       -");
-		buscar = new JButton("Buscar");
-		continuar = new JButton("Continuar");
-		calcular = new JButton("Calcular Total");
-		regresar = new JButton("");
-		table = new JTable();
+		JLabel lblcodigo, lblmonto, lblIva, lblTotal;
+		Componentes componente = new Componentes();
+		JTable table = new JTable();
 		JScrollPane scrollPane = new JScrollPane();
+		String columnaventa[] = { "Modelo", "Tipo", "Color", "Talla", "Costo", "Disponibles", "Pares a Vender" };
+		String datosventa[][] = {};
+		modelo = new DefaultTableModel(datosventa, columnaventa) {
+			@Override
+			   public boolean isCellEditable(int row, int column) {
+			       return column == 6;
+			   }
+		};
 		
-		ImageIcon imgIcon = new ImageIcon(VistaVentaCalzado.class.getResource("return.png"));
-		Image ticket = imgIcon.getImage();
-		Image ticketScaled = ticket.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
-		imgIcon = new ImageIcon(ticketScaled);
+		
 
 		// Propiedades del Panel y se Agrega a la Ventana
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		// Propiedades de la Etiqueta "Id" y se Agrega al Panel
-		lblcodigo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblcodigo.setBounds(40, 25, 160, 26);
-		contentPane.add(lblcodigo);
-
-		// Propiedades de la Etiqueta "Monto" y se Agrega al Panel
-		lblmonto.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblmonto.setBounds(320, 170, 160, 26);
-		contentPane.add(lblmonto);
-
-		// Propiedades de la Etiqueta "Iva" y se Agrega al Panel
-		lblIva.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblIva.setBounds(380, 200, 100, 26);
-		contentPane.add(lblIva);
-
-		// Propiedades de la Etiqueta "Total" y se Agrega al Panel
-		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTotal.setBounds(420, 250, 60, 26);
-		contentPane.add(lblTotal);
-
-		// Propiedades del textfield "Id Producto" y se Agrega al Panel
-		codigo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		codigo.setBounds(220, 25, 90, 24);
-		codigo.setColumns(10);
-		contentPane.add(codigo);
-
-		// Propiedades del textfield "Monto Unitario" y se Agrega al Panel
-		montounitario.setFont(new Font("Tahoma", Font.BOLD, 14));
-		montounitario.setBounds(480, 170, 90, 24);
-		contentPane.add(montounitario);
-
-		// Propiedades del textfield "Iva" y se Agrega al Panel
-		iva.setFont(new Font("Tahoma", Font.BOLD, 14));
-		iva.setBounds(480, 200, 90, 24);
-		contentPane.add(iva);
-
-		// Propiedades del textfield "Total" y se Agrega al Panel
-		total.setFont(new Font("Tahoma", Font.BOLD, 14));
-		total.setBounds(480, 250, 90, 24);
-		contentPane.add(total);
+		//
+		ImageIcon imgIcon = new ImageIcon(VistaVentaCalzado.class.getResource("return.png"));
+		Image ticket = imgIcon.getImage();
+		Image ticketScaled = ticket.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
+		imgIcon = new ImageIcon(ticketScaled);
 
 		// Propiedades del Boton Buscar y se Agrega al Panel
-		buscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		buscar.setBounds(340, 25, 90, 26);
-		contentPane.add(buscar);
-
-		// Propiedades del Boton Continuar y se Agrega al Panel
-		continuar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		continuar.setBounds(460, 290, 120, 26);
-		contentPane.add(continuar);
-
-		// Propiedades del Boton CalcularTotal y se Agrega al Panel
-		calcular.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		calcular.setBounds(180, 200, 160, 26);
-		contentPane.add(calcular);
-
-		// Propiedades del Boton Cancelar y se Agrega al Panel
-		regresar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		regresar.setBounds(40, 260, 50, 50);
+		buscar = componente.creaBoton("Buscar", 340, 25, 90, 26);
+		continuar = componente.creaBoton("Continuar", 460, 290, 120, 26);
+		calcular = componente.creaBoton("Calcular Total", 180, 200, 160, 26);
+		regresar = componente.creaBoton("", 40, 260, 50, 50);
 		regresar.setIcon(imgIcon);
-		contentPane.add(regresar);
+
+		// Propiedades de la Etiqueta "Id" y se Agrega al Panel
+		lblcodigo = componente.creaEtiqueta("Codigo del Producto", 40, 25, 160, 26, 15);
+		lblmonto = componente.creaEtiqueta("Monto por unidad  $", 320, 170, 160, 26, 15);
+		lblIva = componente.creaEtiqueta("IVA (16%)   $", 380, 200, 100, 26, 15);
+		lblTotal = componente.creaEtiqueta("Total  $", 420, 250, 60, 26, 15);
+		montounitario = componente.creaEtiqueta("       -", 480, 170, 90, 24, 15);
+		iva = componente.creaEtiqueta("       -", 480, 200, 90, 24, 15);
+		total = componente.creaEtiqueta("       -", 480, 250, 90, 24, 15);
+
+		// Propiedades del textfield "Id Producto" y se Agrega al Panel
+		codigo = componente.creaCuadroTexto(220, 25, 90, 24, 15);
 
 		// Propiedades de la table y se Agrega el modelo
-		table.setFocusable(false);
-		table.getTableHeader().setReorderingAllowed(false);
 		table.setModel(modelo);
 		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setPreferredWidth(120);
@@ -190,15 +130,28 @@ public class VistaVentaCalzado extends JFrame {
 		table.getColumnModel().getColumn(4).setPreferredWidth(60);
 		table.getColumnModel().getColumn(5).setPreferredWidth(80);
 		table.getColumnModel().getColumn(6).setPreferredWidth(100);
-
+		
 		// Propiedades del ScrollPane Agregando la Tabla al Scrollpane y se Agrega al
 		// Panel
 		scrollPane.setBounds(40, 80, 600, 74);
 		scrollPane.setViewportView(table);
-		contentPane.add(scrollPane);
 
 		// Acciones de los Componentes
 		accionesComponentes();
+
+		contentPane.add(buscar);
+		contentPane.add(continuar);
+		contentPane.add(calcular);
+		contentPane.add(regresar);
+		contentPane.add(lblcodigo);
+		contentPane.add(lblmonto);
+		contentPane.add(lblIva);
+		contentPane.add(lblTotal);
+		contentPane.add(codigo);
+		contentPane.add(montounitario);
+		contentPane.add(iva);
+		contentPane.add(total);
+		contentPane.add(scrollPane);
 	}
 
 	private void accionesComponentes() {
@@ -206,13 +159,13 @@ public class VistaVentaCalzado extends JFrame {
 		// método.
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String prod=codigo.getText();
+				String prod = codigo.getText();
 				if (control.esNumeroReal(prod)) {
 					if (modelo.getRowCount() != 0)
 						control.limpiarDatos("Venta");
 					control.buscaProducto(Integer.valueOf(prod));
 					codigo.setText(prod);
-				} else 
+				} else
 					JOptionPane.showMessageDialog(null, "Ingrese id de producto a buscar");
 			}
 		});
@@ -233,10 +186,10 @@ public class VistaVentaCalzado extends JFrame {
 		// Validamos si ya hay producto seleccionado, para calcular su costo y total
 		calcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (control.esNumeroReal(codigo.getText())) 
+				if (control.esNumeroReal(codigo.getText()))
 					control.calculaTotal();
 				else
-				 JOptionPane.showMessageDialog(null, "No es posible calcular el total");
+					JOptionPane.showMessageDialog(null, "No es posible calcular el total");
 			}
 		});
 

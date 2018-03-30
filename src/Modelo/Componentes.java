@@ -10,11 +10,6 @@ import javax.swing.JTextField;
 
 public class Componentes {
 
-	// Constructor de los Componentes
-	public Componentes() {
-		// vacio
-	}
-
 	// Método Para Crear las Propiedades del boton
 	public JButton creaBoton(String nombre, int posx, int posy, int ancho, int alto) {
 		JButton boton = new JButton(nombre);
