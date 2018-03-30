@@ -190,13 +190,12 @@ public class ControlVenta implements Printable {
 		}
 	}
 
-	// Metodo para Realizar el Cambio del Producto Seleccionado, Requiere el folio
-	// de la Venta, si Realizo el Cambio Correctamente Regresa true en Otro Caso
-	// false
+	// Metodo para Obtener el Nuevo Producto de Cambio Seleccionado, Si Existe un
+	// Producto Seleccionado Regresa True en Otro Caso False
 	public boolean cambioProducto(int folio) {
 		int fila = -1;
 		String modelocambio, tipocambio, colorcambio;
-		double total = 0, iva = 0, diferencia = 0, tventa = 0, tallacambio = 0;
+		double total = 0, iva = 0, tallacambio = 0, diferencia = 0, tventa = 0;
 		boolean seleccion;
 		for (int i = 0; i < vistacambio.getTablaModeloCambio().getRowCount(); i++) {
 			seleccion = (boolean) vistacambio.getTablaModeloCambio().getValueAt(i, 7);
@@ -208,46 +207,16 @@ public class ControlVenta implements Printable {
 			tipocambio = (String) vistacambio.getTablaModeloCambio().getValueAt(fila, 1);
 			colorcambio = (String) vistacambio.getTablaModeloCambio().getValueAt(fila, 2);
 			tallacambio = (double) vistacambio.getTablaModeloCambio().getValueAt(fila, 3);
-			Producto productocambio = servicioalmacen.buscaProducto(modelocambio, tipocambio, colorcambio, tallacambio);
-			Producto productoventa = servicioalmacen.buscaProducto(folio);
-			Usuario user = getVendedor();
-			total = (double) vistacambio.getTablaModeloCambio().getValueAt(fila, 5);
-			iva = productocambio.dameCosto() * 0.16;
 			if (JOptionPane.showConfirmDialog(null, "¿Realmente Desea Realizar el Cambio?", "¿Cambio?",
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-				if (servicioalmacen.eliminarProducto(productocambio)) {
-					productocambio.setCantidad(productocambio.dameCantidad() - 1);
-					servicioalmacen.agregarProducto(productocambio);
-					if (servicioticket.modificaTicket(folio, servicioticket.getFechaActual(), user.getId(),
-							productocambio.dameCodigo(), total, iva)) {
-						if (servicioalmacen.eliminarProducto(productoventa)) {
-							productoventa.setCantidad(productoventa.dameCantidad() + 1);
-							servicioalmacen.agregarProducto(productoventa);
-							tventa = (double) vistacambio.getTablaModeloVenta().getValueAt(0, 5);
-							diferencia = (productocambio.dameCosto() * 1.16) - tventa;
-							creaTicketCambio(folio, productocambio, iva, total, diferencia, tventa);
-							return true;
-						} else {
-							servicioalmacen.eliminarProducto(productocambio);
-							productocambio.setCantidad(productocambio.dameCantidad() + 1);
-							servicioalmacen.agregarProducto(productocambio);
-							JOptionPane.showMessageDialog(null, "No Se Pudo Realizar el Cambio");
-							muestraVistaVendedor();
-							limpiarDatos("Cambio");
-						}
-					} else {
-						servicioalmacen.eliminarProducto(productocambio);
-						productocambio.setCantidad(productocambio.dameCantidad() + 1);
-						servicioalmacen.agregarProducto(productocambio);
-						JOptionPane.showMessageDialog(null, "No Se Pudo Realizar el Cambio");
-						muestraVistaVendedor();
-						limpiarDatos("Cambio");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "No Se Pudo Realizar el Cambio");
-					muestraVistaVendedor();
-					limpiarDatos("Cambio");
-				}
+				Producto productocambio = servicioalmacen.buscaProducto(modelocambio, tipocambio, colorcambio,
+						tallacambio);
+				total = (double) vistacambio.getTablaModeloCambio().getValueAt(fila, 5);
+				iva = productocambio.dameCosto() * 0.16;
+				tventa = (double) vistacambio.getTablaModeloVenta().getValueAt(0, 5);
+				diferencia = (productocambio.dameCosto() * 1.16) - tventa;
+				creaTicketCambio(folio, productocambio, iva, total, diferencia, tventa);
+				return true;
 			}
 		} else
 			JOptionPane.showMessageDialog(null, "Seleccione un Producto para Realizar Cambio");
@@ -256,40 +225,70 @@ public class ControlVenta implements Printable {
 
 	// Creamos el ticket de venta
 	public void creaTicketVenta() {
-		vistaticket.setFolio(String.valueOf(servicioticket.generaFolio()));
-		vistaticket.setFecha(servicioticket.getFechaActual());
-		vistaticket.setModelo((String) vistaventacalzado.getTablaModelo().getValueAt(0, 0));
-		vistaticket.setTipo((String) vistaventacalzado.getTablaModelo().getValueAt(0, 1));
-		vistaticket.setColor((String) vistaventacalzado.getTablaModelo().getValueAt(0, 2));
-		vistaticket.setTalla(String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 3)));
-		vistaticket.setCantidad((String) vistaventacalzado.getTablaModelo().getValueAt(0, 6));
-		vistaticket.setIva(vistaventacalzado.getIva());
-		vistaticket.setPrecioUnitario(String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 4)));
-		vistaticket.setTotal(vistaventacalzado.getTotal());
+		String datosventa[] = { String.valueOf(servicioticket.generaFolio()), servicioticket.getFechaActual(),
+				(String) vistaventacalzado.getTablaModelo().getValueAt(0, 0),
+				(String) vistaventacalzado.getTablaModelo().getValueAt(0, 1),
+				(String) vistaventacalzado.getTablaModelo().getValueAt(0, 2),
+				String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 3)),
+				(String) vistaventacalzado.getTablaModelo().getValueAt(0, 6), vistaventacalzado.getIva(),
+				String.valueOf(vistaventacalzado.getTablaModelo().getValueAt(0, 4)), vistaventacalzado.getTotal() };
+		vistaticket.setDatosTicket(datosventa);
 		vistaticket.setVisible(true);
 	}
 
 	// Creamos el ticket de Cambio
 	public void creaTicketCambio(int folio, Producto producto, double iva, double total, double diferencia,
 			double tventa) {
-		vistaticket.setFolio(String.valueOf(folio));
-		vistaticket.setFecha(servicioticket.getFechaActual());
-		vistaticket.setModelo(producto.dameModelo());
-		vistaticket.setTipo(producto.dameTipo());
-		vistaticket.setColor(producto.dameColor());
-		vistaticket.setTalla(String.valueOf(producto.dameTalla()));
-		vistaticket.setCantidad(String.valueOf(1));
-		vistaticket.setIva(String.format("%.2f", iva));
-		vistaticket.setPrecioUnitario(String.format("%.2f", producto.dameCosto()));
-		vistaticket.setTotal(String.format("%.2f", diferencia));
+		String datoscambio[] = { String.valueOf(folio), servicioticket.getFechaActual(), producto.dameModelo(),
+				producto.dameTipo(), producto.dameColor(), String.valueOf(producto.dameTalla()), String.valueOf(1),
+				String.format("%.2f", iva), String.format("%.2f", producto.dameCosto()),
+				String.format("%.2f", diferencia) };
+		vistaticket.setDatosTicket(datoscambio);
 		vistaticket.setTotalAnterior(String.format("%.2f", tventa));
 		vistaticket.setVisible(true);
 	}
 
+	// Realiza el Cambio del Producto, Si Realizo Cambio Regresa True en Otro Caso
+	// False
+	public boolean realizaCambioProducto(int folio, Producto productocambio, double iva, double total) {
+		Ticket ticket = servicioticket.dameTicket(folio);
+		Producto productoventa = servicioalmacen.buscaProducto(ticket.getCodigoproducto());
+		Usuario user = getVendedor();
+		if (servicioalmacen.eliminarProducto(productocambio)) {
+			productocambio.setCantidad(productocambio.dameCantidad() - 1);
+			servicioalmacen.agregarProducto(productocambio);
+			if (servicioticket.modificaTicket(folio, servicioticket.getFechaActual(), user.getId(),
+					productocambio.dameCodigo(), total, iva)) {
+				if (servicioalmacen.eliminarProducto(productoventa)) {
+					productoventa.setCantidad(productoventa.dameCantidad() + 1);
+					servicioalmacen.agregarProducto(productoventa);
+					return true;
+				} else {
+					servicioalmacen.eliminarProducto(productocambio);
+					productocambio.setCantidad(productocambio.dameCantidad() + 1);
+					servicioalmacen.agregarProducto(productocambio);
+				}
+			} else {
+				servicioalmacen.eliminarProducto(productocambio);
+				productocambio.setCantidad(productocambio.dameCantidad() + 1);
+				servicioalmacen.agregarProducto(productocambio);
+			}
+		}
+		return false;
+	}
+
 	// Metodo que Verifica si el Ticket a Imprimir es de Cambio o no, Si es Cambio
 	// regresa true en Otro Caso false
-	public boolean realizaCambio() {
+	public boolean esCambio() {
 		return vistacambio.realizaCambio();
+	}
+	
+	public boolean esVendedor() {
+		return vistavendedor.esVendedor();
+	}
+	
+	public void setVendedor(boolean vendedor) {
+		vistavendedor.setVendedor(vendedor);
 	}
 
 	// Metodo para Guardar los Datos del Ticket de Venta en la Base de Datos del

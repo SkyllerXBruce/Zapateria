@@ -100,9 +100,12 @@ public class Aplicacion {
 		vistadelvendedor.setControl(controlvendedores);
 		vistalogin.setControl(controllogin);
 		vistamostrarproductos.setControl(controlalmacen);
+		vistamostrarproductos.setControl(controlventa);
 		vistamostrarvendedores.setControl(controlvendedores);
 		vistaticket.setControl(controlventa);
+		vistaticket.setControl(controlalmacen);
 		vistavendedor.setControl(controlventa);
+		vistavendedor.setControl(controlalmacen);
 		vistavendedorcalzado.setControl(controlventa);
 
 		// Mandamos al Control Login las Vistas y el Servicion Correspondiente

@@ -17,13 +17,16 @@ import javax.swing.table.DefaultTableModel;
 
 import Modelo.Componentes;
 import Negocio.ControlAlmacen;
+import Negocio.ControlVenta;
 
 @SuppressWarnings("serial")
 public class VistaMostrarProductos extends JFrame {
 
 	private JButton finaliza;
 	private ControlAlmacen control;
+	private ControlVenta controlventa;
 	private DefaultTableModel modelo;
+	private boolean vendedor = false;
 
 	/**
 	 * Launch the application.
@@ -115,7 +118,12 @@ public class VistaMostrarProductos extends JFrame {
 		finaliza.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				control.muestraVistaAlmacen();
+				vendedor = controlventa.esVendedor();
+				if (vendedor)
+					controlventa.muestraVistaVendedor();
+				else
+					control.muestraVistaAlmacen();
+				controlventa.setVendedor(false);
 				control.limpiarDatos("Mostrar");
 				dispose();
 			}
@@ -134,5 +142,9 @@ public class VistaMostrarProductos extends JFrame {
 
 	public void setControl(ControlAlmacen controlproductos) {
 		this.control = controlproductos;
+	}
+
+	public void setControl(ControlVenta controlventa) {
+		this.controlventa = controlventa;
 	}
 }
