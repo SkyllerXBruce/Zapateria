@@ -84,6 +84,7 @@ public class VistaConsultarVendedor extends JFrame {
 		panel.setLayout(null);
 		setContentPane(panel);
 
+		// Imagen del Boton regresar
 		ImageIcon imgIcon = new ImageIcon(VistaAgregarVendedor.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);

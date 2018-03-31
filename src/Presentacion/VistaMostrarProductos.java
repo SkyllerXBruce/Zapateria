@@ -23,15 +23,14 @@ import Negocio.ControlVenta;
 @SuppressWarnings("serial")
 public class VistaMostrarProductos extends JFrame {
 
+	// Variables Globales
 	private JButton finaliza;
 	private ControlAlmacen control;
 	private ControlVenta controlventa;
 	private DefaultTableModel modelo;
 	private boolean vendedor = false;
 
-	/**
-	 * Launch the application.
-	 */
+	// Muestra Solo la Presentacion de la Vista
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,7 +44,9 @@ public class VistaMostrarProductos extends JFrame {
 		});
 	}
 
+	// Constructor de la Ventana VistaMostrarProductos
 	public VistaMostrarProductos() {
+		// Propiedades de la Ventana
 		setSize(900, 500);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -71,23 +72,29 @@ public class VistaMostrarProductos extends JFrame {
 
 	private void iniciarComponentes() {
 		// Creamos la Instancia del JPanel Así como de Algunos Componentes
-		JPanel panel = new JPanel(null);
+		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
+		JTable tablaproductos = new JTable();
+		JScrollPane scroll = new JScrollPane();
+		JLabel titulo;
 		String[] nombrescolumnas = { "Codigo", "Modelo", "Tipo", "Color", "Costo Unitario", "Talla", "Cantidad" };
 		String[][] datos = {};
-		modelo = new DefaultTableModel(datos, nombrescolumnas);
-		JTable tablaproductos = new JTable(modelo);
-		JLabel titulo;
 
 		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setLayout(null);
 		setContentPane(panel);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		finaliza = componente.creaBoton("Finalizar", 380, 420, 140, 30);
-		finaliza.setToolTipText("Regresa a la Ventana de Administrar Vendedores");
+		
+		// Creamos y Agregamos las Propiedades del JLabel
+		titulo = componente.creaEtiqueta("Mostrar Productos", 300, 40, 340, 35, 30);
+		
+		// Se Crean el Modelo y Se Agregan los Datos de los Productos
+		modelo = new DefaultTableModel(datos, nombrescolumnas);
 
+		// Modificamos las Propiedades de la Tablas y Agregamos el Modelo de Tabla
 		tablaproductos.setModel(modelo);
 		tablaproductos.setEnabled(false);
 		tablaproductos.getColumnModel().getColumn(0).setPreferredWidth(60);
@@ -98,14 +105,9 @@ public class VistaMostrarProductos extends JFrame {
 		tablaproductos.getColumnModel().getColumn(5).setPreferredWidth(80);
 		tablaproductos.getColumnModel().getColumn(6).setPreferredWidth(60);
 
-		//
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(40, 100, 820, 300);
-		scrollPane.setViewportView(tablaproductos);
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
-		titulo = componente.creaEtiqueta("Mostrar Productos", 300, 40, 340, 35, 30);
+		// Modificamos Propiedades del ScrollPane Y Agregamos la Tabla
+		scroll.setBounds(40, 100, 820, 300);
+		scroll.setViewportView(tablaproductos);
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -113,12 +115,12 @@ public class VistaMostrarProductos extends JFrame {
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(finaliza);
-		panel.add(scrollPane);
+		panel.add(scroll);
 	}
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-		// Accion del boton vendedores
+		// Accion del boton Finaliza
 		finaliza.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -134,16 +136,19 @@ public class VistaMostrarProductos extends JFrame {
 		});
 	}
 
+	// Limpia los Datos del Producto de la Tabla
 	public void limpiarDatosMostrarProductos() {
 		if (modelo.getColumnCount() != 0)
 			for (int i = modelo.getRowCount() - 1; i >= 0; i--)
 				modelo.removeRow(i);
 	}
 
+	// Metodo para Obtener el Modelo de la Tabla
 	public DefaultTableModel getTablaModelo() {
 		return modelo;
 	}
 
+	// Métodos para Obtener la Instancia de los Controles Correspondientes
 	public void setControl(ControlAlmacen controlproductos) {
 		this.control = controlproductos;
 	}

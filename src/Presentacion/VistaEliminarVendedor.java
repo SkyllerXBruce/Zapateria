@@ -27,15 +27,14 @@ import Negocio.ControlVendedores;
 @SuppressWarnings("serial")
 public class VistaEliminarVendedor extends JFrame {
 
+	// Variables Globales
 	private JButton eliminar, regresar;
 	private JTextField tnombre, tapaterno, tamaterno, tid;
 	private JLabel id, nombre, apaterno, amaterno;
 	private boolean pornombre, porid;
 	private ControlVendedores control;
 
-	/**
-	 * Launch the application.
-	 */
+	// Muestra Solo la Presentacion de la Vista
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -49,6 +48,7 @@ public class VistaEliminarVendedor extends JFrame {
 		});
 	}
 
+	// Constructor de la Ventana VistaEliminarVendedor
 	public VistaEliminarVendedor() {
 		// Tamaño de la Ventana
 		setSize(480, 480);
@@ -85,20 +85,18 @@ public class VistaEliminarVendedor extends JFrame {
 		panel.setLayout(null);
 		setContentPane(panel);
 
+		// Imagen del Boton regresar
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		eliminar = componente.creaBoton("Eliminar", 260, 400, 150, 30);
 		regresar = componente.creaBoton("", 40, 390, 50, 50);
 		regresar.setIcon(imgIcon);
-		eliminar.setToolTipText("Elimina al Vendedor del Sistema");
-		regresar.setToolTipText("Cancela la Operacion y Regresa a la Ventana de Administrar Vendedores");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Eliminar Vendedor", 120, 40, 340, 35, 30);
 		name = componente.creaEtiqueta("Por Nombre", 40, 120, 140, 25, 16);
 		nombre = componente.creaEtiqueta("Nombre:", 60, 160, 140, 25, 16);
@@ -107,23 +105,11 @@ public class VistaEliminarVendedor extends JFrame {
 		numid = componente.creaEtiqueta("Por Número de ID", 40, 300, 140, 25, 16);
 		id = componente.creaEtiqueta("ID:", 60, 340, 140, 25, 16);
 
-		nombre.setToolTipText("Ingrese Nombre del Vendedor");
-		apaterno.setToolTipText("Ingrese Apellido Paterno del Vendedor");
-		apaterno.setToolTipText("Ingrese Apellido Materno del Vendedor");
-		name.setToolTipText("Ingrese Curp del Vendedor");
-		id.setToolTipText("Ingrese Dirección del Vendedor");
-		numid.setToolTipText("Ingrese Telefono del Vendedor");
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JTextField
 		tnombre = componente.creaCuadroTexto(210, 160, 250, 25, 14);
 		tapaterno = componente.creaCuadroTexto(210, 200, 250, 25, 14);
 		tamaterno = componente.creaCuadroTexto(210, 240, 250, 25, 14);
 		tid = componente.creaCuadroTexto(210, 340, 250, 25, 14);
-		tnombre.setToolTipText("Ingrese Nombre del Vendedor");
-		tapaterno.setToolTipText("Ingrese Apellido Paterno del Vendedor");
-		tapaterno.setToolTipText("Ingrese Apellido Materno del Vendedor");
-		tid.setToolTipText("Ingrese ID del Vendedor");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -142,12 +128,11 @@ public class VistaEliminarVendedor extends JFrame {
 		panel.add(tid);
 		panel.add(eliminar);
 		panel.add(regresar);
-
 	}
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-		// Accion del boton vendedores
+		// Accion del boton Eliminar
 		eliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -205,6 +190,7 @@ public class VistaEliminarVendedor extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField tnombre
 		tnombre.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -224,6 +210,7 @@ public class VistaEliminarVendedor extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField tapaterno
 		tapaterno.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -243,6 +230,7 @@ public class VistaEliminarVendedor extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField tamaterno
 		tamaterno.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -262,6 +250,7 @@ public class VistaEliminarVendedor extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField tid
 		tid.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -285,7 +274,7 @@ public class VistaEliminarVendedor extends JFrame {
 			}
 		});
 
-		// Accion del boton Comiciones
+		// Accion del boton Regresa
 		regresar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -296,6 +285,7 @@ public class VistaEliminarVendedor extends JFrame {
 		});
 	}
 
+	// Metodo que limpia los TextFields
 	public void limpiarDatosEliminarVendedor() {
 		tnombre.setText("");
 		tapaterno.setText("");
@@ -313,10 +303,12 @@ public class VistaEliminarVendedor extends JFrame {
 		porid = true;
 	}
 
+	// Obtenemos la Instancia del Control Vendedores
 	public void setControl(ControlVendedores controlvendedores) {
 		this.control = controlvendedores;
 	}
 
+	// Método para Dibujar una Linea como Separador
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(Color.LIGHT_GRAY);

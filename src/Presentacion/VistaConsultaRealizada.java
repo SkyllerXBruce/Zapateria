@@ -22,7 +22,7 @@ public class VistaConsultaRealizada extends JFrame {
 
 	// Variables Globales
 	private JButton finaliza, nueva;
-	private JLabel lnombre, luser, lcurp, ldireccion, ltelefono, lid;
+	private JLabel lnombre, luser, lcurp, lcorreo, ltelefono, lid;
 	private ControlVendedores control;
 
 	// Muestra Solo la Presentacion de la Vista
@@ -87,12 +87,12 @@ public class VistaConsultaRealizada extends JFrame {
 		telefono = componente.creaEtiqueta("Telefono:", 40, 240, 150, 25, 16);
 		user = componente.creaEtiqueta("Usuario:", 40, 280, 150, 25, 16);
 		id = componente.creaEtiqueta("ID:", 40, 320, 150, 25, 16);
-		lnombre = componente.creaEtiqueta("", 200, 120, 360, 25, 16);
-		lcurp = componente.creaEtiqueta("", 200, 160, 360, 25, 16);
-		ldireccion = componente.creaEtiqueta("", 200, 200, 360, 25, 16);
-		ltelefono = componente.creaEtiqueta("", 200, 240, 360, 25, 16);
-		luser = componente.creaEtiqueta("", 200, 280, 360, 25, 16);
-		lid = componente.creaEtiqueta("", 200, 320, 360, 25, 16);
+		lnombre = componente.creaEtiqueta("Nombre", 200, 120, 360, 25, 16);
+		lcurp = componente.creaEtiqueta("Curp", 200, 160, 360, 25, 16);
+		lcorreo = componente.creaEtiqueta("Correo", 200, 200, 360, 25, 16);
+		ltelefono = componente.creaEtiqueta("Telefono", 200, 240, 360, 25, 16);
+		luser = componente.creaEtiqueta("Usuario", 200, 280, 360, 25, 16);
+		lid = componente.creaEtiqueta("ID", 200, 320, 360, 25, 16);
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -107,7 +107,7 @@ public class VistaConsultaRealizada extends JFrame {
 		panel.add(id);
 		panel.add(lnombre);
 		panel.add(lcurp);
-		panel.add(ldireccion);
+		panel.add(lcorreo);
 		panel.add(ltelefono);
 		panel.add(luser);
 		panel.add(lid);
@@ -142,7 +142,7 @@ public class VistaConsultaRealizada extends JFrame {
 	public void obtenerDatosVendedor(Usuario vendedor) {
 		lnombre.setText(vendedor.getNombre());
 		lcurp.setText(vendedor.getCurp());
-		ldireccion.setText(vendedor.getCorreo());
+		lcorreo.setText(vendedor.getCorreo());
 		ltelefono.setText(vendedor.getTelefono());
 		lid.setText(vendedor.getId());
 		luser.setText(vendedor.getUsuario());
@@ -153,7 +153,7 @@ public class VistaConsultaRealizada extends JFrame {
 		lnombre.setText("");
 		luser.setText("");
 		lcurp.setText("");
-		ldireccion.setText("");
+		lcorreo.setText("");
 		ltelefono.setText("");
 		lid.setText("");
 	}

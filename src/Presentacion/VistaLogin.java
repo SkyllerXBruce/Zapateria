@@ -94,11 +94,10 @@ public class VistaLogin extends JFrame {
 		Image userScaled = user.getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton
+		// Creamos y Agregamos las Propiedades del JButton
 		ingresar = componente.creaBoton("Ingresar", 327, 243, 117, 29);
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		zapateria = componente.creaEtiqueta("Zapateria el Ahorro", 140, 20, 280, 25, 26);
 		usuario = componente.creaEtiqueta("Usuario:", 30, 150, 80, 20, 14);
 		pass = componente.creaEtiqueta("Contraseña:", 30, 200, 100, 20, 14);
@@ -106,12 +105,11 @@ public class VistaLogin extends JFrame {
 		imagen = componente.creaEtiqueta("", 20, 30, 100, 100, 14);
 		imagen.setIcon(imgIcon);
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JTextField y JPasswordField
 		tuser = componente.creaCuadroTexto(130, 150, 214, 26, 14);
 		tpass = componente.creaCuadroPassword(130, 200, 214, 26, 14);
 
-		// Propiedades del Componente JComboBox
+		// Creamos y Agregamos las Propiedades del JCombobox
 		choice = componente.creaComboBox(items, 200, 100, 140, 25, 14);
 
 		// Acciones de los Componentes
