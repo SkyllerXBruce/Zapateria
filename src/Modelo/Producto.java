@@ -7,7 +7,7 @@ public class Producto {
 	private double costo = 0, talla = 0;
 	private int cantidad = 0, codigo = 0;
 
-	// constructor que nos permite asignar valores a los atributos.
+	// Constructor que nos Permite Asignar Valores a los Atributos.
 	public Producto(int codigo, String modelo, String tipo, String color, double costo, double talla, int cantidad) {
 		this.codigo = codigo;
 		this.modelo = modelo;
@@ -18,8 +18,8 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 
-	// Declaramos estos métodos, para que modifiquemos los valores cuando se
-	// necesario
+	// Declaramos estos Métodos, para que Modifiquemos los Valores Cuando sea
+	// Necesario
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -48,7 +48,7 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 
-	// Estos otros metodos nos serviran para mostrar los atributos
+	// Estos Metodos nos Serviran para Mostrar los Atributos
 	public int dameCodigo() {
 		return codigo;
 	}
@@ -77,7 +77,7 @@ public class Producto {
 		return cantidad;
 	}
 
-	@Override
+	@Override // Método para Obtener la Cadena que Representa al Objeto
 	public String toString() {
 		return "Producto [Codigo=" + codigo + ", Modelo=" + modelo + ", Tipo=" + tipo + ", Color=" + color + ", Costo="
 				+ costo + ", Talla=" + talla + ", Cantidad=" + cantidad + "]";
