@@ -20,13 +20,12 @@ import Negocio.ControlAlmacen;
 @SuppressWarnings("serial")
 public class VistaConsultaProductoRealizada extends JFrame {
 
+	// Variables Globales
 	private JButton finaliza, nueva;
 	private JLabel lcodigo, lmodelo, ltipo, lcolor, lcosto, ltalla, lcantidad;
 	private ControlAlmacen control;
 
-	/**
-	 * Launch the application.
-	 */
+	// Muestra Solo la Presentacion de la Vista
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,8 +39,9 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		});
 	}
 
+	// Constructor de la Ventana VistaConsultaProductoRealizada
 	public VistaConsultaProductoRealizada() {
-		// Tamaño de la Ventana
+		// Propiedades de la Ventana
 		setSize(440, 500);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -75,14 +75,11 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		panel.setLayout(null);
 		setContentPane(panel);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		finaliza = componente.creaBoton("Finalizar Consulta", 260, 420, 160, 30);
 		nueva = componente.creaBoton("Nueva Consulta", 20, 420, 150, 30);
-		finaliza.setToolTipText("Termina la Consulta y Regresa a la Ventana de Administrar Vendedores");
-		nueva.setToolTipText("Realiza una Nueva Consulta");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Producto", 140, 40, 340, 35, 30);
 		codigo = componente.creaEtiqueta("Código:", 40, 120, 150, 25, 16);
 		modelo = componente.creaEtiqueta("Modelo:", 40, 160, 150, 25, 16);
@@ -98,15 +95,10 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		lcosto = componente.creaEtiqueta("Costo", 200, 280, 360, 25, 16);
 		ltalla = componente.creaEtiqueta("Talla", 200, 320, 360, 25, 16);
 		lcantidad = componente.creaEtiqueta("Cantidad", 200, 360, 150, 25, 16);
-		lcodigo.setToolTipText("Codigo del Producto");
-		ltipo.setToolTipText("Tipo del Producto");
-		lcolor.setToolTipText("Color del Producto");
-		lcosto.setToolTipText("Costo Unitario del Producto");
-		lmodelo.setToolTipText("Modelo del Producto");
-		ltalla.setToolTipText("Talla del Producto");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
+
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(codigo);
@@ -130,7 +122,7 @@ public class VistaConsultaProductoRealizada extends JFrame {
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-		// Accion del boton vendedores
+		// Accion del boton Finaliza
 		finaliza.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -140,7 +132,7 @@ public class VistaConsultaProductoRealizada extends JFrame {
 			}
 		});
 
-		// Accion del boton Comiciones
+		// Accion del boton Nueva Consulta
 		nueva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -151,6 +143,7 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		});
 	}
 
+	// Método para Obtener los Datos del Producto y Mostrarlo en la Ventana
 	public void obtenerDatosProducto(Producto producto) {
 		lcodigo.setText(String.valueOf(producto.dameCodigo()));
 		lmodelo.setText(producto.dameModelo());
@@ -161,6 +154,7 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		lcantidad.setText(String.valueOf(producto.dameCantidad()));
 	}
 
+	// Metodo que limpia los TextFields
 	public void limpiarDatosConsultaProducto() {
 		lcodigo.setText("");
 		lmodelo.setText("");
@@ -170,6 +164,7 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		ltalla.setText("");
 	}
 
+	// Obtenemos la Instancia del Control Almacen
 	public void setControl(ControlAlmacen controlalmacen) {
 		this.control = controlalmacen;
 	}

@@ -1,5 +1,6 @@
 package Presentacion;
 
+import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -24,8 +25,23 @@ public class VistaConsultaRealizada extends JFrame {
 	private JLabel lnombre, luser, lcurp, ldireccion, ltelefono, lid;
 	private ControlVendedores control;
 
+	// Muestra Solo la Presentacion de la Vista
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VistaConsultaRealizada frame = new VistaConsultaRealizada();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	// Constructor de la Ventana VistaConsultaRealizada
 	public VistaConsultaRealizada() {
-		// Tamaño de la Ventana
+		// Propiedades de la Ventana
 		setSize(580, 460);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -59,14 +75,11 @@ public class VistaConsultaRealizada extends JFrame {
 		panel.setLayout(null);
 		setContentPane(panel);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		finaliza = componente.creaBoton("Finalizar Consulta", 360, 380, 160, 30);
 		nueva = componente.creaBoton("Nueva Consulta", 80, 380, 150, 30);
-		finaliza.setToolTipText("Termina la Consulta y Regresa a la Ventana de Administrar Vendedores");
-		nueva.setToolTipText("Realiza una Nueva Consulta");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Vendedor", 220, 40, 340, 35, 30);
 		nombre = componente.creaEtiqueta("Nombre Completo:", 40, 120, 150, 25, 16);
 		curp = componente.creaEtiqueta("Curp:", 40, 160, 150, 25, 16);
@@ -80,15 +93,10 @@ public class VistaConsultaRealizada extends JFrame {
 		ltelefono = componente.creaEtiqueta("", 200, 240, 360, 25, 16);
 		luser = componente.creaEtiqueta("", 200, 280, 360, 25, 16);
 		lid = componente.creaEtiqueta("", 200, 320, 360, 25, 16);
-		lnombre.setToolTipText("Nombre Completo del Vendedor");
-		lcurp.setToolTipText("Curp del Vendedor");
-		ldireccion.setToolTipText("Direccion del Vendedor");
-		ltelefono.setToolTipText("Telefono del Vendedor");
-		luser.setToolTipText("Usuario del Vendedor para Ingresar al Sistema");
-		lid.setToolTipText("ID del Vendedor para Identificar en el Sistema");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
+		
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(nombre);
@@ -105,12 +113,11 @@ public class VistaConsultaRealizada extends JFrame {
 		panel.add(lid);
 		panel.add(finaliza);
 		panel.add(nueva);
-
 	}
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-		// Accion del boton vendedores
+		// Accion del boton Finaliza
 		finaliza.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -120,7 +127,7 @@ public class VistaConsultaRealizada extends JFrame {
 			}
 		});
 
-		// Accion del boton Comiciones
+		// Accion del boton Nueva Consulta
 		nueva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -131,6 +138,7 @@ public class VistaConsultaRealizada extends JFrame {
 		});
 	}
 
+	// Método para Obtener los Datos del Vendedor y Mostrarlo en la Ventana
 	public void obtenerDatosVendedor(Usuario vendedor) {
 		lnombre.setText(vendedor.getNombre());
 		lcurp.setText(vendedor.getCurp());
@@ -140,6 +148,7 @@ public class VistaConsultaRealizada extends JFrame {
 		luser.setText(vendedor.getUsuario());
 	}
 
+	// Metodo que limpia los TextFields
 	public void limpiarDatosConsultaVendedor() {
 		lnombre.setText("");
 		luser.setText("");
@@ -149,8 +158,8 @@ public class VistaConsultaRealizada extends JFrame {
 		lid.setText("");
 	}
 
+	// Obtenemos la Instancia del Control Vendedores
 	public void setControl(ControlVendedores controlvendedores) {
 		this.control = controlvendedores;
 	}
-
 }

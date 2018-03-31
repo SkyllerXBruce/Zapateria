@@ -56,8 +56,8 @@ public class VistaComiciones extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent evt) {
-				if (JOptionPane.showConfirmDialog(rootPane, "¿Desea Realmente Salir del Balance?",
-						"¿Salir del Balance?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if (JOptionPane.showConfirmDialog(rootPane, "¿Desea Realmente Salir de la Comicion?",
+						"¿Salir de la Comicion?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					control.muestraVistaAdministarVendedores();
 					dispose();
 				}
