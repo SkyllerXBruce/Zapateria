@@ -75,7 +75,7 @@ public class DAOAlmacen {
 		ArrayList<Producto> productosTemp = new ArrayList<Producto>();
 		try {
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM Almacen");
+			ResultSet rs = statement.executeQuery("SELECT * FROM Almacen ORDER BY Codigo");
 			while (rs.next()) {
 				Producto producto = new Producto(rs.getInt("Codigo"), rs.getString("Modelo"), rs.getString("Tipo"),
 						rs.getString("Color"), rs.getDouble("Costo"), rs.getDouble("Talla"), rs.getInt("Cantidad"));

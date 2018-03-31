@@ -60,7 +60,7 @@ public class DAOTicket {
 		ArrayList<Ticket> ticketsTemp = new ArrayList<Ticket>();
 		try {
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM Tickets");
+			ResultSet rs = statement.executeQuery("SELECT * FROM Tickets ORDER BY Folio");
 			while (rs.next()) {
 				Ticket ticket = new Ticket(rs.getInt("Folio"), rs.getString("Fecha"), rs.getString("IDVendedor"),
 						rs.getInt("CodigoProducto"), rs.getDouble("Iva"), rs.getDouble("Total"), rs.getInt("Vendidos"));

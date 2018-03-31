@@ -38,7 +38,7 @@ public class ServicioVendedores {
 		return dao.quitaVendedor(vendedor);
 	}
 
-	// Metodo para Obtener Todos los Tickets Existentes en la Base de Datos
+	// Metodo para Obtener Todos los Vendedores Existentes en la Base de Datos
 	public Usuario[] dameVendedores() {
 		Usuario vendedores[] = dao.dameVendedores();
 		if (vendedores != null)

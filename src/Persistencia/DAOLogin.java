@@ -108,7 +108,7 @@ public class DAOLogin {
 		Usuario usuarios[] = null;
 		try {
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM Loginpersonal");
+			ResultSet rs = statement.executeQuery("SELECT * FROM Loginpersonal ORDER BY Id");
 			while (rs.next()) {
 				Usuario user = new Usuario(rs.getString("Id"), rs.getString("Usuario"), rs.getString("Contraseña"),
 						rs.getString("Tipo"), rs.getString("Nombre"), rs.getString("Curp"), rs.getString("Correo"),

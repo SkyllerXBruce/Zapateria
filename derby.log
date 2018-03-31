@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-2018-03-31 20:11:38.574 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.1.2.1 - (330608): instance c013800d-0162-7daf-d622-0000065d3060
+2018-03-31 21:35:08.398 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.1.2.1 - (330608): instance c013800d-0162-7dfc-47cb-000006654ff8
 on database directory /home/bruce/Programas/Java/Zapateria/BaseDeDatos 
 
 Database Class Loader started - derby.database.classpath=''

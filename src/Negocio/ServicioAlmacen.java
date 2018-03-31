@@ -33,7 +33,6 @@ public class ServicioAlmacen {
 
 	// Metodo para Consultar los Datos del Producto en la Base de Datos
 
-
 	// Metodo para Obtener todos los Productos
 	public Producto[] dameProductos() {
 		return dao.dameProductos();
