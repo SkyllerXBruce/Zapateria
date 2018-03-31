@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Negocio.ControlVenta;
@@ -22,7 +23,7 @@ public class VistaComiciones extends JFrame {
 
 	// Variables Globales
 	private JButton regresar;
-	private JLabel lblnombre, lblventas, lblcomicion;
+	private JLabel lnombre, lventas, lcomicion;
 	private ControlVenta control;
 
 	// Muestra Solo la Presentacion de la Vista
@@ -66,11 +67,14 @@ public class VistaComiciones extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
-		JLabel titulo, nombre, ventas,  comicion;
+		JLabel titulo, nombre, ventas, comicion;
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Imagen del Boton regresar
@@ -88,17 +92,17 @@ public class VistaComiciones extends JFrame {
 		// Como de la Letra
 		titulo = componente.creaEtiqueta("Comicion del Vendedor", 60, 40, 360, 35, 30);
 		nombre = componente.creaEtiqueta("Vendedor:", 40, 100, 220, 25, 16);
-		ventas = componente.creaEtiqueta("Ventas Realizadas:", 40, 140, 220, 25, 16);	
+		ventas = componente.creaEtiqueta("Ventas Realizadas:", 40, 140, 220, 25, 16);
 		comicion = componente.creaEtiqueta("Comicion Obtenida:   $", 60, 200, 220, 25, 18);
-		lblnombre = componente.creaEtiqueta("Nombre", 200, 100, 220, 25, 16);
-		lblventas = componente.creaEtiqueta("Venta", 200, 140, 220, 25, 16);
-		lblcomicion = componente.creaEtiqueta("Comicion", 260, 200, 180, 25, 18);
+		lnombre = componente.creaEtiqueta("Nombre", 200, 100, 220, 25, 16);
+		lventas = componente.creaEtiqueta("Venta", 200, 140, 220, 25, 16);
+		lcomicion = componente.creaEtiqueta("Comicion", 260, 200, 180, 25, 18);
 		nombre.setToolTipText("Nombre del Vendedor");
 		ventas.setToolTipText("Muestra las Cantidad de Ventas Realizadas");
 		comicion.setToolTipText("Muestra la Comicion Obtenida en Total");
-		lblnombre.setToolTipText("Nombre del Vendedor");
-		lblventas.setToolTipText("Muestra las Cantidad de Ventas Realizadas");
-		lblcomicion.setToolTipText("Muestra la Comicion Obtenida en Total");
+		lnombre.setToolTipText("Nombre del Vendedor");
+		lventas.setToolTipText("Muestra las Cantidad de Ventas Realizadas");
+		lcomicion.setToolTipText("Muestra la Comicion Obtenida en Total");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -108,9 +112,9 @@ public class VistaComiciones extends JFrame {
 		panel.add(nombre);
 		panel.add(ventas);
 		panel.add(comicion);
-		panel.add(lblnombre);
-		panel.add(lblventas);
-		panel.add(lblcomicion);
+		panel.add(lnombre);
+		panel.add(lventas);
+		panel.add(lcomicion);
 		panel.add(regresar);
 	}
 
@@ -127,18 +131,18 @@ public class VistaComiciones extends JFrame {
 			}
 		});
 	}
-	
+
 	public void obtenDatosComicion(String nombre, double comicion, int vendidos) {
-		lblnombre.setText(nombre);
-		lblventas.setText(String.valueOf(vendidos));
-		lblcomicion.setText(String.format("%.2f", comicion));
+		lnombre.setText(nombre);
+		lventas.setText(String.valueOf(vendidos));
+		lcomicion.setText(String.format("%.2f", comicion));
 	}
 
 	// Metodo que limpia los TextFields
 	public void limpiarDatosComiciones() {
-		lblnombre.setText("");
-		lblventas.setText("");
-		lblcomicion.setText("");
+		lnombre.setText("");
+		lventas.setText("");
+		lcomicion.setText("");
 	}
 
 	// Obtenemos la Instancia del Control Vendedor

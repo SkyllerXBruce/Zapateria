@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Usuario;
@@ -47,7 +48,7 @@ public class VistaEliminarVendedor extends JFrame {
 			}
 		});
 	}
-	
+
 	public VistaEliminarVendedor() {
 		// Tamaño de la Ventana
 		setSize(480, 480);
@@ -74,12 +75,16 @@ public class VistaEliminarVendedor extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
-		setContentPane(panel);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		JLabel titulo, name, numid;
 		Componentes componente = new Componentes();
-		
+
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		setContentPane(panel);
+
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
@@ -122,7 +127,7 @@ public class VistaEliminarVendedor extends JFrame {
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
-		
+
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(nombre);
@@ -290,7 +295,7 @@ public class VistaEliminarVendedor extends JFrame {
 			}
 		});
 	}
-	
+
 	public void limpiarDatosEliminarVendedor() {
 		tnombre.setText("");
 		tapaterno.setText("");
@@ -311,7 +316,7 @@ public class VistaEliminarVendedor extends JFrame {
 	public void setControl(ControlVendedores controlvendedores) {
 		this.control = controlvendedores;
 	}
-	
+
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(Color.LIGHT_GRAY);

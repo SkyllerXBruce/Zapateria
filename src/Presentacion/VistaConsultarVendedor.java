@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Usuario;
@@ -73,11 +74,15 @@ public class VistaConsultarVendedor extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
-		setContentPane(panel);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		JLabel titulo, name, numid;
 		Componentes componente = new Componentes();
+
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		setContentPane(panel);
 
 		ImageIcon imgIcon = new ImageIcon(VistaAgregarVendedor.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
@@ -121,7 +126,7 @@ public class VistaConsultarVendedor extends JFrame {
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
-		
+
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(nombre);

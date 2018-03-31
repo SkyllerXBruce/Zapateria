@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Producto;
@@ -20,7 +21,7 @@ import Negocio.ControlAlmacen;
 public class VistaConsultaProductoRealizada extends JFrame {
 
 	private JButton finaliza, nueva;
-	private JLabel getcodigo, getmodelo, gettipo, getcolor, getcosto, gettalla, getcantidad;
+	private JLabel lcodigo, lmodelo, ltipo, lcolor, lcosto, ltalla, lcantidad;
 	private ControlAlmacen control;
 
 	/**
@@ -38,7 +39,7 @@ public class VistaConsultaProductoRealizada extends JFrame {
 			}
 		});
 	}
-	
+
 	public VistaConsultaProductoRealizada() {
 		// Tamaño de la Ventana
 		setSize(440, 500);
@@ -64,13 +65,16 @@ public class VistaConsultaProductoRealizada extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
 		JPanel panel = new JPanel(null);
 		JLabel titulo, codigo, modelo, tipo, color, costo, talla, cantidad;
 		Componentes componente = new Componentes();
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
-		
+
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
 		finaliza = componente.creaBoton("Finalizar Consulta", 260, 420, 160, 30);
 		nueva = componente.creaBoton("Nueva Consulta", 20, 420, 150, 30);
@@ -87,19 +91,19 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		costo = componente.creaEtiqueta("Costo Unitario:", 40, 280, 150, 25, 16);
 		talla = componente.creaEtiqueta("Talla:", 40, 320, 150, 25, 16);
 		cantidad = componente.creaEtiqueta("Cantidad:", 40, 360, 150, 25, 16);
-		getcodigo = componente.creaEtiqueta("Codigo", 200, 120, 360, 25, 16);
-		getmodelo = componente.creaEtiqueta("Modelo", 200, 160, 360, 25, 16);
-		gettipo = componente.creaEtiqueta("Tipo", 200, 200, 360, 25, 16);
-		getcolor = componente.creaEtiqueta("Color", 200, 240, 360, 25, 16);
-		getcosto = componente.creaEtiqueta("Costo", 200, 280, 360, 25, 16);
-		gettalla = componente.creaEtiqueta("Talla", 200, 320, 360, 25, 16);
-		getcantidad = componente.creaEtiqueta("Cantidad", 200, 360, 150, 25, 16);
-		getcodigo.setToolTipText("Codigo del Producto");
-		gettipo.setToolTipText("Tipo del Producto");
-		getcolor.setToolTipText("Color del Producto");
-		getcosto.setToolTipText("Costo Unitario del Producto");
-		getmodelo.setToolTipText("Modelo del Producto");
-		gettalla.setToolTipText("Talla del Producto");
+		lcodigo = componente.creaEtiqueta("Codigo", 200, 120, 360, 25, 16);
+		lmodelo = componente.creaEtiqueta("Modelo", 200, 160, 360, 25, 16);
+		ltipo = componente.creaEtiqueta("Tipo", 200, 200, 360, 25, 16);
+		lcolor = componente.creaEtiqueta("Color", 200, 240, 360, 25, 16);
+		lcosto = componente.creaEtiqueta("Costo", 200, 280, 360, 25, 16);
+		ltalla = componente.creaEtiqueta("Talla", 200, 320, 360, 25, 16);
+		lcantidad = componente.creaEtiqueta("Cantidad", 200, 360, 150, 25, 16);
+		lcodigo.setToolTipText("Codigo del Producto");
+		ltipo.setToolTipText("Tipo del Producto");
+		lcolor.setToolTipText("Color del Producto");
+		lcosto.setToolTipText("Costo Unitario del Producto");
+		lmodelo.setToolTipText("Modelo del Producto");
+		ltalla.setToolTipText("Talla del Producto");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -112,13 +116,13 @@ public class VistaConsultaProductoRealizada extends JFrame {
 		panel.add(costo);
 		panel.add(talla);
 		panel.add(cantidad);
-		panel.add(getcodigo);
-		panel.add(gettipo);
-		panel.add(getcolor);
-		panel.add(getcosto);
-		panel.add(getmodelo);
-		panel.add(gettalla);
-		panel.add(getcantidad);
+		panel.add(lcodigo);
+		panel.add(ltipo);
+		panel.add(lcolor);
+		panel.add(lcosto);
+		panel.add(lmodelo);
+		panel.add(ltalla);
+		panel.add(lcantidad);
 		panel.add(finaliza);
 		panel.add(nueva);
 
@@ -148,22 +152,22 @@ public class VistaConsultaProductoRealizada extends JFrame {
 	}
 
 	public void obtenerDatosProducto(Producto producto) {
-		getcodigo.setText(String.valueOf(producto.dameCodigo()));
-		getmodelo.setText(producto.dameModelo());
-		gettipo.setText(producto.dameTipo());
-		getcolor.setText(producto.dameColor());
-		getcosto.setText(String.valueOf(producto.dameCosto()));
-		gettalla.setText(String.valueOf(producto.dameTalla()));
-		getcantidad.setText(String.valueOf(producto.dameCantidad()));
+		lcodigo.setText(String.valueOf(producto.dameCodigo()));
+		lmodelo.setText(producto.dameModelo());
+		ltipo.setText(producto.dameTipo());
+		lcolor.setText(producto.dameColor());
+		lcosto.setText(String.valueOf(producto.dameCosto()));
+		ltalla.setText(String.valueOf(producto.dameTalla()));
+		lcantidad.setText(String.valueOf(producto.dameCantidad()));
 	}
 
 	public void limpiarDatosConsultaProducto() {
-		getcodigo.setText("");
-		getmodelo.setText("");
-		gettipo.setText("");
-		getcolor.setText("");
-		getcosto.setText("");
-		gettalla.setText("");
+		lcodigo.setText("");
+		lmodelo.setText("");
+		ltipo.setText("");
+		lcolor.setText("");
+		lcosto.setText("");
+		ltalla.setText("");
 	}
 
 	public void setControl(ControlAlmacen controlalmacen) {

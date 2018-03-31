@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Usuario;
@@ -20,7 +21,7 @@ public class VistaConsultaRealizada extends JFrame {
 
 	// Variables Globales
 	private JButton finaliza, nueva;
-	private JLabel getnombre, getuser, getcurp, getdireccion, gettelefono, getid;
+	private JLabel lnombre, luser, lcurp, ldireccion, ltelefono, lid;
 	private ControlVendedores control;
 
 	public VistaConsultaRealizada() {
@@ -48,11 +49,15 @@ public class VistaConsultaRealizada extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
-		setContentPane(panel);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		JLabel titulo, nombre, curp, direccion, telefono, user, id;
-		Componentes componente =new Componentes();
+		Componentes componente = new Componentes();
+
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		setContentPane(panel);
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
 		finaliza = componente.creaBoton("Finalizar Consulta", 360, 380, 160, 30);
@@ -69,18 +74,18 @@ public class VistaConsultaRealizada extends JFrame {
 		telefono = componente.creaEtiqueta("Telefono:", 40, 240, 150, 25, 16);
 		user = componente.creaEtiqueta("Usuario:", 40, 280, 150, 25, 16);
 		id = componente.creaEtiqueta("ID:", 40, 320, 150, 25, 16);
-		getnombre = componente.creaEtiqueta("", 200, 120, 360, 25, 16);
-		getcurp = componente.creaEtiqueta("", 200, 160, 360, 25, 16);
-		getdireccion = componente.creaEtiqueta("", 200, 200, 360, 25, 16);
-		gettelefono = componente.creaEtiqueta("", 200, 240, 360, 25, 16);
-		getuser = componente.creaEtiqueta("", 200, 280, 360, 25, 16);
-		getid = componente.creaEtiqueta("", 200, 320, 360, 25, 16);
-		getnombre.setToolTipText("Nombre Completo del Vendedor");
-		getcurp.setToolTipText("Curp del Vendedor");
-		getdireccion.setToolTipText("Direccion del Vendedor");
-		gettelefono.setToolTipText("Telefono del Vendedor");
-		getuser.setToolTipText("Usuario del Vendedor para Ingresar al Sistema");
-		getid.setToolTipText("ID del Vendedor para Identificar en el Sistema");
+		lnombre = componente.creaEtiqueta("", 200, 120, 360, 25, 16);
+		lcurp = componente.creaEtiqueta("", 200, 160, 360, 25, 16);
+		ldireccion = componente.creaEtiqueta("", 200, 200, 360, 25, 16);
+		ltelefono = componente.creaEtiqueta("", 200, 240, 360, 25, 16);
+		luser = componente.creaEtiqueta("", 200, 280, 360, 25, 16);
+		lid = componente.creaEtiqueta("", 200, 320, 360, 25, 16);
+		lnombre.setToolTipText("Nombre Completo del Vendedor");
+		lcurp.setToolTipText("Curp del Vendedor");
+		ldireccion.setToolTipText("Direccion del Vendedor");
+		ltelefono.setToolTipText("Telefono del Vendedor");
+		luser.setToolTipText("Usuario del Vendedor para Ingresar al Sistema");
+		lid.setToolTipText("ID del Vendedor para Identificar en el Sistema");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -92,12 +97,12 @@ public class VistaConsultaRealizada extends JFrame {
 		panel.add(telefono);
 		panel.add(user);
 		panel.add(id);
-		panel.add(getnombre);
-		panel.add(getcurp);
-		panel.add(getdireccion);
-		panel.add(gettelefono);
-		panel.add(getuser);
-		panel.add(getid);
+		panel.add(lnombre);
+		panel.add(lcurp);
+		panel.add(ldireccion);
+		panel.add(ltelefono);
+		panel.add(luser);
+		panel.add(lid);
 		panel.add(finaliza);
 		panel.add(nueva);
 
@@ -127,21 +132,21 @@ public class VistaConsultaRealizada extends JFrame {
 	}
 
 	public void obtenerDatosVendedor(Usuario vendedor) {
-		getnombre.setText(vendedor.getNombre());
-		getcurp.setText(vendedor.getCurp());
-		getdireccion.setText(vendedor.getCorreo());
-		gettelefono.setText(vendedor.getTelefono());
-		getid.setText(vendedor.getId());
-		getuser.setText(vendedor.getUsuario());
+		lnombre.setText(vendedor.getNombre());
+		lcurp.setText(vendedor.getCurp());
+		ldireccion.setText(vendedor.getCorreo());
+		ltelefono.setText(vendedor.getTelefono());
+		lid.setText(vendedor.getId());
+		luser.setText(vendedor.getUsuario());
 	}
-	
+
 	public void limpiarDatosConsultaVendedor() {
-		getnombre.setText("");
-		getuser.setText("");
-		getcurp.setText("");
-		getdireccion.setText("");
-		gettelefono.setText("");
-		getid.setText("");
+		lnombre.setText("");
+		luser.setText("");
+		lcurp.setText("");
+		ldireccion.setText("");
+		ltelefono.setText("");
+		lid.setText("");
 	}
 
 	public void setControl(ControlVendedores controlvendedores) {

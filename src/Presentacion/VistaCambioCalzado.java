@@ -31,7 +31,7 @@ import java.awt.event.ActionEvent;
 public class VistaCambioCalzado extends JFrame {
 
 	// Variables Globales
-	private JTextField tffolioventa;
+	private JTextField tfolio;
 	private DefaultTableModel modeloventa, modelocambio;
 	private JButton buscar, regresar, cambio;
 	private JTable tablacambio;
@@ -81,9 +81,9 @@ public class VistaCambioCalzado extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
 		JPanel panel = new JPanel();
-		JLabel lblFolioDeVenta, lblcambios;
+		JLabel folio, cambios;
 		JTable tablaventa = new JTable();
 		tablacambio = new JTable();
 		JScrollPane scrollventa = new JScrollPane();
@@ -101,26 +101,25 @@ public class VistaCambioCalzado extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Propiedades del Panel y se Agrega a la Ventana
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
-		buscar = componente.creaBoton("buscar", 260, 20, 100, 26);
+		buscar = componente.creaBoton("Buscar", 260, 20, 100, 26);
 		cambio = componente.creaBoton("Cambio", 440, 360, 100, 26);
 		regresar = componente.creaBoton("", 120, 350, 50, 50);
 		regresar.setIcon(imgIcon);
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		lblFolioDeVenta = componente.creaEtiqueta("Folio de Venta", 20, 20, 140, 30, 14);
-		lblcambios = componente.creaEtiqueta("Opciones de Cambio", 20, 110, 160, 30, 14);
+		folio = componente.creaEtiqueta("Folio de Venta", 20, 20, 140, 30, 14);
+		cambios = componente.creaEtiqueta("Opciones de Cambio", 20, 110, 160, 30, 14);
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
 		// Como de la Letra
-		tffolioventa = componente.creaCuadroTexto(140, 20, 90, 24, 14);
-		tffolioventa.setColumns(10);
+		tfolio = componente.creaCuadroTexto(140, 20, 90, 24, 14);
 
 		// Se Crean el Modelo y Se Agregan los Datos de Venta y Cambio
 		modeloventa = new DefaultTableModel(datosventa, columnaventa);
@@ -142,7 +141,9 @@ public class VistaCambioCalzado extends JFrame {
 
 		// Propiedades de los scrollPane
 		scrollventa.setBounds(20, 60, 620, 40);
+		scrollventa.setViewportView(tablaventa);
 		scrollcambio.setBounds(20, 140, 620, 200);
+		scrollcambio.setViewportView(tablacambio);
 
 		// Acciones de los Componentes
 		accionesComponentes();
@@ -151,15 +152,11 @@ public class VistaCambioCalzado extends JFrame {
 		panel.add(buscar);
 		panel.add(cambio);
 		panel.add(regresar);
-		panel.add(lblFolioDeVenta);
-		panel.add(lblcambios);
-		panel.add(tffolioventa);
+		panel.add(folio);
+		panel.add(cambios);
+		panel.add(tfolio);
 		panel.add(scrollventa);
 		panel.add(scrollcambio);
-
-		//Se Agregan las Tablas a los ScrollPane
-		scrollventa.setViewportView(tablaventa);
-		scrollcambio.setViewportView(tablacambio);
 	}
 
 	// Método para Crear las Acciones de Los Componentes
@@ -178,12 +175,12 @@ public class VistaCambioCalzado extends JFrame {
 		// Accion del boton Buscar
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String folio = tffolioventa.getText();
+				String folio = tfolio.getText();
 				if (control.esNumeroReal(folio)) {
 					if (modeloventa.getRowCount() != 0)
 						control.limpiarDatos("Cambio");
 					control.buscaTicket(Integer.valueOf(folio));
-					tffolioventa.setText(folio);
+					tfolio.setText(folio);
 				} else
 					JOptionPane.showMessageDialog(null, "Ingrese folio de venta");
 			}
@@ -192,7 +189,7 @@ public class VistaCambioCalzado extends JFrame {
 		// Accion del boton Cambio
 		cambio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String folio = tffolioventa.getText();
+				String folio = tfolio.getText();
 				int f = 0;
 				if (control.esNumeroReal(folio)) {
 					f = Integer.valueOf(folio);
@@ -230,7 +227,7 @@ public class VistaCambioCalzado extends JFrame {
 	}
 
 	public void setFolioventa(String folioventa) {
-		this.tffolioventa.setText(folioventa);
+		this.tfolio.setText(folioventa);
 	}
 
 	// Asignamos control a nuestra vista.

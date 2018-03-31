@@ -24,6 +24,7 @@ import Negocio.ControlConsultarProducto;
 import Persistencia.DatabaseException;*/
 
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -78,13 +79,16 @@ public class VistaConsultaProducto extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		JLabel titulo, modelotipo, numcodigo;
 		Componentes componente = new Componentes();
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
-		
+
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
