@@ -5,12 +5,12 @@ public class Usuario {
 	// Variables Globales
 	private String id, user, pass, tipo, nombre, curp, correo, telefono;
 
-	// Constructor que hace referencia al constructor debajo
+	// Constructor que Hace Referencia al Constructor Debajo
 	public Usuario() {
 		this("", "", "", "", "", "", "", "");
 	}
 
-	// Constructor para asignar valores al Usuario
+	// Constructor para Asignar Valores al Usuario
 	public Usuario(String id, String user, String pass, String tipo, String nombre, String curp, String correo,
 			String telefono) {
 		this.id = id;
@@ -23,8 +23,8 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 
-	// Declaramos estos métodos, para que modifiquemos los valores cuando se
-	// necesario
+	// Declaramos estos Métodos, para que Modifiquemos los Valores Cuando sea
+	// Necesario
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -57,7 +57,7 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 
-	// Estos otros metodos nos serviran para mostrar los atributos
+	// Estos Metodos nos Serviran para Mostrar los Atributos
 	public String getId() {
 		return id;
 	}
@@ -90,7 +90,7 @@ public class Usuario {
 		return telefono;
 	}
 
-	@Override
+	@Override // Método para Obtener la Cadena que Representa al Objeto
 	public String toString() {
 		return "Usuario [IDVendedor=" + id + ", Usuario=" + user + ", Pass=" + pass + ", Tipo=" + tipo + ", Nombre="
 				+ nombre + ", Curp=" + curp + ", Correo=" + correo + ", Telefono=" + telefono + "]";

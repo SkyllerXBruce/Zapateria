@@ -7,7 +7,7 @@ public class Ticket {
 	private String idvendedor, fecha;
 	private double iva = 0, total = 0;
 
-	// Constructor para asignar valores al ticket.
+	// Constructor para Asignar Valores al Ticket
 	public Ticket(int folio, String fecha, String idvendedor, int codigoproducto, double iva, double total,
 			int vendidos) {
 		this.folio = folio;
@@ -19,8 +19,8 @@ public class Ticket {
 		this.vendidos = vendidos;
 	}
 
-	// Declaramos estos métodos, para que modifiquemos los valores cuando se
-	// necesario
+	// Declaramos estos Métodos, para que Modifiquemos los Valores Cuando sea
+	// Necesario
 	public void setFolio(int folio) {
 		this.folio = folio;
 	}
@@ -49,7 +49,7 @@ public class Ticket {
 		this.vendidos = vendidos;
 	}
 
-	// Estos otros metodos nos serviran para mostrar los atributos
+	// Estos Metodos nos Serviran para Mostrar los Atributos
 	public int getFolio() {
 		return folio;
 	}
@@ -78,7 +78,7 @@ public class Ticket {
 		return vendidos;
 	}
 
-	@Override
+	@Override // Método para Obtener la Cadena que Representa al Objeto
 	public String toString() {
 		return "Ticket [Folio=" + folio + ", Fecha=" + fecha + ", IDVendedor=" + idvendedor + ", CodigoProducto="
 				+ codigoproducto + ", Iva=" + iva + ", Total=" + total + ", Vendidos=" + vendidos + "]";
