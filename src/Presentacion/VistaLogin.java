@@ -33,8 +33,8 @@ public class VistaLogin extends JFrame {
 	// Variables Globales
 	@SuppressWarnings("rawtypes")
 	private JComboBox choice;
-	private JTextField textUser, textPassword;
-	private JButton btnIngresar;
+	private JTextField tuser, tpass;
+	private JButton ingresar;
 	private ControlLogin control;
 
 	// Muestra Solo la Presentacion de la Vista
@@ -77,16 +77,16 @@ public class VistaLogin extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
 		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
 		String items[] = { "Selecciona...", "Vendedor", "Administrador" };
-		JLabel lblZapateria, lblUsuario, lblpass, lblCargo, lblIcon;
+		JLabel zapateria, usuario, pass, cargo, imagen;
 
-		// Propiedades del Panel y se Agrega a la Ventana
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(panel);
 		panel.setLayout(null);
+		setContentPane(panel);
 
 		// Imagen del Login
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("userIcon.png"));
@@ -95,21 +95,21 @@ public class VistaLogin extends JFrame {
 		imgIcon = new ImageIcon(userScaled);
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton
-		btnIngresar = componente.creaBoton("Ingresar", 327, 243, 117, 29);
+		ingresar = componente.creaBoton("Ingresar", 327, 243, 117, 29);
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		lblZapateria = componente.creaEtiqueta("Zapateria el Ahorro", 140, 20, 280, 25, 26);
-		lblUsuario = componente.creaEtiqueta("Usuario:", 30, 150, 80, 20, 14);
-		lblpass = componente.creaEtiqueta("Contraseña:", 30, 200, 100, 20, 14);
-		lblCargo = componente.creaEtiqueta("Selecciona Cargo", 200, 70, 140, 20, 16);
-		lblIcon = componente.creaEtiqueta("", 20, 30, 100, 100, 14);
-		lblIcon.setIcon(imgIcon);
+		zapateria = componente.creaEtiqueta("Zapateria el Ahorro", 140, 20, 280, 25, 26);
+		usuario = componente.creaEtiqueta("Usuario:", 30, 150, 80, 20, 14);
+		pass = componente.creaEtiqueta("Contraseña:", 30, 200, 100, 20, 14);
+		cargo = componente.creaEtiqueta("Selecciona Cargo", 200, 70, 140, 20, 16);
+		imagen = componente.creaEtiqueta("", 20, 30, 100, 100, 14);
+		imagen.setIcon(imgIcon);
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
 		// Como de la Letra
-		textUser = componente.creaCuadroTexto(130, 150, 214, 26, 14);
-		textPassword = componente.creaCuadroPassword(130, 200, 214, 26, 14);
+		tuser = componente.creaCuadroTexto(130, 150, 214, 26, 14);
+		tpass = componente.creaCuadroPassword(130, 200, 214, 26, 14);
 
 		// Propiedades del Componente JComboBox
 		choice = componente.creaComboBox(items, 200, 100, 140, 25, 14);
@@ -118,14 +118,14 @@ public class VistaLogin extends JFrame {
 		accionesComponentes();
 
 		// Agregamos los Componentes al Panel
-		panel.add(lblZapateria);
-		panel.add(lblIcon);
-		panel.add(lblUsuario);
-		panel.add(lblpass);
-		panel.add(lblCargo);
-		panel.add(textUser);
-		panel.add(textPassword);
-		panel.add(btnIngresar);
+		panel.add(zapateria);
+		panel.add(imagen);
+		panel.add(usuario);
+		panel.add(pass);
+		panel.add(cargo);
+		panel.add(tuser);
+		panel.add(tpass);
+		panel.add(ingresar);
 		panel.add(choice);
 	}
 
@@ -133,22 +133,22 @@ public class VistaLogin extends JFrame {
 	private void accionesComponentes() {
 		// Agregamos un caretListener para que se actualice el textfield sobre cada
 		// entrada
-		textUser.addCaretListener(new CaretListener() {
+		tuser.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				control.recibeUsuario(textUser.getText());
+				control.recibeUsuario(tuser.getText());
 			}
 		});
 
 		// Agregamos un caretListener para que se actualice el textfield sobre cada
 		// entrada
-		textPassword.addCaretListener(new CaretListener() {
+		tpass.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
-				control.recibeContraseña(textPassword.getText());
+				control.recibeContraseña(tpass.getText());
 			}
 		});
 
 		// Accion del boton Ingresar
-		btnIngresar.addActionListener(new ActionListener() {
+		ingresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Tomamos parámetros para validar y dependiendo de esto mostramos errores o la
 				// ventana siguiente.
@@ -172,8 +172,8 @@ public class VistaLogin extends JFrame {
 
 	// Limpia los Datos Ingresados para Acceder
 	public void limpiaDatosLogin() {
-		textUser.setText("");
-		textPassword.setText("");
+		tuser.setText("");
+		tpass.setText("");
 		choice.setSelectedIndex(0);
 	}
 

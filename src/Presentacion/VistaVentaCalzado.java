@@ -26,8 +26,8 @@ import java.awt.Image;
 @SuppressWarnings("serial")
 public class VistaVentaCalzado extends JFrame {
 
-	private JTextField codigo;
-	private JLabel total, iva, montounitario;
+	private JTextField tcodigo;
+	private JLabel ltotal, liva, lmonto;
 	private JButton buscar, continuar, regresar, calcular;
 	private ControlVenta control;
 	private DefaultTableModel modelo;
@@ -75,26 +75,25 @@ public class VistaVentaCalzado extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		JPanel contentPane = new JPanel();
-		JLabel lblcodigo, lblmonto, lblIva, lblTotal;
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
+		JLabel codigo, monto, iva, total;
 		Componentes componente = new Componentes();
 		JTable table = new JTable();
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scroll = new JScrollPane();
 		String columnaventa[] = { "Modelo", "Tipo", "Color", "Talla", "Costo", "Disponibles", "Pares a Vender" };
 		String datosventa[][] = {};
 		modelo = new DefaultTableModel(datosventa, columnaventa) {
 			@Override
-			   public boolean isCellEditable(int row, int column) {
-			       return column == 6;
-			   }
+			public boolean isCellEditable(int row, int column) {
+				return column == 6;
+			}
 		};
-		
-		
 
-		// Propiedades del Panel y se Agrega a la Ventana
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		setContentPane(panel);
 
 		//
 		ImageIcon imgIcon = new ImageIcon(VistaVentaCalzado.class.getResource("return.png"));
@@ -110,16 +109,16 @@ public class VistaVentaCalzado extends JFrame {
 		regresar.setIcon(imgIcon);
 
 		// Propiedades de la Etiqueta "Id" y se Agrega al Panel
-		lblcodigo = componente.creaEtiqueta("Codigo del Producto", 40, 25, 160, 26, 15);
-		lblmonto = componente.creaEtiqueta("Monto por unidad  $", 320, 170, 160, 26, 15);
-		lblIva = componente.creaEtiqueta("IVA (16%)   $", 380, 200, 100, 26, 15);
-		lblTotal = componente.creaEtiqueta("Total  $", 420, 250, 60, 26, 15);
-		montounitario = componente.creaEtiqueta("       -", 480, 170, 90, 24, 15);
-		iva = componente.creaEtiqueta("       -", 480, 200, 90, 24, 15);
-		total = componente.creaEtiqueta("       -", 480, 250, 90, 24, 15);
+		codigo = componente.creaEtiqueta("Codigo del Producto", 40, 25, 160, 26, 15);
+		monto = componente.creaEtiqueta("Monto por unidad  $", 320, 170, 160, 26, 15);
+		iva = componente.creaEtiqueta("IVA (16%)   $", 380, 200, 100, 26, 15);
+		total = componente.creaEtiqueta("Total  $", 420, 250, 60, 26, 15);
+		lmonto = componente.creaEtiqueta("       -", 480, 170, 90, 24, 15);
+		liva = componente.creaEtiqueta("       -", 480, 200, 90, 24, 15);
+		ltotal = componente.creaEtiqueta("       -", 480, 250, 90, 24, 15);
 
 		// Propiedades del textfield "Id Producto" y se Agrega al Panel
-		codigo = componente.creaCuadroTexto(220, 25, 90, 24, 15);
+		tcodigo = componente.creaCuadroTexto(220, 25, 90, 24, 15);
 
 		// Propiedades de la table y se Agrega el modelo
 		table.setModel(modelo);
@@ -130,28 +129,28 @@ public class VistaVentaCalzado extends JFrame {
 		table.getColumnModel().getColumn(4).setPreferredWidth(60);
 		table.getColumnModel().getColumn(5).setPreferredWidth(80);
 		table.getColumnModel().getColumn(6).setPreferredWidth(100);
-		
+
 		// Propiedades del ScrollPane Agregando la Tabla al Scrollpane y se Agrega al
 		// Panel
-		scrollPane.setBounds(40, 80, 600, 74);
-		scrollPane.setViewportView(table);
+		scroll.setBounds(40, 80, 600, 74);
+		scroll.setViewportView(table);
 
 		// Acciones de los Componentes
 		accionesComponentes();
 
-		contentPane.add(buscar);
-		contentPane.add(continuar);
-		contentPane.add(calcular);
-		contentPane.add(regresar);
-		contentPane.add(lblcodigo);
-		contentPane.add(lblmonto);
-		contentPane.add(lblIva);
-		contentPane.add(lblTotal);
-		contentPane.add(codigo);
-		contentPane.add(montounitario);
-		contentPane.add(iva);
-		contentPane.add(total);
-		contentPane.add(scrollPane);
+		panel.add(buscar);
+		panel.add(continuar);
+		panel.add(calcular);
+		panel.add(regresar);
+		panel.add(codigo);
+		panel.add(monto);
+		panel.add(iva);
+		panel.add(total);
+		panel.add(tcodigo);
+		panel.add(lmonto);
+		panel.add(liva);
+		panel.add(ltotal);
+		panel.add(scroll);
 	}
 
 	private void accionesComponentes() {
@@ -159,12 +158,12 @@ public class VistaVentaCalzado extends JFrame {
 		// método.
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String prod = codigo.getText();
+				String prod = tcodigo.getText();
 				if (control.esNumeroReal(prod)) {
 					if (modelo.getRowCount() != 0)
 						control.limpiarDatos("Venta");
 					control.buscaProducto(Integer.valueOf(prod));
-					codigo.setText(prod);
+					tcodigo.setText(prod);
 				} else
 					JOptionPane.showMessageDialog(null, "Ingrese id de producto a buscar");
 			}
@@ -173,8 +172,8 @@ public class VistaVentaCalzado extends JFrame {
 		// Validamos si los datos son correctos, y ejecutamos la impresión del ticket.
 		continuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (montounitario.getText().equals("       -") || iva.getText().equals("       -")
-						|| total.getText().equals("       -")) {
+				if (lmonto.getText().equals("       -") || liva.getText().equals("       -")
+						|| ltotal.getText().equals("       -")) {
 					JOptionPane.showMessageDialog(null, "Imposible pasar a imprimir ticket");
 				} else {
 					control.creaTicketVenta();
@@ -186,7 +185,7 @@ public class VistaVentaCalzado extends JFrame {
 		// Validamos si ya hay producto seleccionado, para calcular su costo y total
 		calcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (control.esNumeroReal(codigo.getText()))
+				if (control.esNumeroReal(tcodigo.getText()))
 					control.calculaTotal();
 				else
 					JOptionPane.showMessageDialog(null, "No es posible calcular el total");
@@ -213,29 +212,29 @@ public class VistaVentaCalzado extends JFrame {
 	// los costos.
 
 	public void setIdProducto(String id) {
-		this.codigo.setText(id);
+		this.tcodigo.setText(id);
 	}
 
 	public void setMontototal(String total) {
-		this.total.setText(total);
+		this.ltotal.setText(total);
 	}
 
 	public void setIva(String iva) {
-		this.iva.setText(iva);
+		this.liva.setText(iva);
 	}
 
 	public void setMontounitario(String montounitario) {
-		this.montounitario.setText(montounitario);
+		this.lmonto.setText(montounitario);
 	}
 
 	// Al ya estar calculados, solo los retornamos, para la impresión del ticket.
 
 	public String getIva() {
-		return iva.getText();
+		return liva.getText();
 	}
 
 	public String getTotal() {
-		return total.getText();
+		return ltotal.getText();
 	}
 
 	public DefaultTableModel getTablaModelo() {

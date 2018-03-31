@@ -29,11 +29,11 @@ public class VistaTicket extends JFrame {
 
 	private ControlVenta control;
 	private ControlAlmacen controlalmacen;
-	private JPanel Ticket;
+	private JPanel panelticket;
 	private JButton regresar, imprimir;
 	private boolean cambio = false;
-	private JLabel lbldFolio, lbldFecha, lbldModelo, lbldTipo, lbldColor, lbldTalla, lbldCantidad, lbldPrecioUnitario,
-			lbldIVA, lbldTotal, lblanterior, lbldanterior;
+	private JLabel lfolio, lfecha, lmodelo, ltipo, lcolor, ltalla, lcantidad, lprecio, liva, ltotal, anterior,
+			lanterior;
 
 	/**
 	 * Launch the application.
@@ -79,22 +79,21 @@ public class VistaTicket extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		Ticket = new JPanel();
-		JPanel contentPane = new JPanel();
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		panelticket = new JPanel();
+		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
-		JLabel lblTitulo, lblTicketDeVenta, lblFolio, lblFecha, lblModelo, lblTipo, lblColor, lblTalla, lblCantidad,
-				lblPrecio, lblIva, lblTotal, lblIcon;
+		JLabel titulo, ticket, folio, fecha, modelo, tipo, color, talla, cantidad, precio, iva, total, imagen;
 
-		// Propiedades del Panel y se Agrega a la Ventana
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		// Modificamos Propiedades de JPanel del Ticket
+		panelticket.setBackground(Color.WHITE);
+		panelticket.setBounds(10, 10, 430, 510);
+		panelticket.setLayout(null);
 
-		// Propiedades del Panel "Ticket" y se Agrega al Panel
-		Ticket.setBackground(Color.WHITE);
-		Ticket.setBounds(10, 10, 430, 510);
-		Ticket.setLayout(null);
-		contentPane.add(Ticket);
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		setContentPane(panel);
 
 		//
 		ImageIcon imgIconregresa = new ImageIcon(VistaLogin.class.getResource("return.png"));
@@ -102,8 +101,8 @@ public class VistaTicket extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIconregresa = new ImageIcon(userScaled);
 		ImageIcon imgIconticket = new ImageIcon(VistaTicket.class.getResource("Ticket.png"));
-		Image ticket = imgIconticket.getImage();
-		Image ticketScaled = ticket.getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
+		Image imagenticket = imgIconticket.getImage();
+		Image ticketScaled = imagenticket.getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
 		imgIconticket = new ImageIcon(ticketScaled);
 
 		// Propiedades del Boton Imprimir y se Agrega al Panel
@@ -112,63 +111,64 @@ public class VistaTicket extends JFrame {
 		regresar.setIcon(imgIconregresa);
 
 		// Propiedades de la Etiqueta "Zapateria el Ahorro" y se Agrega al Panel
-		lblTitulo = componente.creaEtiqueta("Zapateria \"El Ahorro\"", 40, 20, 280, 50, 26);
-		lblTicketDeVenta = componente.creaEtiqueta("Ticket de venta", 100, 60, 140, 30, 18);
-		lblFolio = componente.creaEtiqueta("Folio de venta", 40, 140, 140, 26, 16);
-		lblFecha = componente.creaEtiqueta("Fecha", 40, 170, 140, 26, 16);
-		lblModelo = componente.creaEtiqueta("Modelo", 40, 200, 140, 26, 16);
-		lblTipo = componente.creaEtiqueta("Tipo", 40, 230, 140, 26, 16);
-		lblColor = componente.creaEtiqueta("Color", 40, 260, 140, 26, 16);
-		lblTalla = componente.creaEtiqueta("Talla", 40, 290, 140, 26, 16);
-		lblCantidad = componente.creaEtiqueta("Cantidad", 40, 320, 140, 26, 16);
-		lblPrecio = componente.creaEtiqueta("Precio Unitario         $", 40, 350, 180, 26, 16);
-		lblIva = componente.creaEtiqueta("IVA (16%)                  $", 40, 380, 180, 26, 16);
-		lblTotal = componente.creaEtiqueta("Total a pagar (MXN)   $", 60, 460, 190, 26, 16);
-		lblIcon = componente.creaEtiqueta("", 320, 20, 100, 100, 16);
-		lblIcon.setIcon(imgIconticket);
-		lblanterior = componente.creaEtiqueta("", 40, 410, 180, 26, 16);
-		lbldFolio = componente.creaEtiqueta("Folio", 200, 140, 160, 26, 16);
-		lbldFecha = componente.creaEtiqueta("Fecha", 200, 170, 160, 26, 16);
-		lbldModelo = componente.creaEtiqueta("Modelo", 200, 200, 160, 26, 16);
-		lbldTipo = componente.creaEtiqueta("Tipo", 200, 230, 160, 26, 16);
-		lbldColor = componente.creaEtiqueta("Color", 200, 260, 160, 26, 16);
-		lbldTalla = componente.creaEtiqueta("Talla", 200, 290, 160, 26, 16);
-		lbldCantidad = componente.creaEtiqueta("Cantidad", 200, 320, 160, 26, 16);
-		lbldPrecioUnitario = componente.creaEtiqueta("Precio", 210, 350, 160, 26, 16);
-		lbldIVA = componente.creaEtiqueta("Iva", 210, 380, 160, 26, 16);
-		lbldTotal = componente.creaEtiqueta("Total", 240, 460, 140, 26, 16);
-		lbldanterior = componente.creaEtiqueta("", 220, 410, 180, 26, 16);
+		titulo = componente.creaEtiqueta("Zapateria \"El Ahorro\"", 40, 20, 280, 50, 26);
+		ticket = componente.creaEtiqueta("Ticket de venta", 100, 60, 140, 30, 18);
+		folio = componente.creaEtiqueta("Folio de venta", 40, 140, 140, 26, 16);
+		fecha = componente.creaEtiqueta("Fecha", 40, 170, 140, 26, 16);
+		modelo = componente.creaEtiqueta("Modelo", 40, 200, 140, 26, 16);
+		tipo = componente.creaEtiqueta("Tipo", 40, 230, 140, 26, 16);
+		color = componente.creaEtiqueta("Color", 40, 260, 140, 26, 16);
+		talla = componente.creaEtiqueta("Talla", 40, 290, 140, 26, 16);
+		cantidad = componente.creaEtiqueta("Cantidad", 40, 320, 140, 26, 16);
+		precio = componente.creaEtiqueta("Precio Unitario         $", 40, 350, 180, 26, 16);
+		iva = componente.creaEtiqueta("IVA (16%)                  $", 40, 380, 180, 26, 16);
+		total = componente.creaEtiqueta("Total a pagar (MXN)   $", 60, 460, 190, 26, 16);
+		imagen = componente.creaEtiqueta("", 320, 20, 100, 100, 16);
+		imagen.setIcon(imgIconticket);
+		anterior = componente.creaEtiqueta("", 40, 410, 180, 26, 16);
+		lfolio = componente.creaEtiqueta("Folio", 200, 140, 160, 26, 16);
+		lfecha = componente.creaEtiqueta("Fecha", 200, 170, 160, 26, 16);
+		lmodelo = componente.creaEtiqueta("Modelo", 200, 200, 160, 26, 16);
+		ltipo = componente.creaEtiqueta("Tipo", 200, 230, 160, 26, 16);
+		lcolor = componente.creaEtiqueta("Color", 200, 260, 160, 26, 16);
+		ltalla = componente.creaEtiqueta("Talla", 200, 290, 160, 26, 16);
+		lcantidad = componente.creaEtiqueta("Cantidad", 200, 320, 160, 26, 16);
+		lprecio = componente.creaEtiqueta("Precio", 210, 350, 160, 26, 16);
+		liva = componente.creaEtiqueta("Iva", 210, 380, 160, 26, 16);
+		ltotal = componente.creaEtiqueta("Total", 240, 460, 140, 26, 16);
+		lanterior = componente.creaEtiqueta("", 220, 410, 180, 26, 16);
 
 		// Acciones de los Componentes
 		accionesComponentes();
 
-		Ticket.add(lblTitulo);
-		Ticket.add(lblTicketDeVenta);
-		Ticket.add(lblFolio);
-		Ticket.add(lblFecha);
-		Ticket.add(lblModelo);
-		Ticket.add(lblTipo);
-		Ticket.add(lblColor);
-		Ticket.add(lblTalla);
-		Ticket.add(lblCantidad);
-		Ticket.add(lblPrecio);
-		Ticket.add(lblIva);
-		Ticket.add(lblTotal);
-		Ticket.add(lblIcon);
-		Ticket.add(lblanterior);
-		Ticket.add(lbldFolio);
-		Ticket.add(lbldFecha);
-		Ticket.add(lbldModelo);
-		Ticket.add(lbldTipo);
-		Ticket.add(lbldColor);
-		Ticket.add(lbldTalla);
-		Ticket.add(lbldCantidad);
-		Ticket.add(lbldPrecioUnitario);
-		Ticket.add(lbldIVA);
-		Ticket.add(lbldTotal);
-		Ticket.add(lbldanterior);
-		contentPane.add(imprimir);
-		contentPane.add(regresar);
+		panelticket.add(titulo);
+		panelticket.add(ticket);
+		panelticket.add(folio);
+		panelticket.add(fecha);
+		panelticket.add(modelo);
+		panelticket.add(tipo);
+		panelticket.add(color);
+		panelticket.add(talla);
+		panelticket.add(cantidad);
+		panelticket.add(precio);
+		panelticket.add(iva);
+		panelticket.add(total);
+		panelticket.add(imagen);
+		panelticket.add(anterior);
+		panelticket.add(lfolio);
+		panelticket.add(lfecha);
+		panelticket.add(lmodelo);
+		panelticket.add(ltipo);
+		panelticket.add(lcolor);
+		panelticket.add(ltalla);
+		panelticket.add(lcantidad);
+		panelticket.add(lprecio);
+		panelticket.add(liva);
+		panelticket.add(ltotal);
+		panelticket.add(lanterior);
+		panel.add(panelticket);
+		panel.add(imprimir);
+		panel.add(regresar);
 	}
 
 	private void accionesComponentes() {
@@ -185,13 +185,13 @@ public class VistaTicket extends JFrame {
 						String modelo, tipo, color;
 						double talla, iva, total;
 						int folio;
-						modelo = lbldModelo.getText();
-						tipo = lbldTipo.getText();
-						color = lbldColor.getText();
-						talla = Double.valueOf(lbldTalla.getText());
-						iva = Double.valueOf(lbldIVA.getText());
-						total = Double.valueOf(lbldanterior.getText());
-						folio = Integer.valueOf(lbldFolio.getText());
+						modelo = lmodelo.getText();
+						tipo = ltipo.getText();
+						color = lcolor.getText();
+						talla = Double.valueOf(ltalla.getText());
+						iva = Double.valueOf(liva.getText());
+						total = Double.valueOf(lanterior.getText());
+						folio = Integer.valueOf(lfolio.getText());
 						Producto productocambio = controlalmacen.buscaProducto(modelo, tipo, color, talla);
 						if (control.realizaCambioProducto(folio, productocambio, iva, total))
 							JOptionPane.showMessageDialog(null, "Cambio Realizado con Exito");
@@ -220,29 +220,28 @@ public class VistaTicket extends JFrame {
 	}
 
 	public String[] obtenerDatosVentaTicket() {
-		String[] datos = { lbldFolio.getText(), lbldFecha.getText(), lbldModelo.getText(), lbldTipo.getText(),
-				lbldColor.getText(), lbldTalla.getText(), lbldIVA.getText(), lbldTotal.getText(),
-				lbldCantidad.getText() };
+		String[] datos = { lfolio.getText(), lfecha.getText(), lmodelo.getText(), ltipo.getText(), lcolor.getText(),
+				ltalla.getText(), liva.getText(), ltotal.getText(), lcantidad.getText() };
 		return datos;
 	}
 
 	public void setTotalAnterior(String txt) {
-		lblanterior.setText("Total Anterior            $");
-		lbldanterior.setText(txt);
+		anterior.setText("Total Anterior            $");
+		lanterior.setText(txt);
 	}
 
 	public void setDatosTicket(String[] datosventa) {
 		cambio = control.esCambio();
-		lbldFolio.setText(datosventa[0]);
-		lbldFecha.setText(datosventa[1]);
-		lbldModelo.setText(datosventa[2]);
-		lbldTipo.setText(datosventa[3]);
-		lbldColor.setText(datosventa[4]);
-		lbldTalla.setText(datosventa[5]);
-		lbldCantidad.setText(datosventa[6]);
-		lbldIVA.setText(datosventa[7]);
-		lbldPrecioUnitario.setText(datosventa[8]);
-		lbldTotal.setText(datosventa[9]);
+		lfolio.setText(datosventa[0]);
+		lfecha.setText(datosventa[1]);
+		lmodelo.setText(datosventa[2]);
+		ltipo.setText(datosventa[3]);
+		lcolor.setText(datosventa[4]);
+		ltalla.setText(datosventa[5]);
+		lcantidad.setText(datosventa[6]);
+		liva.setText(datosventa[7]);
+		lprecio.setText(datosventa[8]);
+		ltotal.setText(datosventa[9]);
 	}
 
 	// Instanciamos control a nuestra vista.
@@ -257,6 +256,6 @@ public class VistaTicket extends JFrame {
 	// Retornamos el componente del Jframe que queremos imprimir, para evitar que
 	// los botones nos aparezcan en la impresión
 	public JComponent getTicket() {
-		return Ticket;
+		return panelticket;
 	}
 }

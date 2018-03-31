@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Modelo.Componentes;
@@ -69,7 +70,7 @@ public class VistaMostrarProductos extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
 		JPanel panel = new JPanel(null);
 		Componentes componente = new Componentes();
 		String[] nombrescolumnas = { "Codigo", "Modelo", "Tipo", "Color", "Costo Unitario", "Talla", "Cantidad" };
@@ -78,6 +79,9 @@ public class VistaMostrarProductos extends JFrame {
 		JTable tablaproductos = new JTable(modelo);
 		JLabel titulo;
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton

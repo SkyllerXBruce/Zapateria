@@ -71,12 +71,12 @@ public class VistaVendedor extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// Creamos e Instanciamos los Componentes de la Ventana
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
 		JPanel panel = new JPanel();
 		JLabel titulo, subtitulo;
 		Componentes componente = new Componentes();
 
-		// Propiedades del Panel y se Agrega a la Ventana
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panel);
 		panel.setLayout(null);
