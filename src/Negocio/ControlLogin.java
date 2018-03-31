@@ -61,7 +61,8 @@ public class ControlLogin {
 				muestraVistaVendedor(user);
 				return true;
 			} else
-				JOptionPane.showMessageDialog(null, "Datos incorrectos");
+				JOptionPane.showMessageDialog(null, "Datos Incorrectos" + nl
+						+ "Verifique que el Usuario y/o Contraseña del Vendedor sean Correctos");
 		} else if (usuario.getTipo().equals("Administrador")) {
 			if (serviciologin.validaingreso(usuario)) {
 				JOptionPane.showMessageDialog(null,
@@ -69,10 +70,11 @@ public class ControlLogin {
 				muestraVistaAdministrador(user);
 				return true;
 			} else
-				JOptionPane.showMessageDialog(null, "Datos incorrectos");
+				JOptionPane.showMessageDialog(null, "Datos Incorrectos" + nl
+						+ "Verifique que el Usuario y/o Contraseña del Administrador sean Correctos");
 		} else
 			JOptionPane.showMessageDialog(null,
-					"Usuario y/o contraseña incorrecta" + nl + "¿Seleccionó correctamente el campo cargo?");
+					"Usuario y/o Contraseña Incorrecta" + nl + "¿Seleccionó correctamente el campo cargo?");
 		return false;
 	}
 

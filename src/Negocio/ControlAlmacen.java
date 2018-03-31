@@ -102,10 +102,6 @@ public class ControlAlmacen {
 
 	// Metodos para la Busqueda de un Producto, si lo Encuentra Regresa el Producto
 	// en Otro Caso null
-	public Producto buscaProducto(String modelo, String tipo) {
-		return servicioalmacen.buscaProducto(modelo, tipo);
-	}
-
 	public Producto buscaProducto(String modelo, String tipo, String color, double talla) {
 		return servicioalmacen.buscaProducto(modelo, tipo, color, talla);
 	}

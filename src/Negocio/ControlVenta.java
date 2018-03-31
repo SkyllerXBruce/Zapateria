@@ -294,16 +294,17 @@ public class ControlVenta implements Printable {
 
 	// Metodo para Guardar los Datos del Ticket en la Base de Datos
 	public void guardarDatosTicket(String[] datosTicket) {
-		Producto producto = servicioalmacen.buscaProducto(datosTicket[2], datosTicket[3]);
+		Producto producto = servicioalmacen.buscaProducto(datosTicket[2], datosTicket[3], datosTicket[4],
+				Double.valueOf(datosTicket[5]));
 		Usuario user = getVendedor();
 		String fecha;
 		double iva, total;
 		int folio, vendidos, cantidad;
 		folio = Integer.valueOf(datosTicket[0]);
 		fecha = datosTicket[1];
-		iva = Double.valueOf(datosTicket[4]);
-		total = Double.valueOf(datosTicket[5]);
-		vendidos = Integer.valueOf(datosTicket[6]);
+		iva = Double.valueOf(datosTicket[6]);
+		total = Double.valueOf(datosTicket[7]);
+		vendidos = Integer.valueOf(datosTicket[8]);
 		cantidad = producto.dameCantidad();
 		if (cantidad != 0) {
 			servicioalmacen.eliminarProducto(producto);

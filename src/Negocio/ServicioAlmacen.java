@@ -10,20 +10,11 @@ public class ServicioAlmacen {
 
 	// Metodos para Verficar la existencia de Productos si Existe manda true otro
 	// caso false
-	public boolean existeProducto(String modelo, String tipo) {
-		if (dao.buscaProducto(modelo, tipo) != null)
-			return true;
-		return false;
-	}
 
 	// Metodos para la Busqueda de un Producto, si lo Encuentra Regresa el Producto
 	// en Otro Caso null
 	public Producto buscaProducto(int codigo) {
 		return dao.buscaProducto(codigo);
-	}
-
-	public Producto buscaProducto(String modelo, String tipo) {
-		return dao.buscaProducto(modelo, tipo);
 	}
 
 	public Producto buscaProducto(String modelo, String tipo, String color, double talla) {
@@ -41,9 +32,7 @@ public class ServicioAlmacen {
 	}
 
 	// Metodo para Consultar los Datos del Producto en la Base de Datos
-	public Producto consultaProducto(String modelo, String tipo) {
-		return dao.buscaProducto(modelo, tipo);
-	}
+
 
 	// Metodo para Obtener todos los Productos
 	public Producto[] dameProductos() {
