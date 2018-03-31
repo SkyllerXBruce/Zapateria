@@ -83,21 +83,15 @@ public class VistaAlmacen extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		agregar = componente.creaBoton("Agregar Producto", 40, 100, 180, 30);
 		eliminar = componente.creaBoton("Quitar Producto", 40, 150, 180, 30);
 		consultar = componente.creaBoton("Consultar Producto", 260, 100, 180, 30);
 		listar = componente.creaBoton("Listar Productos", 260, 150, 180, 30);
 		regresar = componente.creaBoton("", 20, 200, 50, 50);
 		regresar.setIcon(imgIcon);
-		agregar.setToolTipText("Agrega un Producto");
-		eliminar.setToolTipText("Quita un Producto");
-		consultar.setToolTipText("Consulta un Producto");
-		listar.setToolTipText("Muestra Todos los Productos");
-		regresar.setToolTipText("Regresa a la Ventana del Administrador");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Administrar Almacen", 80, 40, 340, 28, 28);
 
 		// Se Realiza Acciones de los Componentes

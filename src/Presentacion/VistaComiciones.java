@@ -83,13 +83,12 @@ public class VistaComiciones extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		regresar = componente.creaBoton("", 40, 240, 50, 50);
 		regresar.setIcon(imgIcon);
 		regresar.setToolTipText("Cancela la Operacion y Regresa a la Ventana del Administrador");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Comicion del Vendedor", 60, 40, 360, 35, 30);
 		nombre = componente.creaEtiqueta("Vendedor:", 40, 100, 220, 25, 16);
 		ventas = componente.creaEtiqueta("Ventas Realizadas:", 40, 140, 220, 25, 16);
@@ -97,12 +96,6 @@ public class VistaComiciones extends JFrame {
 		lnombre = componente.creaEtiqueta("Nombre", 200, 100, 220, 25, 16);
 		lventas = componente.creaEtiqueta("Venta", 200, 140, 220, 25, 16);
 		lcomicion = componente.creaEtiqueta("Comicion", 260, 200, 180, 25, 18);
-		nombre.setToolTipText("Nombre del Vendedor");
-		ventas.setToolTipText("Muestra las Cantidad de Ventas Realizadas");
-		comicion.setToolTipText("Muestra la Comicion Obtenida en Total");
-		lnombre.setToolTipText("Nombre del Vendedor");
-		lventas.setToolTipText("Muestra las Cantidad de Ventas Realizadas");
-		lcomicion.setToolTipText("Muestra la Comicion Obtenida en Total");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -120,7 +113,6 @@ public class VistaComiciones extends JFrame {
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-
 		// Accion del boton Regresa
 		regresar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -132,6 +124,7 @@ public class VistaComiciones extends JFrame {
 		});
 	}
 
+	// Método para Obtener los Datos de la Comicion del Vendedor
 	public void obtenDatosComicion(String nombre, double comicion, int vendidos) {
 		lnombre.setText(nombre);
 		lventas.setText(String.valueOf(vendidos));
@@ -145,7 +138,7 @@ public class VistaComiciones extends JFrame {
 		lcomicion.setText("");
 	}
 
-	// Obtenemos la Instancia del Control Vendedor
+	// Obtenemos la Instancia del Control Venta
 	public void setControl(ControlVenta controlventa) {
 		this.control = controlventa;
 	}

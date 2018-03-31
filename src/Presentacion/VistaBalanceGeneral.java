@@ -83,13 +83,11 @@ public class VistaBalanceGeneral extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		regresar = componente.creaBoton("", 40, 280, 50, 50);
 		regresar.setIcon(imgIcon);
-		regresar.setToolTipText("Cancela la Operacion y Regresa a la Ventana del Administrador");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Balance General", 100, 40, 340, 35, 30);
 		vendidos = componente.creaEtiqueta("Productos Vendidos:", 40, 100, 220, 25, 16);
 		ganancias = componente.creaEtiqueta("Ganacias por Ventas:       $", 40, 140, 220, 25, 16);
@@ -99,14 +97,6 @@ public class VistaBalanceGeneral extends JFrame {
 		lganancias = componente.creaEtiqueta("Ganacias", 250, 140, 140, 25, 16);
 		lcomiciones = componente.creaEtiqueta("Comiciones", 250, 180, 140, 25, 16);
 		ltotal = componente.creaEtiqueta("Total", 240, 240, 180, 25, 18);
-		vendidos.setToolTipText("Muestra los Productos Vendidos en Total");
-		ganancias.setToolTipText("Muestra las Ganancias por las Ventas Realizadas");
-		comiciones.setToolTipText("Muestra los pados de Comiciones de los Vendedores");
-		total.setToolTipText("Muestra las Ganancias Netas Obtenidas en Total");
-		lvendidos.setToolTipText("Muestra los Productos Vendidos en Total");
-		lganancias.setToolTipText("Muestra las Ganancias por las Ventas Realizadas");
-		lcomiciones.setToolTipText("Muestra los pados de Comiciones de los Vendedores");
-		ltotal.setToolTipText("Muestra las Ganancias Netas Obtenidas en Total");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -138,6 +128,7 @@ public class VistaBalanceGeneral extends JFrame {
 		});
 	}
 
+	// Método para Obtener los Datos del Balance General  
 	public void obtenDatosBalanceGeneral(int vendidos, double comicion, double ganancia) {
 		double total = ganancia - comicion;
 		lvendidos.setText(String.valueOf(vendidos));
@@ -158,5 +149,4 @@ public class VistaBalanceGeneral extends JFrame {
 	public void setControl(ControlVendedores controlvendedores) {
 		this.control = controlvendedores;
 	}
-
 }

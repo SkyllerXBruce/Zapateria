@@ -106,19 +106,17 @@ public class VistaCambioCalzado extends JFrame {
 		panel.setLayout(null);
 		setContentPane(panel);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		buscar = componente.creaBoton("Buscar", 260, 20, 100, 26);
 		cambio = componente.creaBoton("Cambio", 440, 360, 100, 26);
 		regresar = componente.creaBoton("", 120, 350, 50, 50);
 		regresar.setIcon(imgIcon);
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		folio = componente.creaEtiqueta("Folio de Venta", 20, 20, 140, 30, 14);
 		cambios = componente.creaEtiqueta("Opciones de Cambio", 20, 110, 160, 30, 14);
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JTextField
 		tfolio = componente.creaCuadroTexto(140, 20, 90, 24, 14);
 
 		// Se Crean el Modelo y Se Agregan los Datos de Venta y Cambio
@@ -211,13 +209,14 @@ public class VistaCambioCalzado extends JFrame {
 				dispose();
 			}
 		});
-
 	}
 
+	// Método que Muestra si se Realizo un Cambio o no
 	public boolean realizaCambio() {
 		return existecambio;
 	}
 
+	// Metodos que Obtienen los Modelos de las Tablas
 	public DefaultTableModel getTablaModeloVenta() {
 		return this.modeloventa;
 	}
@@ -226,11 +225,12 @@ public class VistaCambioCalzado extends JFrame {
 		return this.modelocambio;
 	}
 
+	// Método para Modificar el Folio de Venta del JTextField
 	public void setFolioventa(String folioventa) {
 		this.tfolio.setText(folioventa);
 	}
 
-	// Asignamos control a nuestra vista.
+	// Obtenemos la Instancia del Control Venta
 	public void setControl(ControlVenta control) {
 		this.control = control;
 	}
