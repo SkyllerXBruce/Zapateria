@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,13 +27,14 @@ import Modelo.Producto;
 @SuppressWarnings("serial")
 public class VistaEliminarProducto extends JFrame {
 
+	// Variables Globales
 	private JButton eliminar, regresa;
 	private JTextField tmodelo, ttipo, tcolor, ttalla, tcodigo;
 	private JLabel codigo, modelo, tipo, color, talla;
 	private boolean pormodelo, porcodigo;
 	private ControlAlmacen control;
 
-	//
+	// Muestra Solo la Presentacion de la Vista
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,8 +48,9 @@ public class VistaEliminarProducto extends JFrame {
 		});
 	}
 
+	// Constructor de la Ventana VistaEliminarProducto
 	public VistaEliminarProducto() {
-		// Tamaño de la Ventana
+		// Propiedades de la Ventana
 		setSize(480, 540);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -72,26 +75,28 @@ public class VistaEliminarProducto extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
-		setContentPane(panel);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		JLabel titulo, modelotipo, numcodigo;
 		Componentes componente = new Componentes();
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		setContentPane(panel);
+
+		// Imagen del Boton regresar
 		ImageIcon imgIcon = new ImageIcon(VistaLogin.class.getResource("return.png"));
 		Image user = imgIcon.getImage();
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		eliminar = componente.creaBoton("Eliminar", 280, 440, 150, 30);
 		regresa = componente.creaBoton("", 40, 430, 50, 50);
 		regresa.setIcon(imgIcon);
-		eliminar.setToolTipText("Elimina el Producto del Almacen");
-		regresa.setToolTipText("Cancela la Operacion y Regresa a la Ventana de Administrar Almacen");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Eliminar Producto", 120, 40, 340, 35, 30);
 		modelotipo = componente.creaEtiqueta("Por Modelo y Tipo de Producto", 40, 120, 260, 25, 16);
 		modelo = componente.creaEtiqueta("Modelo:", 60, 160, 140, 25, 16);
@@ -100,25 +105,17 @@ public class VistaEliminarProducto extends JFrame {
 		talla = componente.creaEtiqueta("Talla:", 60, 280, 140, 25, 16);
 		numcodigo = componente.creaEtiqueta("Por Número de Código", 40, 340, 180, 25, 16);
 		codigo = componente.creaEtiqueta("Código:", 60, 380, 140, 25, 16);
-		modelotipo.setToolTipText("Ingrese el Modelo y el Tipo del Producto");
-		modelo.setToolTipText("Ingrese el Modelo del Producto");
-		tipo.setToolTipText("Ingrese el Tipo del Producto");
-		numcodigo.setToolTipText("Ingrese el Codigo del Producto");
-		codigo.setToolTipText("Ingrese el Codigo del Producto");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JTextField
 		tmodelo = componente.creaCuadroTexto(210, 160, 250, 25, 14);
 		ttipo = componente.creaCuadroTexto(210, 200, 250, 25, 14);
 		tcolor = componente.creaCuadroTexto(210, 240, 250, 25, 14);
 		ttalla = componente.creaCuadroTexto(210, 280, 250, 25, 14);
 		tcodigo = componente.creaCuadroTexto(210, 380, 250, 25, 14);
-		tmodelo.setToolTipText("Ingrese el Modelo del Producto");
-		ttipo.setToolTipText("Ingrese el Tipo del Producto");
-		tcodigo.setToolTipText("Ingrese el Codigo del Producto");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
+		
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(modelo);
@@ -135,12 +132,11 @@ public class VistaEliminarProducto extends JFrame {
 		panel.add(tcodigo);
 		panel.add(eliminar);
 		panel.add(regresa);
-
 	}
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-		// Accion del boton vendedores
+		// Accion del boton Eliminar
 		eliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -212,6 +208,7 @@ public class VistaEliminarProducto extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField tmodelo
 		tmodelo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -232,6 +229,7 @@ public class VistaEliminarProducto extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField ttipo
 		ttipo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -252,6 +250,7 @@ public class VistaEliminarProducto extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField tcolor
 		tcolor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -272,6 +271,7 @@ public class VistaEliminarProducto extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField ttalla
 		ttalla.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -292,6 +292,7 @@ public class VistaEliminarProducto extends JFrame {
 			}
 		});
 
+		// Acciones del JTextField tcodigo
 		tcodigo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -319,7 +320,7 @@ public class VistaEliminarProducto extends JFrame {
 			}
 		});
 
-		// Accion del boton Comiciones
+		// Accion del boton Regresa
 		regresa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -330,6 +331,7 @@ public class VistaEliminarProducto extends JFrame {
 		});
 	}
 
+	// Metodo que limpia los TextFields
 	public void limpiarDatosEliminarProducto() {
 		tmodelo.setText("");
 		ttipo.setText("");
@@ -350,10 +352,12 @@ public class VistaEliminarProducto extends JFrame {
 		porcodigo = false;
 	}
 
+	// Obtenemos la Instancia del Control Almacen
 	public void setControl(ControlAlmacen controlalmacen) {
 		this.control = controlalmacen;
 	}
 
+	// Método para Dibujar una Linea como Separador
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.setColor(Color.LIGHT_GRAY);

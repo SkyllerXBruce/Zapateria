@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Negocio.ControlVendedores;
@@ -66,11 +67,14 @@ public class VistaAdministarVendedores extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
 		JLabel titulo;
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Imagen del Boton regresar
@@ -79,21 +83,15 @@ public class VistaAdministarVendedores extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		agregar = componente.creaBoton("Agregar Vendedor", 40, 100, 180, 30);
 		eliminar = componente.creaBoton("Eliminar Vendedor", 40, 150, 180, 30);
 		consultar = componente.creaBoton("Consultar Vendedor", 260, 100, 180, 30);
 		listar = componente.creaBoton("Listar Vendedores", 260, 150, 180, 30);
 		regresar = componente.creaBoton("", 20, 200, 50, 50);
 		regresar.setIcon(imgIcon);
-		agregar.setToolTipText("Agrega a un Vendedor");
-		eliminar.setToolTipText("Elimina a un Vendedor");
-		consultar.setToolTipText("Consulta a un Vendedor");
-		listar.setToolTipText("Muestra a Todos los Vendedores");
-		regresar.setToolTipText("Regresa a la Ventana del Administrador");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Administrar Vendedores", 80, 40, 340, 28, 28);
 
 		// Se Realiza Acciones de los Componentes

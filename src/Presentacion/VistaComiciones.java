@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Negocio.ControlVenta;
@@ -22,7 +23,7 @@ public class VistaComiciones extends JFrame {
 
 	// Variables Globales
 	private JButton regresar;
-	private JLabel lblnombre, lblventas, lblcomicion;
+	private JLabel lnombre, lventas, lcomicion;
 	private ControlVenta control;
 
 	// Muestra Solo la Presentacion de la Vista
@@ -55,8 +56,8 @@ public class VistaComiciones extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent evt) {
-				if (JOptionPane.showConfirmDialog(rootPane, "¿Desea Realmente Salir del Balance?",
-						"¿Salir del Balance?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if (JOptionPane.showConfirmDialog(rootPane, "¿Desea Realmente Salir de la Comicion?",
+						"¿Salir de la Comicion?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					control.muestraVistaAdministarVendedores();
 					dispose();
 				}
@@ -66,11 +67,14 @@ public class VistaComiciones extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
-		JLabel titulo, nombre, ventas,  comicion;
+		JLabel titulo, nombre, ventas, comicion;
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Imagen del Boton regresar
@@ -79,26 +83,19 @@ public class VistaComiciones extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		regresar = componente.creaBoton("", 40, 240, 50, 50);
 		regresar.setIcon(imgIcon);
 		regresar.setToolTipText("Cancela la Operacion y Regresa a la Ventana del Administrador");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Comicion del Vendedor", 60, 40, 360, 35, 30);
 		nombre = componente.creaEtiqueta("Vendedor:", 40, 100, 220, 25, 16);
-		ventas = componente.creaEtiqueta("Ventas Realizadas:", 40, 140, 220, 25, 16);	
+		ventas = componente.creaEtiqueta("Ventas Realizadas:", 40, 140, 220, 25, 16);
 		comicion = componente.creaEtiqueta("Comicion Obtenida:   $", 60, 200, 220, 25, 18);
-		lblnombre = componente.creaEtiqueta("Nombre", 200, 100, 220, 25, 16);
-		lblventas = componente.creaEtiqueta("Venta", 200, 140, 220, 25, 16);
-		lblcomicion = componente.creaEtiqueta("Comicion", 260, 200, 180, 25, 18);
-		nombre.setToolTipText("Nombre del Vendedor");
-		ventas.setToolTipText("Muestra las Cantidad de Ventas Realizadas");
-		comicion.setToolTipText("Muestra la Comicion Obtenida en Total");
-		lblnombre.setToolTipText("Nombre del Vendedor");
-		lblventas.setToolTipText("Muestra las Cantidad de Ventas Realizadas");
-		lblcomicion.setToolTipText("Muestra la Comicion Obtenida en Total");
+		lnombre = componente.creaEtiqueta("Nombre", 200, 100, 220, 25, 16);
+		lventas = componente.creaEtiqueta("Venta", 200, 140, 220, 25, 16);
+		lcomicion = componente.creaEtiqueta("Comicion", 260, 200, 180, 25, 18);
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -108,15 +105,14 @@ public class VistaComiciones extends JFrame {
 		panel.add(nombre);
 		panel.add(ventas);
 		panel.add(comicion);
-		panel.add(lblnombre);
-		panel.add(lblventas);
-		panel.add(lblcomicion);
+		panel.add(lnombre);
+		panel.add(lventas);
+		panel.add(lcomicion);
 		panel.add(regresar);
 	}
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-
 		// Accion del boton Regresa
 		regresar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -127,21 +123,22 @@ public class VistaComiciones extends JFrame {
 			}
 		});
 	}
-	
+
+	// Método para Obtener los Datos de la Comicion del Vendedor
 	public void obtenDatosComicion(String nombre, double comicion, int vendidos) {
-		lblnombre.setText(nombre);
-		lblventas.setText(String.valueOf(vendidos));
-		lblcomicion.setText(String.format("%.2f", comicion));
+		lnombre.setText(nombre);
+		lventas.setText(String.valueOf(vendidos));
+		lcomicion.setText(String.format("%.2f", comicion));
 	}
 
 	// Metodo que limpia los TextFields
 	public void limpiarDatosComiciones() {
-		lblnombre.setText("");
-		lblventas.setText("");
-		lblcomicion.setText("");
+		lnombre.setText("");
+		lventas.setText("");
+		lcomicion.setText("");
 	}
 
-	// Obtenemos la Instancia del Control Vendedor
+	// Obtenemos la Instancia del Control Venta
 	public void setControl(ControlVenta controlventa) {
 		this.control = controlventa;
 	}

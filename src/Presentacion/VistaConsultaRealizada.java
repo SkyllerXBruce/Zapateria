@@ -1,5 +1,6 @@
 package Presentacion;
 
+import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -10,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Usuario;
@@ -20,11 +22,26 @@ public class VistaConsultaRealizada extends JFrame {
 
 	// Variables Globales
 	private JButton finaliza, nueva;
-	private JLabel getnombre, getuser, getcurp, getdireccion, gettelefono, getid;
+	private JLabel lnombre, luser, lcurp, lcorreo, ltelefono, lid;
 	private ControlVendedores control;
 
+	// Muestra Solo la Presentacion de la Vista
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VistaConsultaRealizada frame = new VistaConsultaRealizada();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	// Constructor de la Ventana VistaConsultaRealizada
 	public VistaConsultaRealizada() {
-		// Tamaño de la Ventana
+		// Propiedades de la Ventana
 		setSize(580, 460);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -48,20 +65,21 @@ public class VistaConsultaRealizada extends JFrame {
 	}
 
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
-		setContentPane(panel);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		JLabel titulo, nombre, curp, direccion, telefono, user, id;
-		Componentes componente =new Componentes();
+		Componentes componente = new Componentes();
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
+		setContentPane(panel);
+
+		// Creamos y Agregamos las Propiedades del JButton
 		finaliza = componente.creaBoton("Finalizar Consulta", 360, 380, 160, 30);
 		nueva = componente.creaBoton("Nueva Consulta", 80, 380, 150, 30);
-		finaliza.setToolTipText("Termina la Consulta y Regresa a la Ventana de Administrar Vendedores");
-		nueva.setToolTipText("Realiza una Nueva Consulta");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Vendedor", 220, 40, 340, 35, 30);
 		nombre = componente.creaEtiqueta("Nombre Completo:", 40, 120, 150, 25, 16);
 		curp = componente.creaEtiqueta("Curp:", 40, 160, 150, 25, 16);
@@ -69,21 +87,16 @@ public class VistaConsultaRealizada extends JFrame {
 		telefono = componente.creaEtiqueta("Telefono:", 40, 240, 150, 25, 16);
 		user = componente.creaEtiqueta("Usuario:", 40, 280, 150, 25, 16);
 		id = componente.creaEtiqueta("ID:", 40, 320, 150, 25, 16);
-		getnombre = componente.creaEtiqueta("", 200, 120, 360, 25, 16);
-		getcurp = componente.creaEtiqueta("", 200, 160, 360, 25, 16);
-		getdireccion = componente.creaEtiqueta("", 200, 200, 360, 25, 16);
-		gettelefono = componente.creaEtiqueta("", 200, 240, 360, 25, 16);
-		getuser = componente.creaEtiqueta("", 200, 280, 360, 25, 16);
-		getid = componente.creaEtiqueta("", 200, 320, 360, 25, 16);
-		getnombre.setToolTipText("Nombre Completo del Vendedor");
-		getcurp.setToolTipText("Curp del Vendedor");
-		getdireccion.setToolTipText("Direccion del Vendedor");
-		gettelefono.setToolTipText("Telefono del Vendedor");
-		getuser.setToolTipText("Usuario del Vendedor para Ingresar al Sistema");
-		getid.setToolTipText("ID del Vendedor para Identificar en el Sistema");
+		lnombre = componente.creaEtiqueta("Nombre", 200, 120, 360, 25, 16);
+		lcurp = componente.creaEtiqueta("Curp", 200, 160, 360, 25, 16);
+		lcorreo = componente.creaEtiqueta("Correo", 200, 200, 360, 25, 16);
+		ltelefono = componente.creaEtiqueta("Telefono", 200, 240, 360, 25, 16);
+		luser = componente.creaEtiqueta("Usuario", 200, 280, 360, 25, 16);
+		lid = componente.creaEtiqueta("ID", 200, 320, 360, 25, 16);
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
+		
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(nombre);
@@ -92,20 +105,19 @@ public class VistaConsultaRealizada extends JFrame {
 		panel.add(telefono);
 		panel.add(user);
 		panel.add(id);
-		panel.add(getnombre);
-		panel.add(getcurp);
-		panel.add(getdireccion);
-		panel.add(gettelefono);
-		panel.add(getuser);
-		panel.add(getid);
+		panel.add(lnombre);
+		panel.add(lcurp);
+		panel.add(lcorreo);
+		panel.add(ltelefono);
+		panel.add(luser);
+		panel.add(lid);
 		panel.add(finaliza);
 		panel.add(nueva);
-
 	}
 
 	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-		// Accion del boton vendedores
+		// Accion del boton Finaliza
 		finaliza.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -115,7 +127,7 @@ public class VistaConsultaRealizada extends JFrame {
 			}
 		});
 
-		// Accion del boton Comiciones
+		// Accion del boton Nueva Consulta
 		nueva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -126,26 +138,28 @@ public class VistaConsultaRealizada extends JFrame {
 		});
 	}
 
+	// Método para Obtener los Datos del Vendedor y Mostrarlo en la Ventana
 	public void obtenerDatosVendedor(Usuario vendedor) {
-		getnombre.setText(vendedor.getNombre());
-		getcurp.setText(vendedor.getCurp());
-		getdireccion.setText(vendedor.getCorreo());
-		gettelefono.setText(vendedor.getTelefono());
-		getid.setText(vendedor.getId());
-		getuser.setText(vendedor.getUsuario());
-	}
-	
-	public void limpiarDatosConsultaVendedor() {
-		getnombre.setText("");
-		getuser.setText("");
-		getcurp.setText("");
-		getdireccion.setText("");
-		gettelefono.setText("");
-		getid.setText("");
+		lnombre.setText(vendedor.getNombre());
+		lcurp.setText(vendedor.getCurp());
+		lcorreo.setText(vendedor.getCorreo());
+		ltelefono.setText(vendedor.getTelefono());
+		lid.setText(vendedor.getId());
+		luser.setText(vendedor.getUsuario());
 	}
 
+	// Metodo que limpia los TextFields
+	public void limpiarDatosConsultaVendedor() {
+		lnombre.setText("");
+		luser.setText("");
+		lcurp.setText("");
+		lcorreo.setText("");
+		ltelefono.setText("");
+		lid.setText("");
+	}
+
+	// Obtenemos la Instancia del Control Vendedores
 	public void setControl(ControlVendedores controlvendedores) {
 		this.control = controlvendedores;
 	}
-
 }

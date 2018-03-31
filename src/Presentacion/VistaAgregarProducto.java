@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import Negocio.ControlAlmacen;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Producto;
@@ -70,11 +71,14 @@ public class VistaAgregarProducto extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
 		JPanel panel = new JPanel(null);
 		JLabel titulo, modelo, tipo, color, costo, talla, cantidad;
 		Componentes componente = new Componentes();
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Imagen del Boton regresar
@@ -83,15 +87,12 @@ public class VistaAgregarProducto extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		agregar = componente.creaBoton("Agregar", 260, 380, 150, 30);
 		regresa = componente.creaBoton("", 40, 370, 50, 50);
 		regresa.setIcon(imgIcon);
-		agregar.setToolTipText("Agrega los Datos del Producto");
-		regresa.setToolTipText("Cancela la Operacion y Regresa a la Ventana de Administrar Almacen");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Agregar Producto", 120, 40, 340, 35, 30);
 		modelo = componente.creaEtiqueta("Modelo:", 40, 120, 140, 25, 16);
 		tipo = componente.creaEtiqueta("Tipo:", 40, 160, 140, 25, 16);
@@ -99,27 +100,14 @@ public class VistaAgregarProducto extends JFrame {
 		costo = componente.creaEtiqueta("Costo:", 40, 240, 140, 25, 16);
 		talla = componente.creaEtiqueta("Talla:", 40, 280, 140, 25, 16);
 		cantidad = componente.creaEtiqueta("Cantidad:", 40, 320, 140, 25, 16);
-		modelo.setToolTipText("Ingrese el Modelo del Producto");
-		tipo.setToolTipText("Ingrese de que Tipo es el Producto");
-		color.setToolTipText("Ingrese el Color del Producto");
-		costo.setToolTipText("Ingrese el Costo Unitario del Producto");
-		talla.setToolTipText("Ingrese la Talla del Producto");
-		cantidad.setToolTipText("Ingrese la Cantidad de Productos con las Mismas Caracteristicas");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JTextField
 		tmodelo = componente.creaCuadroTexto(190, 120, 270, 25, 14);
 		ttipo = componente.creaCuadroTexto(190, 160, 270, 25, 14);
 		tcolor = componente.creaCuadroTexto(190, 200, 270, 25, 14);
 		tcosto = componente.creaCuadroTexto(190, 240, 270, 25, 14);
 		ttalla = componente.creaCuadroTexto(190, 280, 270, 25, 14);
 		tcantidad = componente.creaCuadroTexto(190, 320, 270, 25, 14);
-		tmodelo.setToolTipText("Ingrese el Modelo del Producto");
-		ttipo.setToolTipText("Ingrese de que Tipo es el Producto");
-		tcolor.setToolTipText("Ingrese el Color del Producto");
-		tcosto.setToolTipText("Ingrese el Costo Unitario del Producto");
-		ttalla.setToolTipText("Ingrese la Talla del Producto");
-		tcantidad.setToolTipText("Ingrese la Cantidad de Productos con las Mismas Caracteristicas");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
