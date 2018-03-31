@@ -200,9 +200,9 @@ public class VistaCambioCalzado extends JFrame {
 						control.limpiarDatos("Cambio");
 						existecambio = true;
 						dispose();
-					} else
-						JOptionPane.showMessageDialog(null, "Error, Verifique que los Datos esten Correctamente");
-				}
+					} 
+				}else
+					JOptionPane.showMessageDialog(null, "Error, Ingrese un Folio de Ticket Valido");
 			}
 		});
 

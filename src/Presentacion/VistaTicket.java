@@ -8,11 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Modelo.Componentes;
+import Modelo.Producto;
+import Negocio.ControlAlmacen;
 import Negocio.ControlVenta;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -26,6 +28,7 @@ import java.awt.event.ActionEvent;
 public class VistaTicket extends JFrame {
 
 	private ControlVenta control;
+	private ControlAlmacen controlalmacen;
 	private JPanel Ticket;
 	private JButton regresar, imprimir;
 	private boolean cambio = false;
@@ -50,7 +53,8 @@ public class VistaTicket extends JFrame {
 
 	// Crea Vista del Ticket
 	public VistaTicket() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//
+		setTitle("Ventana Ticket");
 		setBounds(100, 100, 450, 620);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -77,42 +81,9 @@ public class VistaTicket extends JFrame {
 	private void iniciarComponentes() {
 		Ticket = new JPanel();
 		JPanel contentPane = new JPanel();
-		JLabel lblFolio = new JLabel("Folio de venta");
-		JLabel lblTitulo = new JLabel("Zapateria \"El Ahorro\"");
-		JLabel lblTicketDeVenta = new JLabel("Ticket de venta");
-		JLabel lblFecha = new JLabel("Fecha");
-		JLabel lblModelo = new JLabel("Modelo");
-		JLabel lblTipo = new JLabel("Tipo");
-		JLabel lblColor = new JLabel("Color");
-		JLabel lblTalla = new JLabel("Talla");
-		JLabel lblCantidad = new JLabel("Cantidad");
-		JLabel lblPrecio = new JLabel("Precio Unitario         $");
-		JLabel lblIva = new JLabel("IVA (16%)                  $");
-		lblanterior = new JLabel("");
-		JLabel lblTotal = new JLabel("Total a pagar (MXN)   $");
-		JLabel lblIcon = new JLabel("");
-		lbldFolio = new JLabel("Folio");
-		lbldFecha = new JLabel("Fecha");
-		lbldModelo = new JLabel("Modelo");
-		lbldTipo = new JLabel("Tipo");
-		lbldColor = new JLabel("Color");
-		lbldTalla = new JLabel("Talla");
-		lbldCantidad = new JLabel("Cantidad");
-		lbldPrecioUnitario = new JLabel("Precio");
-		lbldIVA = new JLabel("iva");
-		lbldTotal = new JLabel("Total");
-		lbldanterior = new JLabel("");
-		regresar = new JButton("");
-		imprimir = new JButton("Imprimir");
-
-		ImageIcon imgIconregresa = new ImageIcon(VistaLogin.class.getResource("return.png"));
-		Image user = imgIconregresa.getImage();
-		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
-		imgIconregresa = new ImageIcon(userScaled);
-		ImageIcon imgIconticket = new ImageIcon(VistaTicket.class.getResource("Ticket.png"));
-		Image ticket = imgIconticket.getImage();
-		Image ticketScaled = ticket.getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
-		imgIconticket = new ImageIcon(ticketScaled);
+		Componentes componente = new Componentes();
+		JLabel lblTitulo, lblTicketDeVenta, lblFolio, lblFecha, lblModelo, lblTipo, lblColor, lblTalla, lblCantidad,
+				lblPrecio, lblIva, lblTotal, lblIcon;
 
 		// Propiedades del Panel y se Agrega a la Ventana
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -125,146 +96,79 @@ public class VistaTicket extends JFrame {
 		Ticket.setLayout(null);
 		contentPane.add(Ticket);
 
-		// Propiedades de la Imagen y se Agrega al Panel
-		lblIcon.setBounds(320, 20, 100, 100);
-		Ticket.add(lblIcon);
-		lblIcon.setIcon(imgIconticket);
-
-		// Propiedades de la Etiqueta "Zapateria el Ahorro" y se Agrega al Panel
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblTitulo.setBounds(40, 20, 280, 50);
-		Ticket.add(lblTitulo);
-
-		// Propiedades de la Etiqueta "Ticket de Venta" y se Agrega al Panel
-		lblTicketDeVenta.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTicketDeVenta.setBounds(100, 60, 140, 30);
-		Ticket.add(lblTicketDeVenta);
-
-		// Propiedades de la Etiqueta "Folio" y se Agrega al Panel
-		lblFolio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFolio.setBounds(40, 140, 140, 26);
-		Ticket.add(lblFolio);
-
-		// Propiedades de la Etiqueta con los Datos del "Folio" y se Agrega al Panel
-		lbldFolio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldFolio.setBounds(200, 140, 160, 26);
-		Ticket.add(lbldFolio);
-
-		// Propiedades de la Etiqueta "Fecha" y se Agrega al Panel
-		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFecha.setBounds(40, 170, 140, 26);
-		Ticket.add(lblFecha);
-
-		// Propiedades de la Etiqueta con los Datos de la "Fecha" y se Agrega al Panel
-		lbldFecha.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldFecha.setBounds(200, 170, 160, 26);
-		Ticket.add(lbldFecha);
-
-		// Propiedades de la Etiqueta "Modelo" y se Agrega al Panel
-		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblModelo.setBounds(40, 200, 140, 26);
-		Ticket.add(lblModelo);
-
-		// Propiedades de la Etiqueta con los Datos del "Modelo" y se Agrega al Panel
-		lbldModelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldModelo.setBounds(200, 200, 160, 26);
-		Ticket.add(lbldModelo);
-
-		// Propiedades de la Etiqueta "Modelo" y se Agrega al Panel
-		lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTipo.setBounds(40, 230, 140, 26);
-		Ticket.add(lblTipo);
-
-		// Propiedades de la Etiqueta con los Datos del "Modelo" y se Agrega al Panel
-		lbldTipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldTipo.setBounds(200, 230, 160, 26);
-		Ticket.add(lbldTipo);
-
-		// Propiedades de la Etiqueta "Color" y se Agrega al Panel
-		lblColor.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblColor.setBounds(40, 260, 140, 26);
-		Ticket.add(lblColor);
-
-		// Propiedades de la Etiqueta con los Datos del "Color" y se Agrega al Panel
-		lbldColor.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldColor.setBounds(200, 260, 160, 26);
-		Ticket.add(lbldColor);
-
-		// Propiedades de la Etiqueta "Talla" y se Agrega al Panel
-		lblTalla.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTalla.setBounds(40, 290, 140, 26);
-		Ticket.add(lblTalla);
-
-		// Propiedades de la Etiqueta con los Datos de la "Talla" y se Agrega al Panel
-		lbldTalla.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldTalla.setBounds(200, 290, 160, 26);
-		Ticket.add(lbldTalla);
-
-		// Propiedades de la Etiqueta "Cantidad" y se Agrega al Panel
-		lblCantidad.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCantidad.setBounds(40, 320, 140, 26);
-		Ticket.add(lblCantidad);
-
-		// Propiedades de la Etiqueta con los Datos de la "Cantidad" y se Agrega al
-		// Panel
-		lbldCantidad.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldCantidad.setBounds(200, 320, 160, 26);
-		Ticket.add(lbldCantidad);
-
-		// Propiedades de la Etiqueta "Precio Unitario" y se Agrega al Panel
-		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPrecio.setBounds(40, 350, 180, 26);
-		Ticket.add(lblPrecio);
-
-		// Propiedades de la Etiqueta con los Datos del "Precio Unitario" y se Agrega al
-		// Panel
-		lbldPrecioUnitario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldPrecioUnitario.setBounds(210, 350, 160, 26);
-		Ticket.add(lbldPrecioUnitario);
-
-		// Propiedades de la Etiqueta "Iva" y se Agrega al Panel
-		lblIva.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblIva.setBounds(40, 380, 180, 26);
-		Ticket.add(lblIva);
-
-		// Propiedades de la Etiqueta con los Datos del "Iva" y se Agrega al Panel
-		lbldIVA.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldIVA.setBounds(210, 380, 160, 26);
-		Ticket.add(lbldIVA);
-
-		// Propiedades de la Etiqueta "Iva" y se Agrega al Panel
-		lblanterior.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblanterior.setBounds(40, 410, 180, 26);
-		Ticket.add(lblanterior);
-
-		// Propiedades de la Etiqueta "Iva" y se Agrega al Panel
-		lbldanterior.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldanterior.setBounds(220, 410, 180, 26);
-		Ticket.add(lbldanterior);
-
-		// Propiedades de la Etiqueta "Total" y se Agrega al Panel
-		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTotal.setBounds(60, 460, 190, 26);
-		Ticket.add(lblTotal);
-
-		// Propiedades de la Etiqueta con los Datos del "Total" y se Agrega al Panel
-		lbldTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbldTotal.setBounds(240, 460, 140, 26);
-		Ticket.add(lbldTotal);
+		//
+		ImageIcon imgIconregresa = new ImageIcon(VistaLogin.class.getResource("return.png"));
+		Image user = imgIconregresa.getImage();
+		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
+		imgIconregresa = new ImageIcon(userScaled);
+		ImageIcon imgIconticket = new ImageIcon(VistaTicket.class.getResource("Ticket.png"));
+		Image ticket = imgIconticket.getImage();
+		Image ticketScaled = ticket.getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
+		imgIconticket = new ImageIcon(ticketScaled);
 
 		// Propiedades del Boton Imprimir y se Agrega al Panel
-		imprimir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		imprimir.setBounds(260, 540, 140, 26);
-		contentPane.add(imprimir);
-
-		// Propiedades del Boton Cancelar y se Agrega al Panel
-		regresar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		regresar.setBounds(60, 530, 50, 50);
+		imprimir = componente.creaBoton("Imprimir", 260, 540, 140, 26);
+		regresar = componente.creaBoton("", 60, 530, 50, 50);
 		regresar.setIcon(imgIconregresa);
-		contentPane.add(regresar);
+
+		// Propiedades de la Etiqueta "Zapateria el Ahorro" y se Agrega al Panel
+		lblTitulo = componente.creaEtiqueta("Zapateria \"El Ahorro\"", 40, 20, 280, 50, 26);
+		lblTicketDeVenta = componente.creaEtiqueta("Ticket de venta", 100, 60, 140, 30, 18);
+		lblFolio = componente.creaEtiqueta("Folio de venta", 40, 140, 140, 26, 16);
+		lblFecha = componente.creaEtiqueta("Fecha", 40, 170, 140, 26, 16);
+		lblModelo = componente.creaEtiqueta("Modelo", 40, 200, 140, 26, 16);
+		lblTipo = componente.creaEtiqueta("Tipo", 40, 230, 140, 26, 16);
+		lblColor = componente.creaEtiqueta("Color", 40, 260, 140, 26, 16);
+		lblTalla = componente.creaEtiqueta("Talla", 40, 290, 140, 26, 16);
+		lblCantidad = componente.creaEtiqueta("Cantidad", 40, 320, 140, 26, 16);
+		lblPrecio = componente.creaEtiqueta("Precio Unitario         $", 40, 350, 180, 26, 16);
+		lblIva = componente.creaEtiqueta("IVA (16%)                  $", 40, 380, 180, 26, 16);
+		lblTotal = componente.creaEtiqueta("Total a pagar (MXN)   $", 60, 460, 190, 26, 16);
+		lblIcon = componente.creaEtiqueta("", 320, 20, 100, 100, 16);
+		lblIcon.setIcon(imgIconticket);
+		lblanterior = componente.creaEtiqueta("", 40, 410, 180, 26, 16);
+		lbldFolio = componente.creaEtiqueta("Folio", 200, 140, 160, 26, 16);
+		lbldFecha = componente.creaEtiqueta("Fecha", 200, 170, 160, 26, 16);
+		lbldModelo = componente.creaEtiqueta("Modelo", 200, 200, 160, 26, 16);
+		lbldTipo = componente.creaEtiqueta("Tipo", 200, 230, 160, 26, 16);
+		lbldColor = componente.creaEtiqueta("Color", 200, 260, 160, 26, 16);
+		lbldTalla = componente.creaEtiqueta("Talla", 200, 290, 160, 26, 16);
+		lbldCantidad = componente.creaEtiqueta("Cantidad", 200, 320, 160, 26, 16);
+		lbldPrecioUnitario = componente.creaEtiqueta("Precio", 210, 350, 160, 26, 16);
+		lbldIVA = componente.creaEtiqueta("Iva", 210, 380, 160, 26, 16);
+		lbldTotal = componente.creaEtiqueta("Total", 240, 460, 140, 26, 16);
+		lbldanterior = componente.creaEtiqueta("", 220, 410, 180, 26, 16);
 
 		// Acciones de los Componentes
 		accionesComponentes();
+
+		Ticket.add(lblTitulo);
+		Ticket.add(lblTicketDeVenta);
+		Ticket.add(lblFolio);
+		Ticket.add(lblFecha);
+		Ticket.add(lblModelo);
+		Ticket.add(lblTipo);
+		Ticket.add(lblColor);
+		Ticket.add(lblTalla);
+		Ticket.add(lblCantidad);
+		Ticket.add(lblPrecio);
+		Ticket.add(lblIva);
+		Ticket.add(lblTotal);
+		Ticket.add(lblIcon);
+		Ticket.add(lblanterior);
+		Ticket.add(lbldFolio);
+		Ticket.add(lbldFecha);
+		Ticket.add(lbldModelo);
+		Ticket.add(lbldTipo);
+		Ticket.add(lbldColor);
+		Ticket.add(lbldTalla);
+		Ticket.add(lbldCantidad);
+		Ticket.add(lbldPrecioUnitario);
+		Ticket.add(lbldIVA);
+		Ticket.add(lbldTotal);
+		Ticket.add(lbldanterior);
+		contentPane.add(imprimir);
+		contentPane.add(regresar);
 	}
 
 	private void accionesComponentes() {
@@ -276,14 +180,30 @@ public class VistaTicket extends JFrame {
 						"Se Realizará la Compra Aunque el Ticket NO Se Imprima" + nl + "¿Esta Seguro de Continuar?",
 						"Realizar Compra", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					control.imprimeTicket();
-					cambio = control.realizaCambio();
-					if (!cambio) {
-						control.guardarDatosTicket(obtenerDatosTicket());
+					cambio = control.esCambio();
+					if (cambio) {
+						String modelo, tipo, color;
+						double talla, iva, total;
+						int folio;
+						modelo = lbldModelo.getText();
+						tipo = lbldTipo.getText();
+						color = lbldColor.getText();
+						talla = Double.valueOf(lbldTalla.getText());
+						iva = Double.valueOf(lbldIVA.getText());
+						total = Double.valueOf(lbldanterior.getText());
+						folio = Integer.valueOf(lbldFolio.getText());
+						Producto productocambio = controlalmacen.buscaProducto(modelo, tipo, color, talla);
+						if (control.realizaCambioProducto(folio, productocambio, iva, total))
+							JOptionPane.showMessageDialog(null, "Cambio Realizado con Exito");
+						else
+							JOptionPane.showMessageDialog(null, "No Se Pudo Realizar el Cambio");
+						control.limpiarDatos("Cambio");
+					} else {
+						control.guardarDatosTicket(obtenerDatosVentaTicket());
 						JOptionPane.showMessageDialog(null, "Venta Realizada con Exito");
-					}else
-						JOptionPane.showMessageDialog(null, "Cambio Realizado con Exito");
+						control.limpiarDatos("Venta");
+					}
 					control.muestraVistaVendedor();
-					control.limpiarDatos("Venta");
 					dispose();
 				}
 			}
@@ -299,10 +219,29 @@ public class VistaTicket extends JFrame {
 		});
 	}
 
-	public String[] obtenerDatosTicket() {
+	public String[] obtenerDatosVentaTicket() {
 		String[] datos = { lbldFolio.getText(), lbldFecha.getText(), lbldModelo.getText(), lbldTipo.getText(),
 				lbldIVA.getText(), lbldTotal.getText(), lbldCantidad.getText() };
 		return datos;
+	}
+
+	public void setTotalAnterior(String txt) {
+		lblanterior.setText("Total Anterior            $");
+		lbldanterior.setText(txt);
+	}
+
+	public void setDatosTicket(String[] datosventa) {
+		cambio = control.esCambio();
+		lbldFolio.setText(datosventa[0]);
+		lbldFecha.setText(datosventa[1]);
+		lbldModelo.setText(datosventa[2]);
+		lbldTipo.setText(datosventa[3]);
+		lbldColor.setText(datosventa[4]);
+		lbldTalla.setText(datosventa[5]);
+		lbldCantidad.setText(datosventa[6]);
+		lbldIVA.setText(datosventa[7]);
+		lbldPrecioUnitario.setText(datosventa[8]);
+		lbldTotal.setText(datosventa[9]);
 	}
 
 	// Instanciamos control a nuestra vista.
@@ -310,50 +249,8 @@ public class VistaTicket extends JFrame {
 		this.control = control;
 	}
 
-	// Estos métodos nos sirven para agregar datos al ticket.
-	public void setFolio(String txt) {
-		lbldFolio.setText(txt);
-	}
-
-	public void setFecha(String txt) {
-		lbldFecha.setText(txt);
-	}
-
-	public void setModelo(String txt) {
-		lbldModelo.setText(txt);
-	}
-
-	public void setTipo(String txt) {
-		lbldTipo.setText(txt);
-	}
-
-	public void setColor(String txt) {
-		lbldColor.setText(txt);
-	}
-
-	public void setTalla(String txt) {
-		lbldTalla.setText(txt);
-	}
-
-	public void setCantidad(String txt) {
-		lbldCantidad.setText(txt);
-	}
-
-	public void setIva(String txt) {
-		lbldIVA.setText(txt);
-	}
-
-	public void setPrecioUnitario(String txt) {
-		lbldPrecioUnitario.setText(txt);
-	}
-
-	public void setTotal(String txt) {
-		lbldTotal.setText(txt);
-	}
-
-	public void setTotalAnterior(String txt) {
-		lblanterior.setText("Total Anterior            $");
-		lbldanterior.setText(txt);
+	public void setControl(ControlAlmacen controlalmacen) {
+		this.controlalmacen = controlalmacen;
 	}
 
 	// Retornamos el componente del Jframe que queremos imprimir, para evitar que

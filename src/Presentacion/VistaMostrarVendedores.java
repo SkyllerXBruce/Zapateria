@@ -1,6 +1,6 @@
 package Presentacion;
 
-import java.awt.Font;
+import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Modelo.Componentes;
 import Negocio.ControlVendedores;
 
 @SuppressWarnings("serial")
@@ -23,7 +24,22 @@ public class VistaMostrarVendedores extends JFrame {
 	private JButton finaliza;
 	private ControlVendedores control;
 	private DefaultTableModel modelo;
+	
+	//
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VistaMostrarVendedores frame = new VistaMostrarVendedores();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
+	//
 	public VistaMostrarVendedores() {
 		setSize(900, 500);
 		setLocationRelativeTo(null);
@@ -51,15 +67,17 @@ public class VistaMostrarVendedores extends JFrame {
 	private void iniciarComponentes() {
 		// creamos el panel y lo agregamos a la ventana
 		JPanel panel = new JPanel(null);
-		setContentPane(panel);
+		Componentes componente = new Componentes();
 		String[] nombrescolumnas = { "ID", "Nombre Completo", "Curp", "Correo", "Telefono", "Usuario" };
 		String[][] datos = {};
 		modelo = new DefaultTableModel(datos, nombrescolumnas);
 		JTable tablavendedores = new JTable(modelo);
 		JLabel titulo;
 
+		setContentPane(panel);
+
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
-		finaliza = creaBoton("Finalizar", 380, 420, 140, 30);
+		finaliza = componente.creaBoton("Finalizar", 380, 420, 140, 30);
 		finaliza.setToolTipText("Regresa a la Ventana de Administrar Vendedores");
 
 		tablavendedores.setModel(modelo);
@@ -78,39 +96,15 @@ public class VistaMostrarVendedores extends JFrame {
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		titulo = creaEtiqueta("Mostrar Vendedores", 300, 40, 340, 35, 30);
+		titulo = componente.creaEtiqueta("Mostrar Vendedores", 300, 40, 340, 35, 30);
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
-		
+
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(finaliza);
 		panel.add(scrollPane);
-	}
-
-	// Método Para Crear las Propiedades del boton
-	private JButton creaBoton(String nombre, int posx, int posy, int ancho, int alto) {
-		// Se Crea e Inicializa un boton de la Clase JButton
-		JButton boton = new JButton(nombre);
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto del Boton Como la
-		// Letra del Texto
-		boton.setBounds(posx, posy, ancho, alto);
-		boton.setFont(new Font("Serif", Font.ITALIC, 14));
-		return boton;
-	}
-
-	// Método Para Crear las Propiedades de las Etiquetas
-	private JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
-		// Se Crea e Inicializa una Etiqueta de la Clase JLabel
-		JLabel etiqueta = new JLabel(nombre);
-
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de la Etiqueta asi
-		// Como la Letra del Texto
-		etiqueta.setBounds(posx, posy, ancho, alto);
-		etiqueta.setFont(new Font("Serif", Font.ITALIC, tamaño));
-		return etiqueta;
 	}
 
 	// Método para Crear las Acciones de Los Componentes
@@ -125,13 +119,13 @@ public class VistaMostrarVendedores extends JFrame {
 			}
 		});
 	}
-	
+
 	public void limpiarDatosMostrarVendedores() {
-		if (modelo.getColumnCount()!=0) 
+		if (modelo.getColumnCount() != 0)
 			for (int i = modelo.getRowCount() - 1; i >= 0; i--)
 				modelo.removeRow(i);
 	}
-	
+
 	public DefaultTableModel getTablaModelo() {
 		return modelo;
 	}

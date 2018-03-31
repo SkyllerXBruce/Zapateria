@@ -77,4 +77,10 @@ public class Ticket {
 	public int getVendidos() {
 		return vendidos;
 	}
+
+	@Override
+	public String toString() {
+		return "Ticket [Folio=" + folio + ", Fecha=" + fecha + ", IDVendedor=" + idvendedor + ", CodigoProducto="
+				+ codigoproducto + ", Iva=" + iva + ", Total=" + total + ", Vendidos=" + vendidos + "]";
+	}
 }

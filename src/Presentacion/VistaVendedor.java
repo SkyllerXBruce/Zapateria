@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Usuario;
+import Negocio.ControlAlmacen;
 import Negocio.ControlVenta;
 
 import javax.swing.JButton;
@@ -22,9 +23,11 @@ import java.awt.event.ActionEvent;
 public class VistaVendedor extends JFrame {
 
 	// Variables Globales
-	private JButton venta, cambio, comicion, cerrar;
+	private JButton venta, cambio, comicion, productos, cerrar;
 	private JLabel nombre, correo, telefono;
 	private ControlVenta control;
+	private ControlAlmacen controlalmacen;
+	private boolean vendedor = false;
 
 	// Muestra Solo la Presentacion de la Vista
 	public static void main(String[] args) {
@@ -44,7 +47,7 @@ public class VistaVendedor extends JFrame {
 	public VistaVendedor() {
 		// Propiedades de la Ventana
 		setTitle("Vendedor");
-		setBounds(100, 100, 450, 300);
+		setSize(450, 320);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		confirmarSalida();
@@ -79,10 +82,11 @@ public class VistaVendedor extends JFrame {
 		panel.setLayout(null);
 
 		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
-		venta = componente.creaBoton("Venta de Calzado", 250, 100, 180, 30);
-		cambio = componente.creaBoton("Cambio de Calzado", 250, 160, 180, 30);
-		comicion = componente.creaBoton("Comiciones", 250, 220, 180, 30);
-		cerrar = componente.creaBoton("Cerrar Sesión", 40, 220, 160, 30);
+		venta = componente.creaBoton("Venta de Calzado", 250, 80, 180, 30);
+		cambio = componente.creaBoton("Cambio de Calzado", 250, 130, 180, 30);
+		comicion = componente.creaBoton("Comiciones", 250, 180, 180, 30);
+		productos = componente.creaBoton("Lista de Productos", 250, 230, 180, 30);
+		cerrar = componente.creaBoton("Cerrar Sesión", 20, 240, 160, 30);
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
@@ -104,6 +108,7 @@ public class VistaVendedor extends JFrame {
 		panel.add(venta);
 		panel.add(cambio);
 		panel.add(comicion);
+		panel.add(productos);
 		panel.add(cerrar);
 	}
 
@@ -140,6 +145,16 @@ public class VistaVendedor extends JFrame {
 			}
 		});
 
+		// Mostramos la ventana de Cambio de Calzado
+		productos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vendedor = true;
+				controlalmacen.cargarDatosProductos();
+				controlalmacen.muestraVistaMostrarProductos();
+				dispose();
+			}
+		});
+
 		// Cerramos la Ventana Actual y Regresa a la Ventana VistaLogin
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -158,8 +173,20 @@ public class VistaVendedor extends JFrame {
 		this.telefono.setText(user.getTelefono());
 	}
 
+	public void setVendedor(boolean vendedor) {
+		this.vendedor = vendedor;
+	}
+
+	public boolean esVendedor() {
+		return vendedor;
+	}
+
 	// Instanciamos control a nuestra vista.
 	public void setControl(ControlVenta controlvent) {
 		this.control = controlvent;
+	}
+
+	public void setControl(ControlAlmacen controlalmacen) {
+		this.controlalmacen = controlalmacen;
 	}
 }

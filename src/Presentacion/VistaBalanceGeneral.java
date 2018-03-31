@@ -25,7 +25,7 @@ public class VistaBalanceGeneral extends JFrame {
 	private JLabel lblvendidos, lblganancias, lblcomiciones, lbltotal;
 	private ControlVendedores control;
 
-	// Muestra Solo la Presentacion de la Vista
+	// Muestra Solo la Presentacion de la Vista.
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
