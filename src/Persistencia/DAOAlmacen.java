@@ -12,7 +12,6 @@ public class DAOAlmacen {
 	// Metodo para Agregar el Producto a la Base de Datos
 	public boolean agregaProducto(Producto producto) {
 		try {
-			// Crea el statement
 			Statement statement = ManejadorBD.dameConnection().createStatement();
 			statement.execute("INSERT INTO Almacen VALUES(" + producto.dameCodigo() + ",'" + producto.dameModelo()
 					+ "', '" + producto.dameTipo() + "', '" + producto.dameColor() + "', " + producto.dameCosto() + ", "
@@ -28,9 +27,7 @@ public class DAOAlmacen {
 	public boolean quitaProducto(Producto producto) {
 		int resultado = 0;
 		try {
-			// Crea el statement
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			// Recibe los resutados
 			resultado = statement.executeUpdate("DELETE FROM Almacen WHERE Modelo='" + producto.dameModelo()
 					+ "' AND Tipo='" + producto.dameTipo() + "'");
 		} catch (SQLException e) {
@@ -47,52 +44,24 @@ public class DAOAlmacen {
 	public Producto buscaProducto(String modelo, String tipo, String color, double talla) {
 		Producto producto = null;
 		try {
-			// Crea el statement
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			// Recibe los resutados
 			ResultSet rs = statement.executeQuery("SELECT * FROM Almacen WHERE Modelo='" + modelo + "' AND Tipo='"
 					+ tipo + "' AND Color='" + color + "' AND Talla=" + talla);
-			if (rs.next()) {
-				// Crea una nueva instancia del objeto
+			if (rs.next())
 				producto = new Producto(rs.getInt("Codigo"), rs.getString("Modelo"), rs.getString("Tipo"),
 						rs.getString("Color"), rs.getDouble("Costo"), rs.getDouble("Talla"), rs.getInt("Cantidad"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return producto;
 	}
 
-	//
-	public Producto buscaProducto(String modelo, String tipo) {
-		Producto producto = null;
-		try {
-			// Crea el statement
-			Statement statement = ManejadorBD.dameConnection().createStatement();
-			// Recibe los resutados
-			ResultSet rs = statement
-					.executeQuery("SELECT * FROM Almacen WHERE Modelo='" + modelo + "' AND Tipo='" + tipo + "'");
-			if (rs.next()) {
-				// Crea una nueva instancia del objeto
-				producto = new Producto(rs.getInt("Codigo"), rs.getString("Modelo"), rs.getString("Tipo"),
-						rs.getString("Color"), rs.getDouble("Costo"), rs.getDouble("Talla"), rs.getInt("Cantidad"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return producto;
-	}
-
-	//
 	public Producto buscaProducto(int codigo) {
 		Producto producto = null;
 		try {
-			// Crea el statement
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			// Recibe los resutados
 			ResultSet rs = statement.executeQuery("SELECT * FROM Almacen WHERE Codigo=" + codigo);
 			if (rs.next())
-				// Crea una nueva instancia del objeto
 				producto = new Producto(rs.getInt("Codigo"), rs.getString("Modelo"), rs.getString("Tipo"),
 						rs.getString("Color"), rs.getDouble("Costo"), rs.getDouble("Talla"), rs.getInt("Cantidad"));
 		} catch (SQLException e) {
@@ -105,12 +74,9 @@ public class DAOAlmacen {
 	public Producto[] dameProductos() {
 		ArrayList<Producto> productosTemp = new ArrayList<Producto>();
 		try {
-			// Crea el statement
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			// Recibe los resutados
 			ResultSet rs = statement.executeQuery("SELECT * FROM Almacen");
 			while (rs.next()) {
-				// Crea una nueva instancia del objeto
 				Producto producto = new Producto(rs.getInt("Codigo"), rs.getString("Modelo"), rs.getString("Tipo"),
 						rs.getString("Color"), rs.getDouble("Costo"), rs.getDouble("Talla"), rs.getInt("Cantidad"));
 				productosTemp.add(producto);
@@ -119,7 +85,6 @@ public class DAOAlmacen {
 			productosTemp.toArray(productosTempArreglo);
 			return productosTempArreglo;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -128,9 +93,7 @@ public class DAOAlmacen {
 	// Metodo que Obtiene el Total de Productos en la Base de Datos
 	public int cuantosProductos() {
 		try {
-			// Crea el statement
 			Statement statement = ManejadorBD.dameConnection().createStatement();
-			// Recibe los resutados
 			ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Almacen");
 			if (rs.next())
 				return rs.getInt(1);
@@ -139,5 +102,4 @@ public class DAOAlmacen {
 		}
 		return 0;
 	}
-
 }

@@ -221,7 +221,8 @@ public class VistaTicket extends JFrame {
 
 	public String[] obtenerDatosVentaTicket() {
 		String[] datos = { lbldFolio.getText(), lbldFecha.getText(), lbldModelo.getText(), lbldTipo.getText(),
-				lbldIVA.getText(), lbldTotal.getText(), lbldCantidad.getText() };
+				lbldColor.getText(), lbldTalla.getText(), lbldIVA.getText(), lbldTotal.getText(),
+				lbldCantidad.getText() };
 		return datos;
 	}
 

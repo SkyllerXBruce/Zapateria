@@ -71,7 +71,7 @@ public class ServicioTicket {
 		return daoticket.dameTickets();
 	}
 
-	// Este método nos permite obtener la fecha, para pasarla al ticket impreso.
+	// Método para Obtener la Fecha Actual con Día y Hora
 	public String getFechaActual() {
 		Date ahora = new Date();
 		DateFormat formatoHora = new SimpleDateFormat("HH:mm");

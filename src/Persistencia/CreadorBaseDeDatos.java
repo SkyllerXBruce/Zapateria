@@ -38,7 +38,5 @@ public class CreadorBaseDeDatos {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
 	}
-
 }

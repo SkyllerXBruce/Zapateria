@@ -26,15 +26,8 @@ public class ControlVendedores {
 	private ServicioVendedores serviciovendedores;
 	private ServicioTicket servicioticket;
 
-	// Agrega las Instancias de las Vistas al Control Vendedores
-	public void setServicioVendedores(ServicioVendedores serviciovendedores) {
-		this.serviciovendedores = serviciovendedores;
-	}
-
-	public void setServicioTicket(ServicioTicket servicioticket) {
-		this.servicioticket = servicioticket;
-	}
-
+	// En estos Métodos se Agrega las Instancias del Servicio y las Vistas al
+	// Control Vendedores
 	public void setVistaAdministrador(VistaAdministrador vistaadmin) {
 		this.vistaadmin = vistaadmin;
 	}
@@ -69,6 +62,14 @@ public class ControlVendedores {
 
 	public void setVistaBalanceGeneral(VistaBalanceGeneral vistabalancegeneral) {
 		this.vistabalancegeneral = vistabalancegeneral;
+	}
+
+	public void setServicioVendedores(ServicioVendedores serviciovendedores) {
+		this.serviciovendedores = serviciovendedores;
+	}
+
+	public void setServicioTicket(ServicioTicket servicioticket) {
+		this.servicioticket = servicioticket;
 	}
 
 	// Metodos para Mostrar las Vistas Correspondientes
@@ -109,7 +110,7 @@ public class ControlVendedores {
 		vistabalancegeneral.setVisible(true);
 	}
 
-	// Metodos para Verficar la existencia de Vendedores si Existe Manda true otro
+	// Metodos para Verficar la Existencia de Vendedores si Existe Manda true otro
 	// caso false
 	public boolean existeVendedor(String dato) {
 		return serviciovendedores.existeVendedor(dato);
@@ -204,5 +205,4 @@ public class ControlVendedores {
 			throw new IllegalArgumentException("Error, No se Puede Limpiar");
 		}
 	}
-
 }
