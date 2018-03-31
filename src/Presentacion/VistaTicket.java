@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class VistaTicket extends JFrame {
 
+	// Variables Globales
 	private ControlVenta control;
 	private ControlAlmacen controlalmacen;
 	private JPanel panelticket;
@@ -35,9 +36,7 @@ public class VistaTicket extends JFrame {
 	private JLabel lfolio, lfecha, lmodelo, ltipo, lcolor, ltalla, lcantidad, lprecio, liva, ltotal, anterior,
 			lanterior;
 
-	/**
-	 * Launch the application.
-	 */
+	// Muestra Solo la Presentacion de la Vista
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,9 +50,9 @@ public class VistaTicket extends JFrame {
 		});
 	}
 
-	// Crea Vista del Ticket
+	// Constructor de la Ventana VistaTicket
 	public VistaTicket() {
-		//
+		// Propiedades de la Ventana
 		setTitle("Ventana Ticket");
 		setBounds(100, 100, 450, 620);
 		setResizable(false);
@@ -95,22 +94,24 @@ public class VistaTicket extends JFrame {
 		panel.setLayout(null);
 		setContentPane(panel);
 
-		//
+		// Imagen del Boton regresar
 		ImageIcon imgIconregresa = new ImageIcon(VistaLogin.class.getResource("return.png"));
 		Image user = imgIconregresa.getImage();
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIconregresa = new ImageIcon(userScaled);
+
+		// Imagen del Ticket
 		ImageIcon imgIconticket = new ImageIcon(VistaTicket.class.getResource("Ticket.png"));
 		Image imagenticket = imgIconticket.getImage();
 		Image ticketScaled = imagenticket.getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
 		imgIconticket = new ImageIcon(ticketScaled);
 
-		// Propiedades del Boton Imprimir y se Agrega al Panel
+		// Creamos y Agregamos las Propiedades del JButton
 		imprimir = componente.creaBoton("Imprimir", 260, 540, 140, 26);
 		regresar = componente.creaBoton("", 60, 530, 50, 50);
 		regresar.setIcon(imgIconregresa);
 
-		// Propiedades de la Etiqueta "Zapateria el Ahorro" y se Agrega al Panel
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Zapateria \"El Ahorro\"", 40, 20, 280, 50, 26);
 		ticket = componente.creaEtiqueta("Ticket de venta", 100, 60, 140, 30, 18);
 		folio = componente.creaEtiqueta("Folio de venta", 40, 140, 140, 26, 16);
@@ -141,6 +142,7 @@ public class VistaTicket extends JFrame {
 		// Acciones de los Componentes
 		accionesComponentes();
 
+		// Agregamos los Componentes al Panel
 		panelticket.add(titulo);
 		panelticket.add(ticket);
 		panelticket.add(folio);
@@ -171,8 +173,9 @@ public class VistaTicket extends JFrame {
 		panel.add(regresar);
 	}
 
+	// Método para Crear las Acciones de Los Componentes
 	private void accionesComponentes() {
-		// Imprimimos el ticket.
+		// Accion del boton Imprimir
 		imprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nl = System.getProperty("line.separator");
@@ -209,7 +212,7 @@ public class VistaTicket extends JFrame {
 			}
 		});
 
-		// Cerramos la ventana en caso de que se pulse el botón.
+		// Accion del boton Regresar
 		regresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.muestraVistaVendedor();
@@ -219,17 +222,21 @@ public class VistaTicket extends JFrame {
 		});
 	}
 
+	// Método para Obtener los Datos del Ticket, Regresa un Arreglo de Tipo String
 	public String[] obtenerDatosVentaTicket() {
 		String[] datos = { lfolio.getText(), lfecha.getText(), lmodelo.getText(), ltipo.getText(), lcolor.getText(),
 				ltalla.getText(), liva.getText(), ltotal.getText(), lcantidad.getText() };
 		return datos;
 	}
 
+	// Método para Modificar el Total del Ticket Anterior Cuando se Realiza un
+	// Cambio
 	public void setTotalAnterior(String txt) {
 		anterior.setText("Total Anterior            $");
 		lanterior.setText(txt);
 	}
 
+	// Método para Modificar los Datos del Ticket en los JTextField
 	public void setDatosTicket(String[] datosventa) {
 		cambio = control.esCambio();
 		lfolio.setText(datosventa[0]);
@@ -244,7 +251,7 @@ public class VistaTicket extends JFrame {
 		ltotal.setText(datosventa[9]);
 	}
 
-	// Instanciamos control a nuestra vista.
+	// Métodos para Obtener la Instancia de los Controles Correspondientes
 	public void setControl(ControlVenta control) {
 		this.control = control;
 	}
@@ -253,8 +260,7 @@ public class VistaTicket extends JFrame {
 		this.controlalmacen = controlalmacen;
 	}
 
-	// Retornamos el componente del Jframe que queremos imprimir, para evitar que
-	// los botones nos aparezcan en la impresión
+	// Obtiene el Panel del Ticket para Mandarlo a Imprimir
 	public JComponent getTicket() {
 		return panelticket;
 	}

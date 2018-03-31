@@ -81,15 +81,14 @@ public class VistaVendedor extends JFrame {
 		setContentPane(panel);
 		panel.setLayout(null);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		venta = componente.creaBoton("Venta de Calzado", 250, 80, 180, 30);
 		cambio = componente.creaBoton("Cambio de Calzado", 250, 130, 180, 30);
 		comicion = componente.creaBoton("Comiciones", 250, 180, 180, 30);
 		productos = componente.creaBoton("Lista de Productos", 250, 230, 180, 30);
 		cerrar = componente.creaBoton("Cerrar Sesión", 20, 240, 160, 30);
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Ventas y Cambios", 120, 20, 280, 25, 26);
 		subtitulo = componente.creaEtiqueta("Vendedor", 60, 60, 150, 25, 18);
 		nombre = componente.creaEtiqueta("Nombre", 20, 100, 280, 25, 16);
@@ -167,21 +166,24 @@ public class VistaVendedor extends JFrame {
 		});
 	}
 
+	// Estos Métodos Muestran o Modifican si el Vendedor esta Activo o No, En Caso
+	// de Estar Activo Regresa True en Otro Caso False
+	public boolean esVendedor() {
+		return vendedor;
+	}
+	
+	public void setVendedor(boolean vendedor) {
+		this.vendedor = vendedor;
+	}
+
+	// Se Obtiene los Datos del Administrador Ingresado
 	public void actualizarDatos(Usuario user) {
 		this.nombre.setText(user.getNombre());
 		this.correo.setText(user.getCorreo());
 		this.telefono.setText(user.getTelefono());
 	}
 
-	public void setVendedor(boolean vendedor) {
-		this.vendedor = vendedor;
-	}
-
-	public boolean esVendedor() {
-		return vendedor;
-	}
-
-	// Instanciamos control a nuestra vista.
+	// Métodos para Obtener la Instancia de los Controles Correspondientes
 	public void setControl(ControlVenta controlvent) {
 		this.control = controlvent;
 	}
