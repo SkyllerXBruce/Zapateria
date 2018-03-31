@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Negocio.ControlVendedores;
@@ -22,7 +23,7 @@ public class VistaBalanceGeneral extends JFrame {
 
 	// Variables Globales
 	private JButton regresar;
-	private JLabel lblvendidos, lblganancias, lblcomiciones, lbltotal;
+	private JLabel lvendidos, lganancias, lcomiciones, ltotal;
 	private ControlVendedores control;
 
 	// Muestra Solo la Presentacion de la Vista.
@@ -66,11 +67,14 @@ public class VistaBalanceGeneral extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
 		JLabel titulo, vendidos, ganancias, comiciones, total;
 
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Imagen del Boton regresar
@@ -91,18 +95,18 @@ public class VistaBalanceGeneral extends JFrame {
 		ganancias = componente.creaEtiqueta("Ganacias por Ventas:       $", 40, 140, 220, 25, 16);
 		comiciones = componente.creaEtiqueta("Pagos de Comiciones:      $", 40, 180, 220, 25, 16);
 		total = componente.creaEtiqueta("Total Neto:  $", 120, 240, 180, 25, 18);
-		lblvendidos = componente.creaEtiqueta("Vendidos", 240, 100, 140, 25, 16);
-		lblganancias = componente.creaEtiqueta("Ganacias", 250, 140, 140, 25, 16);
-		lblcomiciones = componente.creaEtiqueta("Comiciones", 250, 180, 140, 25, 16);
-		lbltotal = componente.creaEtiqueta("Total", 240, 240, 180, 25, 18);
+		lvendidos = componente.creaEtiqueta("Vendidos", 240, 100, 140, 25, 16);
+		lganancias = componente.creaEtiqueta("Ganacias", 250, 140, 140, 25, 16);
+		lcomiciones = componente.creaEtiqueta("Comiciones", 250, 180, 140, 25, 16);
+		ltotal = componente.creaEtiqueta("Total", 240, 240, 180, 25, 18);
 		vendidos.setToolTipText("Muestra los Productos Vendidos en Total");
 		ganancias.setToolTipText("Muestra las Ganancias por las Ventas Realizadas");
 		comiciones.setToolTipText("Muestra los pados de Comiciones de los Vendedores");
 		total.setToolTipText("Muestra las Ganancias Netas Obtenidas en Total");
-		lblvendidos.setToolTipText("Muestra los Productos Vendidos en Total");
-		lblganancias.setToolTipText("Muestra las Ganancias por las Ventas Realizadas");
-		lblcomiciones.setToolTipText("Muestra los pados de Comiciones de los Vendedores");
-		lbltotal.setToolTipText("Muestra las Ganancias Netas Obtenidas en Total");
+		lvendidos.setToolTipText("Muestra los Productos Vendidos en Total");
+		lganancias.setToolTipText("Muestra las Ganancias por las Ventas Realizadas");
+		lcomiciones.setToolTipText("Muestra los pados de Comiciones de los Vendedores");
+		ltotal.setToolTipText("Muestra las Ganancias Netas Obtenidas en Total");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
@@ -113,10 +117,10 @@ public class VistaBalanceGeneral extends JFrame {
 		panel.add(ganancias);
 		panel.add(comiciones);
 		panel.add(total);
-		panel.add(lblvendidos);
-		panel.add(lblganancias);
-		panel.add(lblcomiciones);
-		panel.add(lbltotal);
+		panel.add(lvendidos);
+		panel.add(lganancias);
+		panel.add(lcomiciones);
+		panel.add(ltotal);
 		panel.add(regresar);
 	}
 
@@ -136,18 +140,18 @@ public class VistaBalanceGeneral extends JFrame {
 
 	public void obtenDatosBalanceGeneral(int vendidos, double comicion, double ganancia) {
 		double total = ganancia - comicion;
-		lblvendidos.setText(String.valueOf(vendidos));
-		lblganancias.setText(String.format("%.2f", ganancia));
-		lblcomiciones.setText(String.format("%.2f", comicion));
-		lbltotal.setText(String.format("%.2f", total));
+		lvendidos.setText(String.valueOf(vendidos));
+		lganancias.setText(String.format("%.2f", ganancia));
+		lcomiciones.setText(String.format("%.2f", comicion));
+		ltotal.setText(String.format("%.2f", total));
 	}
 
 	// Metodo que limpia los TextFields
 	public void limpiarDatosBalanceGeneral() {
-		lblvendidos.setText("");
-		lblganancias.setText("");
-		lblcomiciones.setText("");
-		lbltotal.setText("");
+		lvendidos.setText("");
+		lganancias.setText("");
+		lcomiciones.setText("");
+		ltotal.setText("");
 	}
 
 	// Obtenemos la Instancia del Control Vendedor

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import Modelo.Componentes;
 import Modelo.Usuario;
@@ -73,11 +74,14 @@ public class VistaAgregarUsuario extends JFrame {
 
 	// Creamos y Agregamos los Componetes de la Ventana
 	private void iniciarComponentes() {
-		// creamos el panel y lo agregamos a la ventana
-		JPanel panel = new JPanel(null);
+		// Creamos la Instancia del JPanel Así como de Algunos Componentes
+		JPanel panel = new JPanel();
 		Componentes componente = new Componentes();
-		JLabel titulo1, titulo2, usuario, contrasena;
-		
+		JLabel titulo, subtitulo, usuario, contrasena;
+
+		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(null);
 		setContentPane(panel);
 
 		// Imagen del Boton regresar
@@ -95,8 +99,8 @@ public class VistaAgregarUsuario extends JFrame {
 
 		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
 		// Como de la Letra
-		titulo1 = componente.creaEtiqueta("Asignar Usuario y Cotraseña", 30, 40, 480, 35, 30);
-		titulo2 = componente.creaEtiqueta("al Vendedor", 130, 70, 480, 35, 30);
+		titulo = componente.creaEtiqueta("Asignar Usuario y Cotraseña", 30, 40, 480, 35, 30);
+		subtitulo = componente.creaEtiqueta("al Vendedor", 130, 70, 480, 35, 30);
 		usuario = componente.creaEtiqueta("Usuario:", 40, 140, 140, 25, 16);
 		contrasena = componente.creaEtiqueta("Contraseña:", 40, 180, 140, 25, 16);
 		usuario.setToolTipText("Ingrese un Usuario");
@@ -112,8 +116,8 @@ public class VistaAgregarUsuario extends JFrame {
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
 		// Agregamos los Componentes al Panel
-		panel.add(titulo1);
-		panel.add(titulo2);
+		panel.add(titulo);
+		panel.add(subtitulo);
 		panel.add(usuario);
 		panel.add(tusuario);
 		panel.add(contrasena);
