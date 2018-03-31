@@ -21,17 +21,14 @@ public class ControlAlmacen {
 	private VistaMostrarProductos vistamostrarproductos;
 	private ServicioAlmacen servicioalmacen;
 
-	// Agrega las Instancias de las Vistas al Control del Almacen
+	// En estos Métodos se Agrega las Instancias del Servicio y las Vistas al
+	// Control Almacen
 	public void setVistaAlmacen(VistaAlmacen vistaalmacen) {
 		this.vistaalmacen = vistaalmacen;
 	}
 
 	public void setVistaAdministrador(VistaAdministrador vistaadmin) {
 		this.vistaadmin = vistaadmin;
-	}
-
-	public void setServicioAlmacen(ServicioAlmacen servicioalmacen) {
-		this.servicioalmacen = servicioalmacen;
 	}
 
 	public void setVistaAgregarProducto(VistaAgregarProducto vistaaddproducto) {
@@ -52,6 +49,10 @@ public class ControlAlmacen {
 
 	public void setVistaMostrarProductos(VistaMostrarProductos vistamostrarproductos) {
 		this.vistamostrarproductos = vistamostrarproductos;
+	}
+	
+	public void setServicioAlmacen(ServicioAlmacen servicioalmacen) {
+		this.servicioalmacen = servicioalmacen;
 	}
 
 	// Metodos para Mostrar las Vistas Correspondientes
@@ -84,8 +85,9 @@ public class ControlAlmacen {
 		this.vistamostrarproductos.setVisible(true);
 	}
 
-	// Metodos para Verficar la existencia de Productos si Existe manda true otro
-	// caso false
+	// Metodos para Verficar la Existencia de Productos si Existe Regresa True en
+	// Otro
+	// Caso False
 	public boolean existeProducto(String modelo, String tipo, String color, double talla) {
 		if (servicioalmacen.buscaProducto(modelo, tipo, color, talla) != null)
 			return true;

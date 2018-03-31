@@ -21,7 +21,7 @@ import Presentacion.VistaVentaCalzado;
 
 public class ControlVenta implements Printable {
 
-	// Instanciamos nuestros atributos
+	// Variables Globales
 	private VistaCambioCalzado vistacambio;
 	private VistaVentaCalzado vistaventacalzado;
 	private VistaTicket vistaticket;
@@ -34,19 +34,8 @@ public class ControlVenta implements Printable {
 	private ServicioLogin serviciologin;
 	private Usuario user;
 
-	// Agrega las Instancias de las Vistas al Control de Venta
-	public void setServicioTicket(ServicioTicket servicioticket) {
-		this.servicioticket = servicioticket;
-	}
-
-	public void setServicioAlmacen(ServicioAlmacen servicioalmacen) {
-		this.servicioalmacen = servicioalmacen;
-	}
-
-	public void setServicioLogin(ServicioLogin serviciologin) {
-		this.serviciologin = serviciologin;
-	}
-
+	// En estos Métodos se Agrega las Instancias del Servicio y las Vistas al
+	// Control Venta
 	public void setVistaLogin(VistaLogin vistalogin) {
 		this.vistalogin = vistalogin;
 	}
@@ -73,6 +62,18 @@ public class ControlVenta implements Printable {
 
 	public void setVistaVentaCalzado(VistaVentaCalzado vistaventacalzado) {
 		this.vistaventacalzado = vistaventacalzado;
+	}
+
+	public void setServicioTicket(ServicioTicket servicioticket) {
+		this.servicioticket = servicioticket;
+	}
+
+	public void setServicioAlmacen(ServicioAlmacen servicioalmacen) {
+		this.servicioalmacen = servicioalmacen;
+	}
+
+	public void setServicioLogin(ServicioLogin serviciologin) {
+		this.serviciologin = serviciologin;
 	}
 
 	// Metodos para Mostrar las Vistas Correspondientes
@@ -115,8 +116,7 @@ public class ControlVenta implements Printable {
 		return serviciologin.dameVendedor(nombre, tipo);
 	}
 
-	// Este método nos permite agregar los datos que nos regresa el DAO a la tabla
-	// de consulta.
+	// Este Método nos Permite Agregar los Datos del Producto a la Tabla
 	public void buscaProducto(int id) {
 		Object[] fila = new Object[vistaventacalzado.getTablaModelo().getColumnCount()];
 		Producto producto = servicioalmacen.buscaProducto(id);
@@ -132,8 +132,7 @@ public class ControlVenta implements Printable {
 			JOptionPane.showMessageDialog(null, "No se encontraron productos");
 	}
 
-	// Este método nos permite agregar los datos que nos regresa el DAO a la tabla
-	// de consulta.
+	// Este Método nos Permite Agregar los Datos del Ticket a la Tabla
 	public void buscaTicket(int folio) {
 		double total = 0;
 		Object[] filaventa = new Object[vistacambio.getTablaModeloVenta().getColumnCount()];
@@ -169,8 +168,8 @@ public class ControlVenta implements Printable {
 			JOptionPane.showMessageDialog(null, "No Existen Tickets Actualmente");
 	}
 
-	// Este método calcula el total sobre las unidades que se van a vender y su
-	// precio unitario.
+	// Este Método Calcula el Total Sobre las Unidades que se Van a Vender y su
+	// Precio Unitario
 	public void calculaTotal() {
 		if (vistaventacalzado.getTablaModelo().getValueAt(0, 6) == null)
 			JOptionPane.showMessageDialog(null, "Agregue pares a vender y presione enter");
@@ -223,7 +222,7 @@ public class ControlVenta implements Printable {
 		return false;
 	}
 
-	// Creamos el ticket de venta
+	// Creamos el Ticket de Venta
 	public void creaTicketVenta() {
 		String datosventa[] = { String.valueOf(servicioticket.generaFolio()), servicioticket.getFechaActual(),
 				(String) vistaventacalzado.getTablaModelo().getValueAt(0, 0),
@@ -236,7 +235,7 @@ public class ControlVenta implements Printable {
 		vistaticket.setVisible(true);
 	}
 
-	// Creamos el ticket de Cambio
+	// Creamos el Ticket de Cambio
 	public void creaTicketCambio(int folio, Producto producto, double iva, double total, double diferencia,
 			double tventa) {
 		String datoscambio[] = { String.valueOf(folio), servicioticket.getFechaActual(), producto.dameModelo(),
@@ -282,17 +281,18 @@ public class ControlVenta implements Printable {
 	public boolean esCambio() {
 		return vistacambio.realizaCambio();
 	}
-	
+
+	// Estos Métodos Muestran o Modifican si el Vendedor esta Activo o No, En Caso
+	// de Estar Activo Regresa True en Otro Caso False
 	public boolean esVendedor() {
 		return vistavendedor.esVendedor();
 	}
-	
+
 	public void setVendedor(boolean vendedor) {
 		vistavendedor.setVendedor(vendedor);
 	}
 
-	// Metodo para Guardar los Datos del Ticket de Venta en la Base de Datos del
-	// Ticket
+	// Metodo para Guardar los Datos del Ticket en la Base de Datos
 	public void guardarDatosTicket(String[] datosTicket) {
 		Producto producto = servicioalmacen.buscaProducto(datosTicket[2], datosTicket[3]);
 		Usuario user = getVendedor();
@@ -360,7 +360,7 @@ public class ControlVenta implements Printable {
 		}
 	}
 
-	// Este método imprime el ticket.
+	// Método para Imprimir el Ticket
 	public void imprimeTicket() {
 		try {
 			PrinterJob gap = PrinterJob.getPrinterJob();
@@ -373,7 +373,7 @@ public class ControlVenta implements Printable {
 		}
 	}
 
-	// Valida y le da formato de impresión al ticket.
+	// Método para Validar y dar Formato de Impresión al Ticket
 	@Override
 	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
 		if (pageIndex > 0)

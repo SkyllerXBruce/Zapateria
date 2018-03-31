@@ -8,8 +8,8 @@ public class ServicioLogin {
 	// Instancia de la Base de Datos
 	DAOLogin dao = new DAOLogin();
 
-	// Este método realiza la consulta al DAO, y lo retorna como falso o verdadero.
-	// si es falso el login falla
+	// Este Método Valida el Ingreso de un Usuario, Si es Valido Regresa True en
+	// Otro Caso False
 	public boolean validaingreso(Usuario usuario) {
 		if (dao.valida(usuario)) {
 			return true;
