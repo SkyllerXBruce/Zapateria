@@ -80,18 +80,13 @@ public class VistaAdministrador extends JFrame {
 		panel.setLayout(null);
 		setContentPane(panel);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		vendedores = componente.creaBoton("Vendedores", 360, 100, 120, 30);
 		almacen = componente.creaBoton("Almacen", 360, 150, 120, 30);
 		balance = componente.creaBoton("Balance", 360, 200, 120, 30);
 		cerrarsesion = componente.creaBoton("Cerrar Sesión", 20, 240, 140, 30);
-		vendedores.setToolTipText("Accesar a los Vendedores (Agregar, Consultar, Eliminar, Listar)");
-		almacen.setToolTipText("Accesar al Almacen de Productos (Agregar, Consultar, Eliminar, Listar)");
-		balance.setToolTipText("Accesar a las Comiciones (Asignar, Consultar,Modificar, Listar)");
-		cerrarsesion.setToolTipText("Regresa a la Ventana de Acceso");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Menú Administrador", 120, 40, 280, 28, 28);
 		nombre = componente.creaEtiqueta("Nombre", 20, 100, 300, 50, 16);
 		correo = componente.creaEtiqueta("Correo", 20, 140, 300, 50, 16);
@@ -154,22 +149,20 @@ public class VistaAdministrador extends JFrame {
 		});
 	}
 
-	// Obtenemos la Instancia del Control Vendedores
+	// Métodos para Obtener la Instancia de los Controles Correspondientes
 	public void setControl(ControlVendedores control) {
 		this.control = control;
 	}
 
-	// Obtenemos la Instancia del Control Login
 	public void setControl(ControlLogin controllogin) {
 		this.controllogin = controllogin;
 	}
 
-	// Obtenemos la Instancia del Control Almacen
 	public void setControl(ControlAlmacen controlalmacen) {
 		this.controlalmacen = controlalmacen;
 	}
 
-	// Se Obtiene los Datos del Usuario Ingresado
+	// Se Obtiene los Datos del Administrador Ingresado
 	public void actualizarDatos(Usuario user) {
 		this.nombre.setText(user.getNombre());
 		this.correo.setText(user.getCorreo());

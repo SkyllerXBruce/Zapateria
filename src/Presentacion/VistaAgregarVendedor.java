@@ -85,15 +85,12 @@ public class VistaAgregarVendedor extends JFrame {
 		Image userScaled = user.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
 		imgIcon = new ImageIcon(userScaled);
 
-		// Creamos y Agregamos las Propiedades del Método creaBoton para Cada Boton
+		// Creamos y Agregamos las Propiedades del JButton
 		ingresar = componente.creaBoton("Ingresar", 260, 380, 150, 30);
 		regresar = componente.creaBoton("", 40, 360, 50, 50);
 		regresar.setIcon(imgIcon);
-		ingresar.setToolTipText("Agrega los Datos del Vendedor");
-		regresar.setToolTipText("Cancela la Operacion y Regresa a la Ventana de Administrar Vendedores");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de las Etiquetas
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Agregar Vendedor", 120, 40, 340, 35, 30);
 		nombre = componente.creaEtiqueta("Nombre:", 40, 120, 140, 25, 16);
 		apaterno = componente.creaEtiqueta("Apellido Paterno:", 40, 160, 140, 25, 16);
@@ -101,27 +98,14 @@ public class VistaAgregarVendedor extends JFrame {
 		curp = componente.creaEtiqueta("Curp:", 40, 240, 140, 25, 16);
 		correo = componente.creaEtiqueta("Correo:", 40, 280, 140, 25, 16);
 		telefono = componente.creaEtiqueta("Telefono:", 40, 320, 140, 25, 16);
-		nombre.setToolTipText("Ingrese Nombre del Vendedor");
-		apaterno.setToolTipText("Ingrese Apellido Paterno del Vendedor");
-		apaterno.setToolTipText("Ingrese Apellido Materno del Vendedor");
-		curp.setToolTipText("Ingrese Curp del Vendedor");
-		correo.setToolTipText("Ingrese Correo del Vendedor");
-		telefono.setToolTipText("Ingrese Telefono del Vendedor");
 
-		// Se Modifica la Posicion, Tipo de Letra y su Tamaño Tanto de los TextFields
-		// Como de la Letra
+		// Creamos y Agregamos las Propiedades del JTextField
 		tnombre = componente.creaCuadroTexto(190, 120, 270, 25, 14);
 		tapaterno = componente.creaCuadroTexto(190, 160, 270, 25, 14);
 		tamaterno = componente.creaCuadroTexto(190, 200, 270, 25, 14);
 		tcurp = componente.creaCuadroTexto(190, 240, 270, 25, 14);
 		tcorreo = componente.creaCuadroTexto(190, 280, 270, 25, 14);
 		ttelefono = componente.creaCuadroTexto(190, 320, 270, 25, 14);
-		tnombre.setToolTipText("Ingrese Nombre del Vendedor");
-		tapaterno.setToolTipText("Ingrese Apellido Paterno del Vendedor");
-		tapaterno.setToolTipText("Ingrese Apellido Materno del Vendedor");
-		tcurp.setToolTipText("Ingrese Curp del Vendedor");
-		tcorreo.setToolTipText("Ingrese Correo del Vendedor");
-		ttelefono.setToolTipText("Ingrese Telefono del Vendedor");
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
