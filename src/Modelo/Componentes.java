@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 public class Componentes {
 
-	// Método Para Crear las Propiedades del JButton (Tamaño de Letra, Nombre,
+	// Método para Crear las Propiedades del JButton (Tamaño de Letra, Nombre,
 	// Posicion, largo y ancho, y el Tipo de Letra), Regresa un JButton
 	public JButton creaBoton(String nombre, int posx, int posy, int ancho, int alto) {
 		JButton boton = new JButton(nombre);
@@ -19,7 +19,7 @@ public class Componentes {
 		return boton;
 	}
 
-	// Método Para Crear las Propiedades del JLabel (Tamaño de Letra, Nombre,
+	// Método para Crear las Propiedades del JLabel (Tamaño de Letra, Nombre,
 	// Posicion, largo y ancho, y el Tipo de Letra), Regresa un JLabel
 	public JLabel creaEtiqueta(String nombre, int posx, int posy, int ancho, int alto, int tamaño) {
 		JLabel etiqueta = new JLabel(nombre);
@@ -28,7 +28,7 @@ public class Componentes {
 		return etiqueta;
 	}
 
-	// Método Para Crear las Propiedades del JTextField (Tamaño de Letra, Nombre,
+	// Método para Crear las Propiedades del JTextField (Tamaño de Letra, Nombre,
 	// Posicion, largo y ancho, y el Tipo de Letra), Regresa un JTextField
 	public JTextField creaCuadroTexto(int posx, int posy, int ancho, int alto, int tamaño) {
 		JTextField texto = new JTextField();
@@ -38,7 +38,7 @@ public class Componentes {
 		return texto;
 	}
 
-	// Método Para Crear las Propiedades del JPasswordField (Tamaño de Letra, Nombre,
+	// Método para Crear las Propiedades del JPasswordField (Tamaño de Letra, Nombre,
 	// Posicion, largo y ancho, y el Tipo de Letra), Regresa un JPasswordField
 	public JPasswordField creaCuadroPassword(int posx, int posy, int ancho, int alto, int tamaño) {
 		JPasswordField texto = new JPasswordField();
@@ -48,7 +48,7 @@ public class Componentes {
 		return texto;
 	}
 
-	// Método Para Crear las Propiedades del JComboBox (Tamaño de Letra, Nombre,
+	// Método para Crear las Propiedades del JComboBox (Tamaño de Letra, Nombre,
 	// Posicion, largo y ancho, y el Tipo de Letra), Regresa un JComboBox
 	public JComboBox<String> creaComboBox(String[] items, int posx, int posy, int ancho, int alto, int tamaño) {
 		JComboBox<String> elementos = new JComboBox<String>(items);
