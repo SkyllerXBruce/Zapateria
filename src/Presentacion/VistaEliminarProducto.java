@@ -77,7 +77,7 @@ public class VistaEliminarProducto extends JFrame {
 	private void iniciarComponentes() {
 		// Creamos la Instancia del JPanel Así como de Algunos Componentes
 		JPanel panel = new JPanel();
-		JLabel titulo, modelotipo, numcodigo;
+		JLabel titulo, datosproducto, codigoproducto;
 		Componentes componente = new Componentes();
 
 		// Modificamos Propiedades de JPanel y lo Agregamos a la Ventana
@@ -98,12 +98,12 @@ public class VistaEliminarProducto extends JFrame {
 
 		// Creamos y Agregamos las Propiedades del JLabel
 		titulo = componente.creaEtiqueta("Eliminar Producto", 120, 40, 340, 35, 30);
-		modelotipo = componente.creaEtiqueta("Por Modelo y Tipo de Producto", 40, 120, 260, 25, 16);
+		datosproducto = componente.creaEtiqueta("Por Datos del Producto", 40, 120, 220, 25, 16);
 		modelo = componente.creaEtiqueta("Modelo:", 60, 160, 140, 25, 16);
 		tipo = componente.creaEtiqueta("Tipo:", 60, 200, 140, 25, 16);
 		color = componente.creaEtiqueta("Color:", 60, 240, 140, 25, 16);
 		talla = componente.creaEtiqueta("Talla:", 60, 280, 140, 25, 16);
-		numcodigo = componente.creaEtiqueta("Por Número de Código", 40, 340, 180, 25, 16);
+		codigoproducto = componente.creaEtiqueta("Por Código del Producto", 40, 340, 220, 25, 16);
 		codigo = componente.creaEtiqueta("Código:", 60, 380, 140, 25, 16);
 
 		// Creamos y Agregamos las Propiedades del JTextField
@@ -115,16 +115,16 @@ public class VistaEliminarProducto extends JFrame {
 
 		// Se Realiza Acciones de los Componentes
 		accionesComponentes();
-		
+
 		// Agregamos los Componentes al Panel
 		panel.add(titulo);
 		panel.add(modelo);
 		panel.add(tipo);
 		panel.add(color);
 		panel.add(talla);
-		panel.add(modelotipo);
+		panel.add(datosproducto);
 		panel.add(codigo);
-		panel.add(numcodigo);
+		panel.add(codigoproducto);
 		panel.add(tmodelo);
 		panel.add(ttipo);
 		panel.add(tcolor);
@@ -171,7 +171,7 @@ public class VistaEliminarProducto extends JFrame {
 										}
 									} else
 										JOptionPane.showMessageDialog(null,
-												"El Producto No se Encuentra, Verifique que el Modelo o Tipo sean Correctos");
+												"El Producto No se Encuentra, Verifique que los Datos sean Correctos");
 								else
 									JOptionPane.showMessageDialog(null, "Es Necesario Escribir una Talla Valida");
 							} else
@@ -201,10 +201,12 @@ public class VistaEliminarProducto extends JFrame {
 						} else
 							JOptionPane.showMessageDialog(null,
 									"El Producto No se Encuentra, Verifique que el Codigo sea Correcto");
-					}
+					} else
+						JOptionPane.showMessageDialog(null,
+								"El Producto No se Encuentra, Verifique que el Codigo sea Correcto");
 				} else
 					JOptionPane.showMessageDialog(null,
-							"Es Necesario llenar los Campos ya sea Por Modelo y Tipo o Por Codigo del Producto");
+							"Es Necesario llenar los Campos ya sea Por Datos o Por Codigo de Producto");
 			}
 		});
 

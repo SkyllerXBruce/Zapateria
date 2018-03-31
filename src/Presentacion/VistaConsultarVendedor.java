@@ -163,7 +163,7 @@ public class VistaConsultarVendedor extends JFrame {
 							dispose();
 						} else
 							JOptionPane.showMessageDialog(null,
-									"El Vendedor No se Encuentra, Verifique que sea el ID Correcto");
+									"El Vendedor No se Encuentra, Verifique que el ID del Vendedor sea Correcto");
 					}
 				} else
 					JOptionPane.showMessageDialog(null, "Es Necesario llenar los Campos ya sea Por Nombre o Por ID");
@@ -279,8 +279,8 @@ public class VistaConsultarVendedor extends JFrame {
 		tamaterno.setEnabled(true);
 		id.setEnabled(true);
 		tid.setEnabled(true);
-		pornombre = true;
-		porid = true;
+		pornombre = false;
+		porid = false;
 	}
 
 	// Obtenemos la Instancia del Control Vendedores

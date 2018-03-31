@@ -148,9 +148,9 @@ public class VistaAgregarUsuario extends JFrame {
 							}
 						}
 					} else
-						JOptionPane.showMessageDialog(null, "Es Necesario Ingresar el Usuario");
+						JOptionPane.showMessageDialog(null, "Es Necesario Ingresar la Contraseña");
 				else
-					JOptionPane.showMessageDialog(null, "Es Necesario Ingresar la Contraseña");
+					JOptionPane.showMessageDialog(null, "Es Necesario Ingresar el Usuario");
 			}
 		});
 

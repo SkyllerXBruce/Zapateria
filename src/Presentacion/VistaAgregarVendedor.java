@@ -153,7 +153,7 @@ public class VistaAgregarVendedor extends JFrame {
 									} else
 										JOptionPane.showMessageDialog(null, "Es Necesario Ingresar el Telefono");
 								else
-									JOptionPane.showMessageDialog(null, "Es Necesario Ingresar el Dirección");
+									JOptionPane.showMessageDialog(null, "Es Necesario Ingresar el Correo");
 							else
 								JOptionPane.showMessageDialog(null, "Es Necesario Ingresar el Curp");
 						else

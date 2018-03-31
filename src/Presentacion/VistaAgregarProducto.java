@@ -185,13 +185,18 @@ public class VistaAgregarProducto extends JFrame {
 											control.limpiarDatos("Agregar");
 											dispose();
 										}
-									} else
-										JOptionPane.showMessageDialog(null,
-												"Es Necesario Ingresar una Cantidad Valida");
-								} else
+									} else {
+										JOptionPane.showMessageDialog(null,	"Es Necesario Ingresar una Cantidad Valida");
+										tcantidad.setText("");
+									}
+								} else {
 									JOptionPane.showMessageDialog(null, "Es Necesario Ingresar una Talla Valida");
-							} else
+									ttalla.setText("");
+								}
+							} else {
 								JOptionPane.showMessageDialog(null, "Es Necesario Ingresar un Costo Unitario Valido");
+								tcosto.setText("");
+							}
 						} else
 							JOptionPane.showMessageDialog(null, "Es Necesario Ingresar el Color");
 					else
