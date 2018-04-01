@@ -16,11 +16,13 @@ class PruebasUnitariasAlmacen {
 	void testAgregarProducto() {
 		control.setServicioAlmacen(servicio);
 		assert (control.agregarProducto(producto) == true);
+		control.eliminarProducto(producto);
 	}
 
 	@Test
 	void testEliminarProducto() {
 		control.setServicioAlmacen(servicio);
+		control.agregarProducto(producto);
 		assert (control.eliminarProducto(producto) == true);
 	}
 

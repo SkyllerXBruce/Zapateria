@@ -16,11 +16,13 @@ class PruebasUnitariasVendedor {
 	void testAgregarVendedor() {
 		control.setServicioVendedores(servicio);
 		assert (control.agregaVendedor(vendedor) == true);
+		control.eliminarVendedor(vendedor);
 	}
 
 	@Test
 	void testEliminarVendedor() {
 		control.setServicioVendedores(servicio);
+		control.agregaVendedor(vendedor);
 		assert (control.eliminarVendedor(vendedor) == true);
 	}
 
